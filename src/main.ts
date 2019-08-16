@@ -1,9 +1,14 @@
 import Vue from 'vue';
+import axios from 'axios';
 import App from './views/shared/app';
 import router from './routers';
 import store from './store';
+import { axiosConfig } from './utils';
 
 Vue.config.productionTip = false;
+
+axiosConfig();
+Vue.prototype.axios = axios;
 
 // 配置element-ui组件库
 import ElementUI from 'element-ui';
