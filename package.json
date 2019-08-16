@@ -1,14 +1,18 @@
 {
-  "name": "admin-web-vue3-typescript",
-  "version": "0.1.0",
+  "name": "admin-web",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
+    "uat": "vue-cli-service build --mode uat",
+    "fat": "vue-cli-service build --mode fat",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "element-ui": "^2.11.1",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
