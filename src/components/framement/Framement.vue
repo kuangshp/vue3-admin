@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { State, Mutation, Getter } from 'vuex-class';
+import { Getter } from 'vuex-class';
 import { IViewState } from '@/store/view';
 
 @Component({
