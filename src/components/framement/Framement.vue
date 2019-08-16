@@ -4,7 +4,10 @@
       <app-header></app-header>
     </div>
     <div class="content">
-      <div class="sidebar">
+      <div
+        class="sidebar"
+        :class="{'sidebar-close': !sidebarOpened}"
+      >
         <app-sidebar></app-sidebar>
       </div>
       <div class="view">
@@ -16,14 +19,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { State, Mutation, Getter } from 'vuex-class';
+import { IViewState } from '@/store/view';
+
 @Component({
   components: {},
 })
-export default class Framement extends Vue {}
+export default class Framement extends Vue {
+  @Getter('viewStore/sidebarOpened') private sidebarOpened!: IViewState;
+}
 </script>
 
 <style lang="less">
-.content{
+.content {
   position: fixed;
   left: 0;
   top: 50px;
@@ -31,16 +39,22 @@ export default class Framement extends Vue {}
   bottom: 0;
   display: flex;
   flex-direction: row;
-  .sidebar{
+  .sidebar {
     width: 240px;
     height: inherit;
     background: #fff;
     padding: 1rem 0;
-    box-shadow: 0 0 1.2em rgba(0,0,0,.12);
+    box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);
     margin-right: 10px;
     overflow-y: auto;
+    transition: width 1s;
   }
-  .view{
+  .sidebar-close {
+    width: 0;
+    transition: width 1s;
+    margin-right: 0;
+  }
+  .view {
     flex: 1;
     background: #e5e5e5;
     height: inherit;

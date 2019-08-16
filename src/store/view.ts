@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-08-16 15:38:58
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-16 15:50:54
+ * @LastEditTime: 2019-08-16 16:27:48
  */
 import { MutationTree, ActionTree } from 'vuex';
 
@@ -14,11 +14,6 @@ export interface IViewState {
   sidebarOpened: boolean;
   title: string;
 }
-
-const state: IViewState = {
-  sidebarOpened: true,
-  title: '主页',
-};
 
 export interface RootState {
   viewStore: IViewState;
@@ -29,6 +24,16 @@ export enum TYPES {
   CLOSE_SIDEBAR = 'CLOSE_SIDEBAR', // 关闭侧边栏
   SET_TITLE = 'SET_TITLE',
 }
+
+const state: IViewState = {
+  sidebarOpened: true,
+  title: '主页',
+};
+
+const getters = {
+  // tslint:disable-next-line:no-shadowed-variable
+  sidebarOpened: (state: IViewState) => state.sidebarOpened,
+};
 
 const mutations: MutationTree<IViewState> = {
   [TYPES.OPEN_SIDEBAR](s: IViewState) {
@@ -58,6 +63,7 @@ const actions: ActionTree<IViewState, RootState> = {
 export const viewStore = {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions,
 };
