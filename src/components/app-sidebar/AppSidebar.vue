@@ -9,7 +9,7 @@
           :router="true"
           background-color="#333"
           text-color="#fff"
-          active-text-color="#f00"
+          active-text-color="#3273dc"
           @open="handleOpen"
           @close="handleClose"
         >

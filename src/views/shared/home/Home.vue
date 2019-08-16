@@ -11,7 +11,6 @@
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { State, Action } from 'vuex-class';
-import { homeStore } from '../../../store/homeStore';
 import { IViewState } from '@/store/view';
 
 @Component({})
