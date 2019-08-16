@@ -1,8 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const pjson = require('./package.json');
 // 自定义webpack
 module.exports = {
+  outputDir: path.join(__dirname, './dist', pjson.name),
   configureWebpack: (config) => {
     const env = process.env.NODE_ENV;
     switch (env) {
@@ -28,6 +29,8 @@ module.exports = {
         template: './src/index.html',
         title: 'admin-web',
         hash: true,
+        favicon: './src/images/favicon.png',
+        href: path.join('/', pjson.name, '/'),
         minify: {
           removeAttributeQuotes: false, // 去除双引号(实际开发改为true)
           collapseWhitespace: false, // 合并代码到一行(实际开发改为true)
