@@ -6,12 +6,12 @@ const menus: any[] = [
     children: [
       {
         label: '选项1',
-        url: 'demo1.demo11',
+        url: 'demo11',
         ico: 'el-icon-setting',
       },
       {
         label: '选项2',
-        url: 'demo1.demo12',
+        url: 'demo12',
         ico: 'el-icon-picture-outline',
       },
     ],
@@ -23,6 +23,4 @@ const menus: any[] = [
   },
 ];
 
-export {
-  menus,
-};
+export { menus };

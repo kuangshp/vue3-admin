@@ -5,9 +5,13 @@
         <el-menu
           :collapse="isCollapse"
           class="el-menu-vertical-demo"
+          :default-active="$route.url"
+          :router="true"
+          background-color="#333"
+          text-color="#fff"
+          active-text-color="#f00"
           @open="handleOpen"
           @close="handleClose"
-          @select="selectMenu"
         >
           <template v-for="(item, index) of menus">
             <template v-if="item.children && item.children.length">
@@ -57,18 +61,18 @@ import { menus } from '@/statics/menus';
   components: {},
 })
 export default class AppSidebar extends Vue {
-  @Provide() private isCollapse: boolean = false;
-  @Provide() private menus: any[] = menus;
+  @Provide() private data() {
+    return {
+      menus,
+      isCollapse: false,
+    };
+  }
 
   @Provide() private handleOpen(key: any, keyPath: any) {
     console.log(key, keyPath);
   }
   @Provide() private handleClose(key: any, keyPath: any) {
     console.log(key, keyPath);
-  }
-  @Provide() private selectMenu(urlPath: string): void {
-    console.log('当前的url', urlPath);
-    this.$router.push({ name: urlPath });
   }
 }
 </script>
