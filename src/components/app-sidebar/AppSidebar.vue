@@ -13,11 +13,11 @@
           @open="handleOpen"
           @close="handleClose"
         >
-          <template v-for="(item, index) of menus">
+          <template v-for="item of menus">
             <template v-if="item.children && item.children.length">
               <el-submenu
                 :index="item.url"
-                :key="index"
+                :key="item.url"
               >
                 <template slot="title">
                   <i :class="item.ico"></i>
@@ -36,10 +36,10 @@
               </el-submenu>
             </template>
           </template>
-          <template v-for="(item, index) of menus">
+          <template v-for="item of menus">
             <template v-if="!item.children || !item.children.length">
               <el-menu-item
-                :key="index"
+                :key="item.url"
                 :index="item.url"
               >
                 <i :class="item.ico"></i>
