@@ -1,8 +1,16 @@
 <template>
   <div class="app-header">
     <div class="logo">
-      <router-link to="/">主页</router-link>
+      <router-link to="/">XX公司权限管理平台</router-link>
     </div>
+    <!-- 头部切换左侧菜单 -->
+    <div
+      class="menus"
+      @click="toogleSidebar"
+    >
+      <i class="fas fa-bars"></i>
+    </div>
+    <!-- 头部导航 -->
     <div class="header-info">
       <app-breadcrumb />
     </div>
@@ -27,13 +35,23 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
+import {
+  State,
+  Getter,
+  Action,
+  Mutation,
+  namespace,
+} from 'vuex-class';
 import { OperatedProduct } from '@/config';
 import { storage } from '@/utils';
+import { IViewState } from '@/store/view';
 
 @Component({
   components: {},
 })
 export default class AppHeader extends Vue {
+  @State private viewStore!: IViewState;
+  @Action('viewStore/toogleSidebar') private toogleSidebar!: () => void;
   @Provide() private username: string = '';
 
   @Provide() private logout(): void {
@@ -54,6 +72,12 @@ export default class AppHeader extends Vue {
   flex-direction: row;
   line-height: 50px;
   color: #fff;
+  .menus {
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    cursor: pointer;
+  }
   .logo {
     width: 240px;
     height: inherit;
