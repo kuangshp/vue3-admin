@@ -6,7 +6,7 @@
     <div class="content">
       <div
         class="sidebar"
-        :class="{'sidebar-close': !sidebarOpened}"
+        :class="{'sidebar-close': sidebarOpened}"
       >
         <app-sidebar></app-sidebar>
       </div>

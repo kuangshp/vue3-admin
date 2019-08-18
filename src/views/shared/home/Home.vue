@@ -18,7 +18,7 @@ export default class Home extends Vue {
   @State private viewStore!: IViewState;
   @Action('viewStore/setTitle') private changeTitleAc!: (params: string) => void;
 
-  @Provide() private changeTitle() {
+  private changeTitle() {
     this.changeTitleAc('你好');
   }
 }

@@ -61,17 +61,13 @@ import { menus } from '@/statics/menus';
   components: {},
 })
 export default class AppSidebar extends Vue {
-  @Provide() private data() {
-    return {
-      menus,
-      isCollapse: false,
-    };
-  }
+  private menus: any[] = menus;
+  private isCollapse: boolean = false;
 
-  @Provide() private handleOpen(key: any, keyPath: any) {
+  private handleOpen(key: any, keyPath: any) {
     console.log(key, keyPath);
   }
-  @Provide() private handleClose(key: any, keyPath: any) {
+  private handleClose(key: any, keyPath: any) {
     console.log(key, keyPath);
   }
 }

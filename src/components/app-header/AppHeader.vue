@@ -52,9 +52,9 @@ import { IViewState } from '@/store/view';
 export default class AppHeader extends Vue {
   @State private viewStore!: IViewState;
   @Action('viewStore/toogleSidebar') private toogleSidebar!: () => void;
-  @Provide() private username: string = '';
+  private username: string = '';
 
-  @Provide() private logout(): void {
+  private logout(): void {
     storage.removeItem(OperatedProduct);
     this.$router.push({ name: 'login' });
   }
