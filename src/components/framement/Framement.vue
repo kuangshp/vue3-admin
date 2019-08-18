@@ -3,11 +3,11 @@
     <div class="header">
       <app-header></app-header>
     </div>
-    <div class="content">
-      <div
-        class="sidebar"
-        :class="{'sidebar-close': sidebarOpened}"
-      >
+    <div
+      class="content"
+      :class="{'sidebar-close': sidebarOpened}"
+    >
+      <div class="sidebar">
         <app-sidebar></app-sidebar>
       </div>
       <div class="view">
@@ -37,8 +37,9 @@ export default class Framement extends Vue {
   top: 50px;
   right: 0;
   bottom: 0;
-  display: flex;
-  flex-direction: row;
+  > * {
+    transition: all 1s;
+  }
   .sidebar {
     width: 240px;
     height: inherit;
@@ -47,18 +48,29 @@ export default class Framement extends Vue {
     box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);
     margin-right: 10px;
     overflow-y: auto;
-    transition: width 1s;
-  }
-  .sidebar-close {
-    width: 0;
-    transition: width 1s;
-    margin-right: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 50px;
+    right: 0;
+    transform: translateX(0);
   }
   .view {
-    flex: 1;
+    margin-left: 240px;
     background: #e5e5e5;
     height: inherit;
     padding: 2rem;
+  }
+}
+.sidebar-close {
+  > * {
+    transition: all 1s;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .view {
+    margin-left: 0;
   }
 }
 </style>
