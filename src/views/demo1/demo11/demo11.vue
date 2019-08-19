@@ -9,7 +9,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
   components: {},
 })
-export default class Demo11 extends Vue {}
+export default class Demo11 extends Vue { }
 </script>
 <style lang="less">
 </style>

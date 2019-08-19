@@ -1,12 +1,8 @@
 {
   "defaultSeverity": "warning",
-  "extends": [
-    "tslint:recommended"
-  ],
+  "extends": ["tslint:recommended"],
   "linterOptions": {
-    "exclude": [
-      "node_modules/**"
-    ]
+    "exclude": ["node_modules/**"]
   },
   "rules": {
     "indent": [true, "spaces", 2],
@@ -15,6 +11,7 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "quotemark": [true, "single"],
-    "no-console": false
+    "no-console": false,
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "" }]
   }
 }
