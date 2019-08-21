@@ -27,8 +27,14 @@
 
 <script lang="ts">
 import { Component, Provide, Vue } from 'vue-property-decorator';
+import { clickOutside } from '@/directives';
 @Component({
+  name: 'demo02',
   components: {},
+  directives: { clickOutside },
+  filters: {},
+  inheritAttrs: false,
+  mixins: [],
 })
 export default class Demo2 extends Vue {
   private tableData: any[] = [{
