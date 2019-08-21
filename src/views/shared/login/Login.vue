@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
-import { OperatedProduct } from '@/config';
+import { authToken } from '@/config';
 import { storage } from '@/utils';
 import axios from 'axios';
 
@@ -55,18 +55,20 @@ export default class Login extends Vue {
     password: '',
   };
   private submitForm(formType: string): void {
-    (this.$refs[formType] as any).validate((valid: boolean) => {
+    (this.$refs[formType] as any).validate(async (valid: boolean) => {
       if (valid) {
-        axios.post('/api/v1/user/login', { userName: this.loginForm.email, password: this.loginForm.password })
-          .then((data: any) => {
-            console.log(data);
-          });
-        // 设置本地存储
-        storage.setItem(OperatedProduct, this.loginForm.email);
-        if (this.$route.query.backUrl) {
-          this.$router.push((this.$route.query as any).backUrl);
+        const postData = { name: this.loginForm.email, password: this.loginForm.password };
+        const { code, result: { data: { token } }, message } = await axios.post('/login', postData);
+        if (code === 0) {
+          // 设置本地存储
+          storage.setItem(authToken, token);
+          if (this.$route.query.backUrl) {
+            this.$router.push((this.$route.query as any).backUrl);
+          } else {
+            this.$router.push('/');
+          }
         } else {
-          this.$router.push('/');
+          console.log(message);
         }
       } else {
         return false;

@@ -3,12 +3,12 @@ import axios from 'axios';
 import App from './views/shared/app';
 import router from './routers';
 import store from './store';
-import { axiosConfig } from './utils';
+import { axiosRequest } from './utils';
 
 Vue.config.productionTip = false;
 
-axiosConfig();
-Vue.prototype.axios = axios;
+// 初始化请求的封装函数
+axiosRequest.init();
 
 // 配置element-ui组件库
 import ElementUI from 'element-ui';
