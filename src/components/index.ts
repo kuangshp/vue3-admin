@@ -2,12 +2,14 @@ import AppBreadcrumb from './app-breadcrumb';
 import AppHeader from './app-header';
 import AppSidebar from './app-sidebar';
 import Framement from './framement';
+import Demo from './demo';
 
 const components: { [propsName: string]: any } = {
   AppBreadcrumb,
   AppHeader,
   AppSidebar,
   Framement,
+  Demo,
 };
 
 const install = (Vue: any): void => {

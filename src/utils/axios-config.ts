@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-08-16 16:57:42
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-21 10:21:16
+ * @LastEditTime: 2019-08-21 10:37:01
  */
 
 import axios from 'axios';
@@ -35,9 +35,9 @@ export const axiosConfig = (): void => {
   /********************************封装请求的 start********************************/
   function request(config: { [propsName: string]: any }) {
     // 配置请求头
-    config.headers['X-Origin'] = 'admin-web';
-    config.headers[authToken] = storage.getItem(authToken);
-    config.headers[authMobile] = storage.getItem(authMobile);
+    // config.headers['X-Origin'] = 'admin-web';
+    // config.headers[authToken] = storage.getItem(authToken);
+    // config.headers[authMobile] = storage.getItem(authMobile);
 
     // 处理请求地址
     const input = config.url;
@@ -71,62 +71,3 @@ export const axiosConfig = (): void => {
   // 拦截响应
   axios.interceptors.response.use(response, responseError);
 };
-
-// class AxiosRequest {
-//   private baseUrl: string;
-//   private timeout: number;
-//   constructor(baseUrl: string = prefix, timeout: number = 60 * 1000) {
-//     this.baseUrl = baseUrl;
-//     this.timeout = timeout;
-//   }
-
-//   public request(config: { [propsName: string]: any }) {
-//     const instance = axios.create({
-//       baseURL: this.baseUrl,
-//       timeout: this.timeout,
-//     });
-//     /********************************设置请求拦截 start********************************/
-//     instance.interceptors.request.use(this.requestSuccess, this.requestError);
-//     /********************************设置请求拦截 end********************************/
-//     /********************************设置响应拦截 start********************************/
-//     instance.interceptors.response.use(
-//       this.responseSuccess,
-//       this.responseError,
-//     );
-//     /********************************设置响应拦截 end********************************/
-//     return instance(config);
-//   }
-
-//   private requestSuccess(config: { [propsName: string]: any }) {
-//     config.headers['X-Origin'] = 'admin-web';
-//     config.headers[authToken] = storage.getItem(authToken);
-//     config.headers[authMobile] = storage.getItem(authMobile);
-//     return config;
-//   }
-
-//   private requestError(rejection: { data: any }) {
-//     return this.useOrigin(rejection)
-//       ? Promise.reject(rejection)
-//       : Promise.reject(rejection.data);
-//   }
-
-//   private responseSuccess(res: any): any {
-//     return this.isPlainRequest(res.config.url) || this.useOrigin(res)
-//       ? res
-//       : res.data;
-//   }
-
-//   private responseError(error: any) {
-//     return Promise.reject(error);
-//   }
-
-//   private useOrigin(res: any) {
-//     return res.config.useOrigin;
-//   }
-
-//   private isPlainRequest(input: string) {
-//     return /\.(html?|xml|txt)$/.test(input);
-//   }
-// }
-
-// export const axiosConfig = new AxiosRequest();

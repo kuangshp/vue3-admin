@@ -1,6 +1,7 @@
 <template>
   <div class="demo11">
     <h1>我是demo11页面</h1>
+    <Demo></Demo>
   </div>
 </template>
 
