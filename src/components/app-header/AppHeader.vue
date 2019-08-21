@@ -42,7 +42,7 @@ import {
   Mutation,
   namespace,
 } from 'vuex-class';
-import { OperatedProduct } from '@/config';
+import { currentUser, authToken } from '@/config';
 import { storage } from '@/utils';
 import { IViewState } from '@/store/view';
 
@@ -55,12 +55,13 @@ export default class AppHeader extends Vue {
   private username: string = '';
 
   private logout(): void {
-    storage.removeItem(OperatedProduct);
+    storage.removeItem(authToken);
+    storage.removeItem(currentUser);
     this.$router.push({ name: 'login' });
   }
 
   private mounted() {
-    this.username = storage.getItem(OperatedProduct);
+    this.username = storage.getItem(currentUser);
   }
 }
 </script>

@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-08-16 16:57:42
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-21 12:23:41
+ * @LastEditTime: 2019-08-21 16:23:28
  */
 
 import axios from 'axios';
@@ -32,6 +32,10 @@ class AxiosRequest {
     );
   }
 
+  /**
+   * 成功请求的方法
+   * @param config
+   */
   private request(config: { [propsName: string]: any }) {
     // 配置请求头
     config.headers['X-Origin'] = 'admin-web';
@@ -49,18 +53,35 @@ class AxiosRequest {
     return config;
   }
 
+  /**
+   * 失败请求的方法
+   * @param rejection
+   */
   private requestError(rejection: { data: any }) {
     return this.useOrigin(rejection)
       ? Promise.reject(rejection)
       : Promise.reject(rejection.data);
   }
 
-  private response(res: any) {
-    return this.isPlainRequest(res.config.url) || this.useOrigin(res)
-      ? res
-      : res.data;
+  /**
+   * 成功响应的方法
+   * @param response
+   */
+  private response(response: any) {
+    if (response.status === 200 || response.status === 201) {
+      return this.isPlainRequest(response.config.url) ||
+        this.useOrigin(response)
+        ? Promise.resolve(response)
+        : Promise.resolve(response.data);
+    } else {
+      return Promise.reject(response);
+    }
   }
 
+  /**
+   * 响应失败的方法(根据自己的业务逻辑写)
+   * @param error
+   */
   private responseError(error: any) {
     if (error.response && error.response.status) {
       let $path;
@@ -82,6 +103,7 @@ class AxiosRequest {
         // 未登录则跳转登录页面，并携带当前页面的路径
         // 在登录成功后返回当前页面，这一步需要在登录页操作。
         case 401:
+          console.log('你没有登录,请先登录');
           routers.replace({
             path: '/login',
             query: {

@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
-import { authToken } from '@/config';
+import { authToken, currentUser } from '@/config';
 import { storage } from '@/utils';
 import axios from 'axios';
 
@@ -62,6 +62,7 @@ export default class Login extends Vue {
         if (code === 0) {
           // 设置本地存储
           storage.setItem(authToken, token);
+          storage.setItem(currentUser, this.loginForm.email);
           if (this.$route.query.backUrl) {
             this.$router.push((this.$route.query as any).backUrl);
           } else {

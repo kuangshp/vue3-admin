@@ -11,7 +11,7 @@ export default {
         const { code, message, result } = await UserService.getAllUser();
         return axiosResult(result, code, message, true);
       } catch (e) {
-        console.error(e);
+        return e;
       }
     },
   },
