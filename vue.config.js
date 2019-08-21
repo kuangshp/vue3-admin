@@ -54,5 +54,7 @@ module.exports = {
     port: 8000,
     compress: true, // 自动压缩
     open: true, // 自动打开浏览器
+    inline: true, // 页面自动刷新
+    hot: true, //热更新,实时更新
   },
 };
