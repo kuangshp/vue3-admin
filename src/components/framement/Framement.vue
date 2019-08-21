@@ -5,7 +5,7 @@
     </div>
     <div
       class="content"
-      :class="{'sidebar-close': sidebarOpened}"
+      :class="{'sidebar-close': !sidebarOpened}"
     >
       <div class="sidebar">
         <app-sidebar></app-sidebar>
@@ -58,7 +58,7 @@ export default class Framement extends Vue {
   .view {
     margin-left: 240px;
     background: #e5e5e5;
-    height: inherit;
+    height: 100%;
     padding: 2rem;
   }
 }

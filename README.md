@@ -36,3 +36,7 @@
 
 * 4、对`axios`请求进行了封装处理
 * 5、引入`vuex`
+
+## 五、有技术问题可以加微信:备注 `vue+ts`
+
+<img src="./wx.jpg" width="200" height="200" />
