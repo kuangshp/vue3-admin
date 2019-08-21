@@ -46,6 +46,7 @@
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { OperatedProduct } from '@/config';
 import { storage } from '@/utils';
+import axios from 'axios';
 
 @Component({})
 export default class Login extends Vue {
@@ -56,6 +57,10 @@ export default class Login extends Vue {
   private submitForm(formType: string): void {
     (this.$refs[formType] as any).validate((valid: boolean) => {
       if (valid) {
+        console.log('--------')
+        axios.post('/api/v1/user/login', { userName: this.loginForm.email, password: this.loginForm.password }).then((data: any) => {
+          console.log(data);
+        });
         // 设置本地存储
         storage.setItem(OperatedProduct, this.loginForm.email);
         if (this.$route.query.backUrl) {
