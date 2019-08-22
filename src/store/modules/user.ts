@@ -7,7 +7,7 @@ export default {
   mutations: {},
   actions: {
     async getAllUserApi() {
-      const [err, result] = await errorCaptured(UserService.getAllUser)();
+      const [err, result] = await errorCaptured(UserService.getAllUser, true)();
       return result;
     },
   },
