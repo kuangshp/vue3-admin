@@ -1,5 +1,5 @@
 import UserService from '@/servers/User';
-import { axiosResult } from '@/utils';
+import { errorCaptured } from '@/utils';
 
 export default {
   namespaced: true,
@@ -7,12 +7,8 @@ export default {
   mutations: {},
   actions: {
     async getAllUserApi() {
-      try {
-        const { code, message, result } = await UserService.getAllUser();
-        return axiosResult(result, code, message, true);
-      } catch (e) {
-        return e;
-      }
+      const [err, result] = await errorCaptured(UserService.getAllUser)();
+      return result;
     },
   },
 };
