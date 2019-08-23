@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-08-16 16:57:42
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-21 16:23:28
+ * @LastEditTime: 2019-08-23 13:57:49
  */
 
 import axios from 'axios';
@@ -110,6 +110,7 @@ class AxiosRequest {
               redirect: routers.currentRoute.fullPath,
             },
           });
+          window.location.reload();
           break;
 
         // 403 token过期
@@ -120,6 +121,7 @@ class AxiosRequest {
           console.log('登录过期，请重新登录');
           // 清除全部的缓存数据
           window.localStorage.clear();
+          window.location.reload();
           // store.commit('loginSuccess', null);
           // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
           setTimeout(() => {
