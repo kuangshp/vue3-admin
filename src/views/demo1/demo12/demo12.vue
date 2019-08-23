@@ -7,7 +7,7 @@
     >使用vuex方法获取全部用户</el-button>
     <el-button
       type="primary"
-      @click="getAllUserApi"
+      @click="getUser"
     >直接获取全部用户</el-button>
   </div>
 </template>
@@ -26,15 +26,15 @@ export default class Demo12 extends Vue {
    * 直接在vue组件中使用axios请求接口
    */
   private async getUser() {
-    const result = await axios.get('/user?pageSize=10&pageNumber=1');
-    console.log(result);
+    const { code, message, result } = await axios.get('/user?pageSize=10&pageNumber=1');
+    console.log(code, message, result);
   }
 
   /**
    * 通过store统一调用接口
    */
   private async vuexGetUser() {
-    const { result } = await this.getAllUserApi();
+    const result = await this.getAllUserApi();
     console.log(result);
   }
 }
