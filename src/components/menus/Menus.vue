@@ -64,6 +64,9 @@ export default class Menu extends Vue {
     top: 0;
     right: 0;
     bottom: 0;
+    .is-active {
+      background: rgb(41, 41, 41);
+    }
   }
 }
 </style>
