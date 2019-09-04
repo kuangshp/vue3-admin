@@ -22,20 +22,10 @@ const baseRoutes = [
     component: () => import('@/layout'),
     redirect: '/home',
     children: [
-      {
-        name: 'home',
-        path: '/home',
-        meta: { title: 'Home' },
-        component: () => import('@/views/shared/home'),
-      },
+      ...home,
     ],
   },
-  {
-    name: 'login',
-    path: '/login',
-    meta: { title: 'login', unauth: true },
-    component: () => import('@/views/shared/login'),
-  },
+  ...login,
 ];
 
 // 路由的基础配置

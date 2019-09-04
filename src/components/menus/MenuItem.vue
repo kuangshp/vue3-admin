@@ -17,7 +17,7 @@
       v-else
       :index="item.url"
     >
-      <router-link :to="{ name: item.url }">
+      <router-link :to="{ name: item.url }" class="router">
         <li>{{ item.name }}</li>
       </router-link>
 
@@ -36,4 +36,8 @@ export default class MenuItem extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="less">
+.router{
+  color: #f00;
+}
+</style>
