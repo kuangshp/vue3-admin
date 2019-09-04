@@ -1,9 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pjson = require('./package.json');
+
+// 模拟菜单
+const menuList = require('./menus.json');
 // 自定义webpack
 module.exports = {
   outputDir: path.join(__dirname, './dist', pjson.name),
+  // 配置模拟数据接口
+  devServer: {
+    compress: false, // 开启压缩
+    before (app) {
+      app.get('/api/v1/menu', (req, res) => {
+        res.json(menuList)
+      })
+    },
+  },
   configureWebpack: (config) => {
     const env = process.env.NODE_ENV;
     switch (env) {
