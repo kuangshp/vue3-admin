@@ -6,8 +6,11 @@
     "start": "vue-cli-service serve",
     "uat": "vue-cli-service build --mode uat",
     "fat": "vue-cli-service build --mode fat",
-    "build": "rm -rf dist & vue-cli-service build",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
@@ -34,6 +37,7 @@
     "editorconfig": "^0.15.3",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "pre-commit": "^1.2.2",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   }
