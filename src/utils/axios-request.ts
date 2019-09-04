@@ -6,14 +6,14 @@
  * @Company:
  * @Date: 2019-08-16 16:57:42
  * @LastEditors: 水痕
- * @LastEditTime: 2019-09-04 11:20:47
+ * @LastEditTime: 2019-09-04 13:32:30
  */
 
 import axios from 'axios';
 import { storage } from './storage';
 import { prefix, iamPrefix } from '@/api';
-import { authMobile, authToken } from '@/config';
-import routers from '../routers';
+import { authToken } from '@/config';
+import { router } from '../routers';
 
 class AxiosRequest {
   public init() {
@@ -105,10 +105,10 @@ class AxiosRequest {
         // 在登录成功后返回当前页面，这一步需要在登录页操作。
         case 401:
           console.log('你没有登录,请先登录');
-          routers.replace({
+          router.replace({
             path: '/login',
             query: {
-              redirect: routers.currentRoute.fullPath,
+              redirect: router.currentRoute.fullPath,
             },
           });
           window.location.reload();
@@ -126,10 +126,10 @@ class AxiosRequest {
           // store.commit('loginSuccess', null);
           // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
           setTimeout(() => {
-            routers.replace({
+            router.replace({
               path: '/login',
               query: {
-                redirect: routers.currentRoute.fullPath,
+                redirect: router.currentRoute.fullPath,
               },
             });
           }, 1000);
