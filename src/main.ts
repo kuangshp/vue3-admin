@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import App from './views/shared/app';
-import router from './routers';
+import { router } from './routers';
 import store from './store';
 import { axiosRequest } from './utils';
 
@@ -32,7 +32,7 @@ fontawesome.library.add(brands);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 /********************************引入字体 end********************************/
 
-new Vue({
+(window as any)._vm = new Vue({
   router,
   store,
   render: (h) => h(App),

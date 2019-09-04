@@ -7,3 +7,4 @@ export * from './axios-result';
 export * from './data-type';
 export * from './error-captured';
 export * from './url';
+export * from './menu';
