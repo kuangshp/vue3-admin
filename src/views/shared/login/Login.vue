@@ -45,11 +45,13 @@
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { authToken, currentUser } from '@/config';
+import { Action } from 'vuex-class';
 import { storage } from '@/utils';
-import axios from 'axios';
 
 @Component({})
 export default class Login extends Vue {
+  @Action('login/loginApi') private loginApi!: (postData: { name: string, password: string }) => Promise<any>;
+
   private loginForm: { [propsName: string]: any } = {
     email: '',
     password: '',
@@ -58,7 +60,7 @@ export default class Login extends Vue {
     (this.$refs[formType] as any).validate(async (valid: boolean) => {
       if (valid) {
         const postData = { name: this.loginForm.email, password: this.loginForm.password };
-        const { code, result: { data: { token } }, message } = await axios.post('/login', postData);
+        const { code, result: { data: { token } }, message } = await this.loginApi(postData);
         if (code === 0) {
           // 设置本地存储
           storage.setItem(authToken, token);

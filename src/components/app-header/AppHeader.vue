@@ -44,13 +44,13 @@ import {
 } from 'vuex-class';
 import { currentUser, authToken } from '@/config';
 import { storage } from '@/utils';
-import { IViewState } from '@/store/view';
+// import { IViewState } from '@/store/view';
 
 @Component({
   components: {},
 })
 export default class AppHeader extends Vue {
-  @State private viewStore!: IViewState;
+  // @State private viewStore!: IViewState;
   @Action('viewStore/toogleSidebar') private toogleSidebar!: () => void;
   private username: string = '';
 
