@@ -9,9 +9,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "gitHooks": {
-    "pre-commit": "lint"
-  },
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
