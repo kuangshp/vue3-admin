@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-08-16 16:57:42
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-27 12:51:12
+ * @LastEditTime: 2019-09-04 11:20:47
  */
 
 import axios from 'axios';
@@ -68,7 +68,8 @@ class AxiosRequest {
    * @param response
    */
   private response(response: any) {
-    if (response.status === 200 || response.status === 201) {
+    const code = response.status;
+    if ((code >= 200 && code < 300) || code === 304) {
       return this.isPlainRequest(response.config.url) ||
         this.useOrigin(response)
         ? Promise.resolve(response)
