@@ -1,30 +1,30 @@
 {
 	"code":0,
-	"message":"Permintaan berhasil",
+	"message":"请求成功",
 	"result":[
 		{
 			"id":1,
 			"name":"Demo1",
 			"parentId":-1,
-			"path":"demo1"
+			"url":"demo1"
 		},
 		{
 			"id":2,
 			"name":"Demo11",
 			"parentId":1,
-			"path":"demo1.demo11"
+			"url":"demo1.demo11"
 		},
 		{
 			"id":3,
 			"name":"Demo12",
 			"parentId":1,
-			"path":"demo1.demo12"
+			"url":"demo1.demo12"
 		},
 		{
 			"id":4,
 			"name":"demo2",
 			"parentId":-1,
-			"path":"demo2"
+			"url":"demo2"
 		}
 	]
 }

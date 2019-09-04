@@ -6,13 +6,14 @@
  * @Company:
  * @Date: 2019-08-16 15:38:58
  * @LastEditors: 水痕
- * @LastEditTime: 2019-08-16 17:35:35
+ * @LastEditTime: 2019-09-04 13:57:50
  */
 import { MutationTree, ActionTree } from 'vuex';
 
 export interface IViewState {
   sidebarOpened: boolean;
   title: string;
+  menuList: Array<{ [propsName: string]: any }>;
 }
 
 export interface RootState {
@@ -23,11 +24,13 @@ export enum TYPES {
   OPEN_SIDEBAR = 'OPEN_SIDEBAR', // 打开侧边栏
   CLOSE_SIDEBAR = 'CLOSE_SIDEBAR', // 关闭侧边栏
   SET_TITLE = 'SET_TITLE',
+  SET_SIDE_MENU = 'SET_SIDE_MENU', // 设置左侧菜单
 }
 
 const state: IViewState = {
   sidebarOpened: true,
   title: '主页',
+  menuList: [],
 };
 
 const getters = {
@@ -44,6 +47,9 @@ const mutations: MutationTree<IViewState> = {
   },
   [TYPES.SET_TITLE](s: IViewState, title: string) {
     s.title = title;
+  },
+  [TYPES.SET_SIDE_MENU]: (s: IViewState, payload: Array<{ [propsName: string]: any }>) => {
+    s.menuList = payload;
   },
 };
 

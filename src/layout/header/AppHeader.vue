@@ -12,7 +12,7 @@
     </div>
     <!-- 头部导航 -->
     <div class="header-info">
-      <app-breadcrumb />
+      <breadcrumb />
     </div>
     <div class="userinfo-submenu">
       <el-dropdown>
@@ -44,13 +44,14 @@ import {
 } from 'vuex-class';
 import { currentUser, authToken } from '@/config';
 import { storage } from '@/utils';
-// import { IViewState } from '@/store/view';
 
+import Breadcrumb from './../breadcrumb';
 @Component({
-  components: {},
+  components: {
+    Breadcrumb,
+  },
 })
 export default class AppHeader extends Vue {
-  // @State private viewStore!: IViewState;
   @Action('viewStore/toogleSidebar') private toogleSidebar!: () => void;
   private username: string = '';
 

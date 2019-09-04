@@ -38,11 +38,7 @@ export const formatList = (authRooutes: Array<{ [propsName: string]: any }>, aut
 
   return authRooutes.filter((route) => {
     // 判断从服务器端获取的auths是否包括本地路由中的url
-    if (
-      auths.includes(route.name) ||
-      auths.includes(startWithPath(route.name)) ||
-      route.path.includes(':')
-    ) {
+    if (auths.includes(route.name)) {
       // 如果有children字段递归继续判断
       if (route.children) {
         route.children = formatList(route.children, auths);
@@ -52,8 +48,3 @@ export const formatList = (authRooutes: Array<{ [propsName: string]: any }>, aut
   });
 };
 
-const startWithPath = (currentName: string): string => {
-  const splitPath = currentName.split('.');
-  splitPath.pop();
-  return splitPath.length === 1 ? `${splitPath[0]}.` : splitPath.join('.');
-};

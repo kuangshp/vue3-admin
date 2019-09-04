@@ -8,7 +8,7 @@
       :class="{'sidebar-close': !sidebarOpened}"
     >
       <div class="sidebar">
-        <app-sidebar></app-sidebar>
+        <sidebar></sidebar>
       </div>
       <div class="view">
         <router-view></router-view>
@@ -22,10 +22,18 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { IViewState } from '@/store/view';
 
+import AppHeader from './header';
+import Breadcrumb from './breadcrumb';
+import Sidebar from './sidebar';
+
 @Component({
-  components: {},
+  components: {
+    AppHeader,
+    Breadcrumb,
+    Sidebar,
+  },
 })
-export default class Framement extends Vue {
+export default class Layout extends Vue {
   @Getter('viewStore/sidebarOpened') private sidebarOpened!: IViewState;
 }
 </script>

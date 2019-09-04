@@ -4,9 +4,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const pjson = require('./package.json');
 
-// 模拟菜单
-const menuList = require('./menus.json');
-
 const isProduction = Object.is(process.env.NODE_DEV, 'production');
 // const isUat = Object.is(process.env.NODE_DEV, 'uat');
 // const isFat = Object.is(process.env.NODE_DEV, 'fat');
@@ -22,15 +19,6 @@ module.exports = {
   publicPath: './',
   // 打包输出的路径
   outputDir: path.join(__dirname, './dist', pjson.name),
-  // 配置模拟数据接口
-  devServer: {
-    compress: false, // 开启压缩
-    before (app) {
-      app.get('/api/v1/menu', (req, res) => {
-        res.json(menuList)
-      })
-    },
-  },
   /********************************css的配置 start********************************/
   css: {
     // 分离插件

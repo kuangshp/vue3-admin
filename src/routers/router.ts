@@ -6,7 +6,6 @@ import { auth, setTitle, storage, formatList, getTreeList } from '@/utils';
 
 Vue.use(Router);
 
-import Framement from '@/components/framement';
 import { constantRoutes } from './constant-routes';
 import unmatch from './shared/unmatch';
 import home from './shared/home';
@@ -20,13 +19,23 @@ const baseRoutes = [
     name: '',
     path: '/',
     meta: { title: 'Home' },
-    component: Framement,
+    component: () => import('@/layout'),
     redirect: '/home',
     children: [
-      ...home,
+      {
+        name: 'home',
+        path: '/home',
+        meta: { title: 'Home' },
+        component: () => import('@/views/shared/home'),
+      },
     ],
   },
-  ...login,
+  {
+    name: 'login',
+    path: '/login',
+    meta: { title: 'login', unauth: true },
+    component: () => import('@/views/shared/login'),
+  },
 ];
 
 // 路由的基础配置
@@ -38,14 +47,10 @@ const routeConfig = {
     return { x: 0, y: 0 };
   },
 };
+
 // 实例化路由
 const createRouter = (): any => new Router({
-  mode: 'history',
-  linkActiveClass: 'active',
-  linkExactActiveClass: 'active',
-  scrollBehavior() {
-    return { x: 0, y: 0 };
-  },
+  ...routeConfig,
   routes: baseRoutes,
 });
 const router = createRouter();
@@ -55,13 +60,8 @@ const router = createRouter();
  */
 router.$addRoutes = (array: any) => {
   (router as any).matcher = (new Router({
-    mode: 'history',
-    linkActiveClass: 'active',
-    linkExactActiveClass: 'active',
-    scrollBehavior() {
-      return { x: 0, y: 0 };
-    },
-    routes: array,
+    ...routeConfig,
+    array,
   }) as any).matcher;
   router.addRoutes(array);
 };
@@ -89,11 +89,11 @@ const isExistRouter = (auths: string[], routes: Array<{ [propsName: string]: any
 const mergeRoute = async () => {
   // 本地中有存储的时候才拉取菜单
   if (storage.getItem(authToken)) {
-    const { result } = await store.dispatch('sideMeunApi');
+    const { result } = await store.dispatch('meuns/sideMeunApi');
     // 从服务器端获取菜单及对应的权限
     const [auths, menu] = getTreeList(result);
     // 格式化后的菜单设置到store存储中
-    store.commit('SET_SIDE_MENU', menu);
+    store.commit('viewStore/SET_SIDE_MENU', menu);
     // 根据后端返回的权限,切割路由文件中的路由
     const permiseMenu = formatList(constantRoutes, auths);
     if ((window as any)._vm) {
