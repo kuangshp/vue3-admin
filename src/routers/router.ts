@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Router, { Route } from 'vue-router';
+import Router, { Route, RouterOptions, RouteConfig, RouterMode } from 'vue-router';
 import store from '@/store';
 
 import { auth, setTitle, storage, formatList, getTreeList } from '@/utils';
@@ -40,7 +40,12 @@ const routeConfig = {
 
 // 实例化路由
 const createRouter = (): any => new Router({
-  ...routeConfig,
+  mode: 'history',
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active',
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: baseRoutes,
 });
 const router = createRouter();
@@ -48,12 +53,12 @@ const router = createRouter();
 /**
  * 扩展添加动态路由的方法
  */
-router.$addRoutes = (array: any) => {
+router.$addRoutes = (routerArray: any) => {
   (router as any).matcher = (new Router({
     ...routeConfig,
-    array,
+    ...routerArray,
   }) as any).matcher;
-  router.addRoutes(array);
+  router.addRoutes(routerArray);
 };
 
 // 定义一个变量判断当前是否可以添加路由
