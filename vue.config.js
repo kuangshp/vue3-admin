@@ -27,7 +27,7 @@ module.exports = {
     sourceMap: false,
     loaderOptions: {
       // 配置引入全局的样式
-      sass: {
+      less: {
         data: `@import "@/assets/common/css/index.less";`
       }
     },
