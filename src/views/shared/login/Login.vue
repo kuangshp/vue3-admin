@@ -60,19 +60,27 @@ export default class Login extends Vue {
     (this.$refs[formType] as any).validate(async (valid: boolean) => {
       if (valid) {
         const postData = { name: this.loginForm.email, password: this.loginForm.password };
-        const { code, result: { data: { token } }, message } = await this.loginApi(postData);
-        if (code === 0) {
-          // 设置本地存储
-          storage.setItem(authToken, token);
-          storage.setItem(currentUser, this.loginForm.email);
-          if (this.$route.query.backUrl) {
-            this.$router.push((this.$route.query as any).backUrl);
-          } else {
-            this.$router.push('/');
-          }
+        // 设置本地存储
+        storage.setItem(authToken, this.loginForm.email);
+        storage.setItem(currentUser, this.loginForm.email);
+        if (this.$route.query.backUrl) {
+          this.$router.push((this.$route.query as any).backUrl);
         } else {
-          console.log(message);
+          this.$router.push('/');
         }
+        // const { code, result: { data: { token } }, message } = await this.loginApi(postData);
+        // if (code === 0) {
+        //   // 设置本地存储
+        //   storage.setItem(authToken, token);
+        //   storage.setItem(currentUser, this.loginForm.email);
+        //   if (this.$route.query.backUrl) {
+        //     this.$router.push((this.$route.query as any).backUrl);
+        //   } else {
+        //     this.$router.push('/');
+        //   }
+        // } else {
+        //   console.log(message);
+        // }
       } else {
         return false;
       }
