@@ -48,6 +48,11 @@ const state = {
         }
       ]
     },
+    {
+      icon: 'el-icon-s-marketing',
+      index: 'tabs1',
+      title: 'tab1选项卡'
+    },
   ],
 };
 
