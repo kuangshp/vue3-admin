@@ -11,7 +11,9 @@
       <sidebar></sidebar>
       <!-- 右侧视图 -->
       <div class="view">
-        <router-view></router-view>
+        <div class="conatiner">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@ export default {
   .view {
     width: auto;
     height: 100%;
-    padding: 2rem;
+    padding: 1rem;
     position: absolute;
     left: 240px;
     right: 0;
@@ -54,6 +56,12 @@ export default {
     padding-bottom: 30px;
     transition: left 0.3s ease-in-out;
     background: #f0f0f0;
+    .conatiner {
+      background: #fff;
+      width: inherit;
+      height: inherit;
+      padding: 1rem;
+    }
   }
 }
 .sidebar-close {

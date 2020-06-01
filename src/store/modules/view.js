@@ -4,55 +4,31 @@ const state = {
   title: '主页',
   menuList: [
     {
-      icon: 'el-icon-s-home',
-      index: 'dashboard',
-      title: '系统首页'
-    },
-    {
       icon: 'el-icon-s-order',
       index: 'table',
       title: '基础表格'
     },
     {
       icon: 'el-icon-s-marketing',
-      index: 'tabs',
+      index: 'tab',
       title: 'tab选项卡'
     },
     {
       icon: 'el-icon-folder-opened',
-      index: '3',
+      index: 'form',
       title: '表单相关',
       children: [
         {
-          index: 'form',
+          index: 'base_form',
           title: '基本表单',
           icon: 'el-icon-s-data',
-        },
-        {
-          index: '3-2',
-          title: '三级菜单',
-          children: [
-            {
-              index: 'editor',
-              title: '富文本编辑器'
-            },
-            {
-              index: 'markdown',
-              title: 'markdown编辑器'
-            }
-          ]
         },
         {
           index: 'upload',
           title: '文件上传'
         }
       ]
-    },
-    {
-      icon: 'el-icon-s-marketing',
-      index: 'tabs1',
-      title: 'tab1选项卡'
-    },
+    }
   ],
 };
 

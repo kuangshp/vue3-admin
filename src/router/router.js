@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import home from './shared/home';
 import login from './shared/login';
 import { setTitle } from '@/utils';
-
+import { constantRoutes } from './constant-routes';
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +15,7 @@ const routes = [
     redirect: '/home',
     children: [
       ...home,
+      ...constantRoutes,
     ],
   },
   ...login,
