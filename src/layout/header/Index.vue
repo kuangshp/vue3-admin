@@ -97,7 +97,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: width 0.3s;
     .log1 {
       width: 240px;
       height: 40px;
@@ -127,7 +126,6 @@ export default {
       padding: 5px;
       margin-top: 4px;
       cursor: pointer;
-      transition: color 0.3s;
     }
     .trigger:hover {
       background: #40a9ff;

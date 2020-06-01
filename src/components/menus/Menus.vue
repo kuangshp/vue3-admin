@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebae">
+  <div class="sidebar">
     <el-menu
       class="sidebar-el-menu"
       :default-active="onRoutes"
@@ -46,12 +46,13 @@ export default {
 
 <style scoped lang="scss">
 .sidebar {
-  display: block;
+  /* display: block;
   position: absolute;
   left: 0;
   top: 70px;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: scroll; */
+  float: left;
 }
 .sidebar::-webkit-scrollbar {
   width: 0;
@@ -62,8 +63,5 @@ export default {
 }
 .sidebar-el-menu:not(.el-menu--collapse) {
   width: 240px;
-}
-.sidebar > ul {
-  height: 100%;
 }
 </style>
