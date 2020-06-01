@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/shared/login/index.vue'
+import home from './shared/home';
+import login from './shared/login';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/login",
-    name: "Login",
-    meta: { withoutLayout: true },
-    component: Login,
+    name: '',
+    path: '/',
+    meta: { title: 'Home' },
+    component: () => import('@/layout'),
+    redirect: '/home',
+    children: [
+      ...home,
+    ],
   },
+  ...login,
 ]
 
 const router = new VueRouter({
