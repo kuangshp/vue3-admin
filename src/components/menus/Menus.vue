@@ -52,16 +52,16 @@ export default {
   top: 70px;
   bottom: 0;
   overflow-y: scroll;
-  box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);
 }
 .sidebar::-webkit-scrollbar {
   width: 0;
 }
 .sidebar-el-menu {
   height: calc(100vh - 50px);
+  box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);
 }
 .sidebar-el-menu:not(.el-menu--collapse) {
-  width: 230px;
+  width: 240px;
 }
 .sidebar > ul {
   height: 100%;

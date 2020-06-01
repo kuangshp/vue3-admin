@@ -1,7 +1,16 @@
 <template>
   <div class="app-header">
     <div class="logo">
-      <router-link to="/">XX公司权限管理平台</router-link>
+      <router-link to="/">
+        <div
+          class="log1"
+          v-if="sidebarOpened"
+        ></div>
+        <div
+          class="log2"
+          v-else
+        ></div>
+      </router-link>
     </div>
     <!-- 头部切换左侧菜单 -->
     <div
@@ -10,11 +19,11 @@
     >
       <i
         v-if="sidebarOpened"
-        class="el-icon-s-fold"
+        class="trigger el-icon-s-fold"
       ></i>
       <i
         v-else
-        class="el-icon-s-unfold"
+        class="trigger el-icon-s-unfold"
       ></i>
     </div>
     <!-- 头部导航 -->
@@ -82,19 +91,46 @@ export default {
   flex-direction: row;
   line-height: 50px;
   color: #fff;
-  .menus {
-    width: 30px;
-    height: 30px;
-    font-size: 25px;
-    padding: 0 21px;
-    cursor: pointer;
-  }
   .logo {
-    width: 240px;
-    height: inherit;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.3s;
+    .log1 {
+      width: 240px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .log2 {
+      width: 65px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+  .menus {
+    width: 50px;
+    height: 50px;
     text-align: center;
-    a {
-      text-decoration: none;
+    line-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    .trigger {
+      color: #fff;
+      font-size: 30px;
+      width: 35px;
+      height: 35px;
+      padding: 5px;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .trigger:hover {
+      background: #40a9ff;
       color: #fff;
     }
   }
