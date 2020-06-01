@@ -165,6 +165,7 @@ export default {
       height: 35px;
       padding: 5px;
       margin-top: 4px;
+      margin-bottom: 4px;
       cursor: pointer;
     }
     .trigger:hover {
