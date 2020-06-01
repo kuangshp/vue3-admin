@@ -63,7 +63,6 @@ export default {
     submitForm () {
       // let data = { "accountName": this.param.username, "password": this.param.password };
       this.$refs.login.validate(valid => {
-
         if (valid) {
           this.$message.success('登录成功');
           localStorage.setItem('ms_username', this.param.username);
