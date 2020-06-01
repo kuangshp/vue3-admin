@@ -3,7 +3,10 @@
     v-if="item.children && item.children.length"
     :index="item.index"
   >
-    <template slot="title">{{ item.title }}</template>
+    <span slot="title">
+      <i :class="item.icon"></i>
+      {{ item.title }}
+    </span>
     <!-- 递归使用该组件 -->
     <template v-for="(m, i) in item.children">
       <MenuItem
@@ -24,6 +27,7 @@
 <script>
 
 export default {
+  name: 'MenuItem',
   props: {
     item: Object,
     default: () => { },
