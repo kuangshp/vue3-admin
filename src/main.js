@@ -7,8 +7,8 @@ import './assets/css/main.scss';
 
 /******************************** 配置axios的请求 start ********************************/
 import axios from 'axios';
-import { AxiosHttps } from './utils';
-new AxiosHttps();
+import { axiosHttp } from './utils';
+axiosHttp.init();
 Vue.prototype.$axios = axios;
 /******************************** 配置axios的请求 end   ********************************/
 

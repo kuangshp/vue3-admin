@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2020-06-01 09:22:43
  * @LastEditors: 水痕
- * @LastEditTime: 2020-06-01 09:54:07
+ * @LastEditTime: 2020-06-01 10:03:05
  * @FilePath: /admin-web/src/utils/http.js
  */
 
@@ -17,7 +17,7 @@ import { authToken } from '@/config';
 import { router } from '../router';
 
 class AxiosHttp {
-  constructor () {
+  init () {
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
     axios.defaults.timeout = 60 * 1000;
     // 拦截请求
@@ -146,4 +146,4 @@ class AxiosHttp {
   }
 }
 
-export const http = AxiosHttp;
+export const axiosHttp = new AxiosHttp();
