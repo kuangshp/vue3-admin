@@ -50,11 +50,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.router {
+/* .router {
   color: #e5e5e5;
   text-decoration: none;
 }
 .active {
   color: #f00;
-}
+} */
 </style>
