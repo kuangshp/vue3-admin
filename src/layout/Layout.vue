@@ -44,7 +44,7 @@ export default {
     transition: all 1s;
   }
   .sidebar {
-    width: 240px;
+    width: 230px;
     height: inherit;
     background: #fff;
     box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);

@@ -1,7 +1,7 @@
 <template>
   <el-submenu
     v-if="item.children && item.children.length"
-    :index="item.url"
+    :index="item.index"
   >
     <template slot="title">{{ item.title }}</template>
     <!-- 递归使用该组件 -->
@@ -16,7 +16,8 @@
     v-else
     :index="item.index"
   >
-    <li>{{ item.title }}</li>
+    <i :class="item.icon"></i>
+    <span slot="title">{{ item.title }}</span>
   </el-menu-item>
 </template>
 

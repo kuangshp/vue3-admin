@@ -4,17 +4,17 @@ const state = {
   title: '主页',
   menuList: [
     {
-      icon: 'el-icon-lx-home',
+      icon: 'el-icon-s-home',
       index: 'dashboard',
       title: '系统首页'
     },
     {
-      icon: 'el-icon-lx-cascades',
+      icon: 'el-icon-s-order',
       index: 'table',
       title: '基础表格'
     },
     {
-      icon: 'el-icon-lx-copy',
+      icon: 'el-icon-s-marketing',
       index: 'tabs',
       title: 'tab选项卡'
     },

@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 .app-header {
   height: 50px;
-  background: #242f42;
+  background: #3273dc;
   display: flex;
   flex-direction: row;
   line-height: 50px;
