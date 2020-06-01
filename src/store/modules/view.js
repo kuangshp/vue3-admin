@@ -1,4 +1,4 @@
-import * as types from './mutation-types';
+import * as types from '../mutation-types';
 const state = {
   sidebarOpened: true,
   title: '主页',
@@ -37,8 +37,7 @@ const actions = {
   },
 };
 
-export const viewStore = {
-  namespaced: true,
+export default {
   state,
   getters,
   mutations,

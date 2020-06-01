@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import MenuItem from './MenuItem.vue';
-// import { IViewState } from '@/store/view';
+import { mapState } from 'vuex';
 
 export default {
   props: {},
@@ -44,9 +44,9 @@ export default {
     }
   },
   computed: {
-    menuList() {
-      return [];
-    }
+    ...mapState({
+      menuList: state => state.view.menuList,
+    })
   },
   components: {
     MenuItem,

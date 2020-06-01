@@ -61,7 +61,7 @@ export default {
   }
   .view {
     margin-left: 240px;
-    background: #e5e5e5;
+    background: #f0f0f0;
     height: 100%;
     padding: 2rem;
   }
