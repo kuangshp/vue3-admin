@@ -4,7 +4,14 @@
     :index="item.index"
   >
     <span slot="title">
-      <i :class="item.icon"></i>
+      <i
+        v-if="item.icon"
+        :class="item.icon"
+      ></i>
+      <i
+        v-else
+        class="el-icon-folder-opened"
+      ></i>
       {{ item.title }}
     </span>
     <!-- 递归使用该组件 -->
@@ -19,7 +26,14 @@
     v-else
     :index="item.index"
   >
-    <i :class="item.icon"></i>
+    <i
+      v-if="item.icon"
+      :class="item.icon"
+    ></i>
+    <i
+      v-else
+      class="el-icon-tickets"
+    ></i>
     <span slot="title">{{ item.title }}</span>
   </el-menu-item>
 </template>
