@@ -14,11 +14,12 @@ Vue.prototype.$axios = axios;
 
 /******************************** 引入elementUi组件库 start ********************************/
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
+import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
+Vue.use(ElementUI, {
+  size: 'small',
+});
 /******************************** 引入elementUi组件库 end   ********************************/
 
-// 配置自定义组件
 // 使用自己定义的组件
 import components from '@/components';
 Vue.use(components);

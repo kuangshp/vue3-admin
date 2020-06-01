@@ -1,7 +1,5 @@
 <template>
-  <div class="app-sidebar">
-    <menus />
-  </div>
+  <menus />
 </template>
 
 <script>
@@ -10,17 +8,8 @@ export default {
   data () {
     return {
       menus,
-      isCollapse: false,
     }
   },
-  methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath);
-    }
-  }
 }
 </script>
 

@@ -7,9 +7,9 @@
       class="content"
       :class="{'sidebar-close': !sidebarOpened}"
     >
-      <div class="sidebar">
-        <sidebar></sidebar>
-      </div>
+      <!-- 左侧导航 -->
+      <sidebar></sidebar>
+      <!-- 右侧视图 -->
       <div class="view">
         <router-view></router-view>
       </div>
@@ -17,8 +17,7 @@
   </div>
 </template>
 
-<script lang="ts">
-// import { IViewState } from '@/store/view';
+<script>
 
 import AppHeader from './header/Index.vue';
 import Sidebar from './sidebar/Index.vue';
