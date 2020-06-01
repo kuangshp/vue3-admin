@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { currentUser } from '@/config';
+import { storage } from '@/utils';
 export default {
   data: function () {
     return {
@@ -65,7 +67,7 @@ export default {
       this.$refs.login.validate(valid => {
         if (valid) {
           this.$message.success('登录成功');
-          localStorage.setItem('ms_username', this.param.username);
+          storage.setItem(currentUser, this.param.username);
           this.$router.push('/');
         } else {
           this.$message.error('请输入账号和密码');

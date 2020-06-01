@@ -24,9 +24,9 @@ export default {
         ? matched
         : [
           {
-            name: 'home',
+            name: '首页',
             path: '/home',
-            meta: { title: 'Home' },
+            meta: { title: '首页' },
           },
         ].concat(matched);
     }
