@@ -43,15 +43,23 @@ export default {
   right: 0;
   bottom: 0;
   .view {
-    margin-left: 240px;
+    width: auto;
     background: #f0f0f0;
     height: 100%;
     padding: 2rem;
+    position: absolute;
+    left: 240px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-bottom: 30px;
+    transition: left 0.3s ease-in-out;
+    background: #f0f0f0;
   }
 }
 .sidebar-close {
   .view {
-    margin-left: 64px;
+    left: 64px;
   }
 }
 </style>

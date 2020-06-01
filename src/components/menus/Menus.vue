@@ -52,7 +52,13 @@ export default {
   top: 70px;
   bottom: 0;
   overflow-y: scroll; */
-  float: left;
+  /* float: left; */
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: scroll;
 }
 .sidebar::-webkit-scrollbar {
   width: 0;
