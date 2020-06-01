@@ -44,7 +44,6 @@ export default {
   bottom: 0;
   .view {
     width: auto;
-    background: #f0f0f0;
     height: 100%;
     padding: 2rem;
     position: absolute;

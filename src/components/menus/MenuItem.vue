@@ -3,7 +3,7 @@
     v-if="item.children && item.children.length"
     :index="item.index"
   >
-    <span slot="title">
+    <template slot="title">
       <i
         v-if="item.icon"
         :class="item.icon"
@@ -12,8 +12,10 @@
         v-else
         class="el-icon-folder-opened"
       ></i>
-      {{ item.title }}
-    </span>
+      <span slot="title">
+        {{ item.title }}
+      </span>
+    </template>
     <!-- 递归使用该组件 -->
     <template v-for="(m, i) in item.children">
       <MenuItem
