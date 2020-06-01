@@ -2,7 +2,7 @@ const routers = [
   {
     name: 'home',
     path: '/home',
-    meta: { title: 'Home' },
+    meta: { title: '首页' },
     component: () => import('@/views/shared/home/Index.vue'),
   },
 ];

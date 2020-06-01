@@ -49,7 +49,7 @@ export default {
   color: #fff !important;
   .el-breadcrumb {
     line-height: 50px;
-    .el-breadcrumb__item {
+    ::v-deep .el-breadcrumb__item {
       .el-breadcrumb__inner.is-link {
         color: #fff;
       }

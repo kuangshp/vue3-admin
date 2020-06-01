@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from './shared/home';
 import login from './shared/login';
+import { setTitle } from '@/utils';
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,7 @@ router.beforeEach((to, from, next) => {
   // auth(to, from, next);
   // // 动态生成路由
   // mergeRoute();
-  // setTitle(to.meta.title);
+  setTitle(to.meta.title);
   next();
 });
 
