@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-submenu
-      v-if="item.children.length"
+      v-if="item.children && item.children.length"
       :index="item.url"
     >
-      <template slot="title">{{ item.name }}</template>
+      <template slot="title">{{ item.title }}</template>
       <!-- 递归使用该组件 -->
       <template v-for="(m, i) in item.children">
         <MenuItem
@@ -15,15 +15,9 @@
     </el-submenu>
     <el-menu-item
       v-else
-      :index="item.url"
+      :index="item.index"
     >
-      <router-link
-        :to="{ name: item.url }"
-        class="router"
-      >
-        <li>{{ item.name }}</li>
-      </router-link>
-
+      <li>{{ item.title }}</li>
     </el-menu-item>
   </div>
 </template>
@@ -33,7 +27,7 @@
 export default {
   props: {
     item: Object,
-    default: () => {},
+    default: () => { },
   }
 }
 </script>

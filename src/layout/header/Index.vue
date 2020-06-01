@@ -8,7 +8,14 @@
       class="menus"
       @click="toggleSidebar"
     >
-      <i class="fas fa-bars"></i>
+      <i
+        v-if="sidebarOpened"
+        class="el-icon-s-fold"
+      ></i>
+      <i
+        v-else
+        class="el-icon-s-unfold"
+      ></i>
     </div>
     <!-- 头部导航 -->
     <div class="header-info">
@@ -37,7 +44,7 @@
 import Breadcrumb from './../breadcrumb/Index.vue';
 import { currentUser, authToken } from '@/config';
 import { storage } from '@/utils';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 export default {
   data () {
     return {
@@ -52,7 +59,13 @@ export default {
     },
     ...mapActions(['toggleSidebar'])
   },
+  computed: {
+    ...mapState({
+      sidebarOpened: state => state.view.sidebarOpened
+    })
+  },
   mounted () {
+    console.log(this.sidebarOpened, '==')
     this.username = storage.getItem(currentUser);
   },
   components: {
@@ -64,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 .app-header {
   height: 50px;
-  background: #3273dc;
+  background: #242f42;
   display: flex;
   flex-direction: row;
   line-height: 50px;
@@ -73,6 +86,7 @@ export default {
     width: 30px;
     height: 30px;
     font-size: 25px;
+    padding: 0 21px;
     cursor: pointer;
   }
   .logo {

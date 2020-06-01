@@ -48,7 +48,6 @@ export default {
     width: 240px;
     height: inherit;
     background: #fff;
-    padding: 1rem 0;
     box-shadow: 0 0 1.2em rgba(0, 0, 0, 0.12);
     margin-right: 10px;
     overflow-y: auto;
