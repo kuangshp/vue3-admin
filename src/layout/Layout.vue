@@ -22,23 +22,16 @@
 
 import AppHeader from './header/Index.vue';
 import Sidebar from './sidebar/Index.vue';
-
+import { mapActions } from 'vuex';
 export default {
   components: {
     AppHeader,
     Sidebar,
+  },
+  methods: {
+    ...mapActions(['sidebarOpened'])
   }
 }
-// @Component({
-//   components: {
-//     AppHeader,
-//     Breadcrumb,
-//     Sidebar,
-//   },
-// })
-// export default class Layout extends Vue {
-//   @Getter('viewStore/sidebarOpened') private sidebarOpened!: IViewState;
-// }
 </script>
 
 <style lang="scss">

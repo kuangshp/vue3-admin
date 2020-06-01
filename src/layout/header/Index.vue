@@ -6,7 +6,7 @@
     <!-- 头部切换左侧菜单 -->
     <div
       class="menus"
-      @click="toogleSidebar"
+      @click="toggleSidebar"
     >
       <i class="fas fa-bars"></i>
     </div>
@@ -50,7 +50,7 @@ export default {
       storage.removeItem(currentUser);
       this.$router.push({ name: 'login' });
     },
-    ...mapActions(['toogleSidebar'])
+    ...mapActions(['toggleSidebar'])
   },
   mounted () {
     this.username = storage.getItem(currentUser);

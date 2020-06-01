@@ -18,6 +18,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 /******************************** 引入elementUi组件库 end   ********************************/
 
+// 配置自定义组件
+// 使用自己定义的组件
+import components from '@/components';
+Vue.use(components);
+
 Vue.config.productionTip = false;
 
 new Vue({
