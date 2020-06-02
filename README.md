@@ -1,29 +1,10 @@
-# admin-web
+## 一、启动项目步骤
+* 1、下载文件
+* 2、安装依赖包
+* 3、起一个node服务加载菜单
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
+```shell
+node muenu-server.js
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* 4、启动项目
