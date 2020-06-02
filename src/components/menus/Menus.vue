@@ -28,8 +28,7 @@ import { getTreeList } from '@/utils';
 
 export default {
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
     ...mapState({
