@@ -48,9 +48,6 @@ export default {
       return this.$route.path.replace('/', '');
     }
   },
-  mounted () {
-    console.log('当前的路由', this.menuList);
-  },
   components: {
     MenuItem,
   },

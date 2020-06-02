@@ -25,7 +25,6 @@ export const getTreeList = (dataList) => {
     }
     return arr;
   }, []);
-  console.log(formatArray);
   return formatArray;
 };
 

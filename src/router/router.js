@@ -37,9 +37,7 @@ const router = new VueRouter({
  * @param {type} 
  * @return: 
  */
-// eslint-disable-next-line no-unused-vars
 const auth = (to, from, next) => {
-  console.log(to.meta.unauth, Boolean(storage.getItem(authToken)), to.fullPath);
   // 如果需要登录的地址及本地不存在authToken的时候就到登录页面
   if (!to.meta.unauth && !storage.getItem(authToken)) {
     Vue.prototype.$notify({
@@ -50,15 +48,21 @@ const auth = (to, from, next) => {
   }
 }
 
+/**
+ * @Author: 水痕
+ * @Date: 2020-06-02 13:10:09
+ * @LastEditors: 水痕
+ * @Description: 根据后端返回的菜单接口权限来拦截本地菜单路由
+ * @param {type} 
+ * @return: 
+ */
 const authRoutes = async (to, from, next) => {
-  if (!store.state.hasPermission) {
-    const routes = await store.dispatch('getAuthRoutes');
-    // router.options.routes[0].children.push(...routes);
-    router.addRoutes(routes);
-    console.log(routes, '////', router.options.routes)
+  const routes = await store.dispatch('getMenuListApi');
+  const routesUrlList = routes.map(item => item.index);
+  if (routesUrlList.includes(to.name)) {
     next({ ...to, replace: true });
   } else {
-    next();
+    next({ name: 'home', replace: true });
   }
 }
 /********************************路由拦截配置 start********************************/
