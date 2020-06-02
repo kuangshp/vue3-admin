@@ -36,21 +36,23 @@ const router = new VueRouter({
  * @param {type} 
  * @return: 
  */
+// eslint-disable-next-line no-unused-vars
 const auth = (to, from, next) => {
+  console.log(to.meta.unauth, Boolean(storage.getItem(authToken)), to.fullPath);
   // 如果需要登录的地址及本地不存在authToken的时候就到登录页面
   if (!to.meta.unauth && !storage.getItem(authToken)) {
     Vue.prototype.$notify({
-      title: '退出登录提示',
+      title: '退出提示',
       message: '登录超时',
-    })
+    });
+    next({ name: 'login', query: { backUrl: to.fullPath } });
   }
-  next({ name: 'login', query: { backUrl: to.fullPath } });
 }
 /********************************路由拦截配置 start********************************/
 router.beforeEach((to, from, next) => {
-  // // 校验是否登录
+  // 校验是否登录
   auth(to, from, next);
-  // // 动态生成路由
+  // 动态生成路由
   // mergeRoute();
   setTitle(to.meta.title);
   next();

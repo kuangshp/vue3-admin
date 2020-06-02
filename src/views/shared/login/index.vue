@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { currentUser } from '@/config';
+import { currentUser, authToken } from '@/config';
 import { storage } from '@/utils';
 export default {
   data: function () {
@@ -68,6 +68,7 @@ export default {
         if (valid) {
           this.$message.success('登录成功');
           storage.setItem(currentUser, this.param.username);
+          storage.setItem(authToken, this.param.username);
           this.$router.push('/');
         } else {
           this.$message.error('请输入账号和密码');

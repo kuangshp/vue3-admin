@@ -1,16 +1,12 @@
 <template>
-  <menus />
+  <div>
+    <!-- 加载菜单组件 -->
+    <menus />
+  </div>
 </template>
 
 <script>
-import { menus } from '@/statics/menus';
-export default {
-  data () {
-    return {
-      menus,
-    }
-  },
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>

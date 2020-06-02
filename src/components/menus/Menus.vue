@@ -9,6 +9,7 @@
       active-text-color="#3273dc"
       unique-opened
       router
+      v-if="menuList.length"
     >
       <template v-for="(item, index) in menuList">
         <MenuItem
@@ -37,6 +38,9 @@ export default {
     onRoutes () {
       return this.$route.path.replace('/', '');
     }
+  },
+  mounted () {
+    console.log('当前的路由', this.menuList);
   },
   components: {
     MenuItem,
