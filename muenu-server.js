@@ -11,13 +11,13 @@ app.all('*', (req, res, next) => {
 app.get('/category', (req, res) => {
   res.json({
     menuList: [
-      // {
-      //   id: 0,
-      //   icon: 'el-icon-s-order',
-      //   index: 'table',
-      //   title: '基础表格',
-      //   pid: -1,
-      // },
+      {
+        id: 0,
+        icon: 'el-icon-s-order',
+        index: 'table',
+        title: '基础表格',
+        pid: -1,
+      },
       {
         id: 1,
         icon: 'el-icon-s-marketing',

@@ -11,9 +11,9 @@
       router
       v-if="menuList.length"
     >
-      <template v-for="(item, index) in menuList">
+      <template v-for="(item, i) in menuList">
         <MenuItem
-          :key="index"
+          :key="i"
           :item="item"
         />
       </template>
