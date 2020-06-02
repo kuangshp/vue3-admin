@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h1>表单组件</h1>
   </div>
 </template>
 
