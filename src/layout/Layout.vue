@@ -43,23 +43,23 @@ export default {
   left: 0;
   top: 50px;
   right: 0;
-  bottom: 0;
+  bottom: -30px;
   .view {
     width: auto;
-    height: 100%;
+    height: inherit;
     padding: 1rem;
     position: absolute;
     left: 240px;
     right: 0;
     top: 0;
-    bottom: 0;
-    padding-bottom: 30px;
+    bottom: 30px;
     transition: left 0.3s ease-in-out;
     background: #f0f0f0;
+    overflow-y: auto;
     .conatiner {
       background: #fff;
       width: inherit;
-      height: inherit;
+      min-height: calc(100% - 35px);
       padding: 1rem;
     }
   }

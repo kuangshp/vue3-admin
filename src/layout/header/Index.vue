@@ -185,6 +185,7 @@ export default {
     margin-right: 2rem;
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     .btn-fullscreen {
       transform: rotate(45deg);
       margin-right: 5px;
@@ -193,7 +194,6 @@ export default {
     }
     .el-dropdown {
       color: #fff;
-      flex: 1;
     }
   }
 }
