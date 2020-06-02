@@ -1,10 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '@/store';
 import home from './shared/home';
 import login from './shared/login';
+import { constantRoutes } from './constant-routes';
 import { setTitle, storage } from '@/utils';
 import { authToken } from '@/config';
-import { constantRoutes } from './constant-routes';
 Vue.use(VueRouter)
 
 const routes = [
@@ -48,12 +49,23 @@ const auth = (to, from, next) => {
     next({ name: 'login', query: { backUrl: to.fullPath } });
   }
 }
+
+const authRoutes = async (to, from, next) => {
+  if (!store.state.hasPermission) {
+    const routes = await store.dispatch('getAuthRoutes');
+    // router.options.routes[0].children.push(...routes);
+    router.addRoutes(routes);
+    console.log(routes, '////', router.options.routes)
+    next({ ...to, replace: true });
+  } else {
+    next();
+  }
+}
 /********************************路由拦截配置 start********************************/
 router.beforeEach((to, from, next) => {
+  authRoutes(to, from, next);
   // 校验是否登录
   auth(to, from, next);
-  // 动态生成路由
-  // mergeRoute();
   setTitle(to.meta.title);
   next();
 });

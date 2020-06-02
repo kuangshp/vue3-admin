@@ -24,6 +24,7 @@
 <script>
 import MenuItem from './MenuItem.vue';
 import { mapState } from 'vuex';
+import { getTreeList } from '@/utils';
 
 export default {
   data () {
@@ -32,9 +33,17 @@ export default {
   },
   computed: {
     ...mapState({
-      menuList: state => state.view.menuList,
+      authMenuList: state => state.menus.authMenuList,
       isCollapse: state => state.view.sidebarOpened,
     }),
+    // 对菜单进行格式化
+    menuList () {
+      try {
+        return getTreeList(this.authMenuList);
+      } catch (e) {
+        return [];
+      }
+    },
     onRoutes () {
       return this.$route.path.replace('/', '');
     }
