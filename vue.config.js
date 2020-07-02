@@ -1,4 +1,5 @@
 const path = require("path");
+const menus = require('./menu-data');
 
 module.exports = {
   configureWebpack: {
@@ -13,5 +14,13 @@ module.exports = {
     port: 9000,
     open: false,
     disableHostCheck: true,
+    before(app) {
+      app.get('/api/category', (req, res) => {
+        res.json({
+          code: 0,
+          data: menus,
+        })
+      })
+    }
   },
 }

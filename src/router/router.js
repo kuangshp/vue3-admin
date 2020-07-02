@@ -56,14 +56,21 @@ const auth = (to, from, next) => {
  * @param {type} 
  * @return: 
  */
+const whiteList = ['login'];
 const authRoutes = async (to, from, next) => {
-  const routes = await store.dispatch('getMenuListApi');
-  const routesUrlList = routes.map(item => item.index);
-  if (routesUrlList.includes(to.name)) {
-    next({ ...to, replace: true });
+  if (storage.getItem(authToken)) {
+    const routes = await store.dispatch('getMenuListApi');
+    const routesUrlList = routes.map(item => item.index);
+    if (routesUrlList.includes(to.name) || whiteList.includes(to.name)) {
+      next({ ...to, replace: true });
+      return
+    } else {
+      next({ name: 'home', replace: true });
+    }
   } else {
-    next({ name: 'home', replace: true });
+    // next({name: '/login'});
   }
+  
 }
 /********************************路由拦截配置 start********************************/
 router.beforeEach((to, from, next) => {

@@ -12,9 +12,9 @@ export default {
   actions: {
     // 获取菜单的api
     async getMenuListApi ({ commit }) {
-      const { menuList } = await MenuService.getMenuList();
-      commit('setAuthMenuList', menuList);
-      return menuList;
+      const { data } = await MenuService.getMenuList();
+      commit('setAuthMenuList', data);
+      return data;
     },
   }
 }
