@@ -137,6 +137,14 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    a {
+      text-decoration: none;
+      color: #fff;
+      text-decoration: none;
+      color: #fff;
+      line-height: 45px;
+      text-align: center;
+    }
     .log1 {
       width: 240px;
       height: 40px;

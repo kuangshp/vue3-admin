@@ -94,7 +94,7 @@ export default {
   line-height: 50px;
   text-align: center;
   font-size: 20px;
-  color: #fff;
+  color: #444;
   border-bottom: 1px solid #ddd;
 }
 .ms-login {
