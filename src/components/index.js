@@ -1,7 +1,9 @@
 import Menus from './menus';
+import tablePagination from './table-pagination/Index.vue';
 
 const components = {
   Menus,
+  tablePagination,
 };
 
 const install = (Vue) => {

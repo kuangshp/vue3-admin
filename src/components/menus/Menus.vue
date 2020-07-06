@@ -1,21 +1,8 @@
 <template>
   <div class="sidebar">
-    <el-menu
-      class="sidebar-el-menu"
-      :default-active="onRoutes"
-      :collapse="!isCollapse"
-      background-color="#fff"
-      text-color="#333"
-      active-text-color="#3273dc"
-      unique-opened
-      router
-      v-if="menuList.length"
-    >
+    <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="!isCollapse" background-color="#fff" text-color="#333" active-text-color="#3273dc" unique-opened v-if="menuList.length" @select="selectMenu">
       <template v-for="(item, i) in menuList">
-        <MenuItem
-          :key="i"
-          :item="item"
-        />
+        <MenuItem :key="i" :item="item" />
       </template>
     </el-menu>
   </div>
@@ -45,6 +32,11 @@ export default {
     },
     onRoutes () {
       return this.$route.path.replace('/', '');
+    }
+  },
+  methods: {
+    selectMenu (item) {
+      this.$router.push({ name: item, replace: true });
     }
   },
   components: {
