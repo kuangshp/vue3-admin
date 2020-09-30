@@ -3,11 +3,13 @@ const state = {
   sidebarOpened: true,
   title: '主页',
   menuList: [],
+  currentUserInfo: {},
 };
 
 const getters = {
   // tslint:disable-next-line:no-shadowed-variable
   sidebarOpened: (state) => state.sidebarOpened,
+  currentUserInfo: (state) => state.currentUserInfo,
 };
 
 const mutations = {
@@ -23,6 +25,9 @@ const mutations = {
   [types.SET_SIDE_MENU]: (s, payload) => {
     s.menuList = payload;
   },
+  [types.SET_CURRENT_USER_INFO]: (s, payload) => {
+    s.currentUserInfo = payload;
+  }
 };
 
 const actions = {

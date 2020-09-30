@@ -2,29 +2,14 @@
   <div class="app-header">
     <div class="logo">
       <router-link to="/">
-        <div
-          class="log1"
-          v-if="sidebarOpened"
-        ></div>
-        <div
-          class="log2"
-          v-else
-        ></div>
+        <div class="log1" v-if="sidebarOpened"></div>
+        <div class="log2" v-else></div>
       </router-link>
     </div>
     <!-- 头部切换左侧菜单 -->
-    <div
-      class="menus"
-      @click="toggleSidebar"
-    >
-      <i
-        v-if="sidebarOpened"
-        class="trigger el-icon-s-fold"
-      ></i>
-      <i
-        v-else
-        class="trigger el-icon-s-unfold"
-      ></i>
+    <div class="menus" @click="toggleSidebar">
+      <i v-if="sidebarOpened" class="trigger el-icon-s-fold"></i>
+      <i v-else class="trigger el-icon-s-unfold"></i>
     </div>
     <!-- 头部导航 -->
     <div class="header-info">
@@ -32,30 +17,20 @@
     </div>
     <div class="userinfo-submenu">
       <!-- 全屏显示 -->
-      <div
-        class="btn-fullscreen"
-        @click="handleFullScreen"
-      >
-        <el-tooltip
-          effect="dark"
-          :content="fullscreen?`取消全屏`:`全屏`"
-          placement="bottom"
-        >
+      <div class="btn-fullscreen" @click="handleFullScreen">
+        <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
           <i class="el-icon-rank"></i>
         </el-tooltip>
       </div>
       <el-dropdown>
         <span class="el-dropdown-link">
-          <span>{{username}}</span>
+          <span>{{currentUserInfo.username}}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>修改密码</el-dropdown-item>
           <el-dropdown-item>个人资料</el-dropdown-item>
-          <el-dropdown-item
-            divided
-            @click.native="logout"
-          >退出</el-dropdown-item>
+          <el-dropdown-item divided @click.native="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -70,7 +45,6 @@ import { mapActions, mapState } from 'vuex';
 export default {
   data () {
     return {
-      username: '',
       fullscreen: false,
     }
   },
@@ -111,11 +85,9 @@ export default {
   },
   computed: {
     ...mapState({
-      sidebarOpened: state => state.view.sidebarOpened
+      sidebarOpened: state => state.view.sidebarOpened,
+      currentUserInfo: state => state.view.currentUserInfo,
     })
-  },
-  mounted () {
-    this.username = storage.getItem(currentUser);
   },
   components: {
     Breadcrumb,
