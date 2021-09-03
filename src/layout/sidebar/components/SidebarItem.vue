@@ -3,7 +3,7 @@
     <!-- 一个路由下只有一个子路由的时候 只渲染这个子路由 -->
     <template v-if="theOnlyOneChildRoute && !theOnlyOneChildRoute.children">
       <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
-        <el-icon>
+        <el-icon style="margin-right: 10px">
           <folder-opened />
         </el-icon>
         <template #title>
@@ -14,7 +14,7 @@
     <!-- 多个子路由时 -->
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <el-icon>
+        <el-icon style="margin-right: 10px">
           <folder-opened />
         </el-icon>
         <span class="submenu-title">{{ item.meta.title }}</span>
