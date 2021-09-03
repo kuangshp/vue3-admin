@@ -1,9 +1,11 @@
 <template>
   <div class="app-wrapper">
+    <!-- 侧边 -->
     <div class="sidebar-container">sidebar</div>
+    <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
-        <div class="navbar">navbar</div>
+        <div class="navbar">navbar--{{ name }}</div>
         <div class="tags-view">tagsview</div>
       </div>
       <div class="app-main">
@@ -14,6 +16,24 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import Sidebar from './sidebar/Index.vue';
+import { ref } from 'vue';
+@Options({
+  components: {
+    Sidebar,
+  },
+})
+export default class Home extends Vue {
+  setup() {
+    const name = ref('hello');
+    return {
+      name,
+    };
+  }
+}
+</script>
 <style lang="scss" scoped>
 .app-wrapper {
   display: flex;
