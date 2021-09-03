@@ -29,7 +29,6 @@ export default defineComponent({
     };
   },
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     Sidebar: defineAsyncComponent(() => import('./sidebar/Index.vue')),
   },
 });
