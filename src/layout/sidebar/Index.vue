@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h8 @click="isCollapse = !isCollapse">展收测试</h8>
+    <h5 @click="isCollapse = !isCollapse">展收测试</h5>
   </div>
 </template>
 

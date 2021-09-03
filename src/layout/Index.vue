@@ -1,7 +1,9 @@
 <template>
   <div class="app-wrapper">
     <!-- 侧边 -->
-    <div class="sidebar-container">sidebar</div>
+    <div class="sidebar-container">
+      <sidebar />
+    </div>
     <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
@@ -17,22 +19,20 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import Sidebar from './sidebar/Index.vue';
+import { defineComponent, defineAsyncComponent } from 'vue';
 import { ref } from 'vue';
-@Options({
-  components: {
-    Sidebar,
-  },
-})
-export default class Home extends Vue {
+export default defineComponent({
   setup() {
     const name = ref('hello');
     return {
       name,
     };
-  }
-}
+  },
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    Sidebar: defineAsyncComponent(() => import('./sidebar/Index.vue')),
+  },
+});
 </script>
 <style lang="scss" scoped>
 .app-wrapper {
