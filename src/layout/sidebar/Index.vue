@@ -4,7 +4,6 @@
     <el-menu
       class="sidebar-container-menu"
       mode="vertical"
-      router
       :default-active="activeMenu"
       :background-color="scssVariables.menuBg"
       :text-color="scssVariables.menuText"
@@ -31,7 +30,7 @@ import { routes } from '@/router';
 export default defineComponent({
   name: 'Sidebar',
   setup() {
-    const isCollapse = ref(true);
+    const isCollapse = ref(false);
     const route = useRoute();
     const scssVariables = computed(() => variables);
     const activeMenu = computed(() => {

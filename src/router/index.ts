@@ -8,8 +8,10 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     component: Layout,
     redirect: '/system/user',
     meta: {
-      title: 'System',
+      title: '系统管理',
       // icon: 'lock',
+      // 就算只有一个子节点也现实父节点
+      alwaysShow: true,
     },
     children: [
       {
@@ -34,6 +36,21 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: '用户管理',
           icon: 'list',
+        },
+      },
+    ],
+  },
+  {
+    // 外链路由
+    path: '/external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://www.baidu.com/',
+        redirect: '/',
+        meta: {
+          title: 'External Link',
+          icon: 'link',
         },
       },
     ],

@@ -1,11 +1,20 @@
 <template>
-  <div>用户</div>
+  <div>
+    用户
+    <input v-model="name" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: 'User',
+  setup() {
+    const name = ref('');
+    return {
+      name,
+    };
+  },
 });
 </script>
 

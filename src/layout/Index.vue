@@ -7,25 +7,31 @@
     <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
-        <div class="navbar">navbar--{{ name }}</div>
+        <div class="navbar">navbar</div>
         <div class="tags-view">tagsview</div>
       </div>
       <div class="app-main">
-        <h2>app main</h2>
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <transition name="fade-transform" mode="out-in">
+            <keep-alive>
+              <component :is="Component" :key="key" />
+            </keep-alive>
+          </transition>
+        </router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
-import { ref } from 'vue';
+import { defineComponent, defineAsyncComponent, computed } from 'vue';
+import { useRoute } from 'vue-router';
 export default defineComponent({
   setup() {
-    const name = ref('hello');
+    const route = useRoute();
+    const key = computed(() => route.path);
     return {
-      name,
+      key,
     };
   },
   components: {
@@ -55,8 +61,25 @@ export default defineComponent({
     }
     .app-main {
       /* 50= navbar  50  如果有tagsview + 34  */
-      min-height: calc(100vh - 84px);
-      background: red;
+      .app-main {
+        /* navbar 50px  */
+        min-height: calc(100vh - 50px);
+      }
+
+      .fade-transform-enter-active,
+      .fade-transform-leave-active {
+        transition: all 0.5s;
+      }
+
+      .fade-transform-enter-from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .fade-transform-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
+      }
     }
   }
 }
