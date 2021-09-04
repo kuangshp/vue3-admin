@@ -25,6 +25,10 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],
+    "typeRoots": [ /*类型声明文件*/
+      "./types",
+      "./node_modules/@types"
     ]
   },
   "include": [
