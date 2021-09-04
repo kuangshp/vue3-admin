@@ -4,12 +4,13 @@
       class="sidebar-container-menu"
       mode="vertical"
       :default-active="activeMenu"
-      :background-color="scssVariables.menuBg"
-      :text-color="scssVariables.menuText"
-      :active-text-color="scssVariables.menuActiveText"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#409EFF"
       :collapse="isCollapse"
       :collapse-transition="true"
     >
+      <!-- 循环导航菜单 -->
       <sidebar-item
         v-for="route in menuRoutes"
         :key="route.path"
@@ -23,8 +24,6 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
-// 导入scss变量在组件中使用
-import variables from '@/assets/styles/variables.scss';
 import { asyncRoutes } from '@/router';
 import { useStore } from '@/store';
 export default defineComponent({
@@ -33,7 +32,6 @@ export default defineComponent({
     const route = useRoute();
     const store = useStore();
     const isCollapse = computed(() => !store.getters.sidebar.opened);
-    const scssVariables = computed(() => variables);
     const activeMenu = computed(() => {
       const { path } = route;
       return path;
@@ -42,7 +40,6 @@ export default defineComponent({
     return {
       isCollapse,
       activeMenu,
-      scssVariables,
       menuRoutes,
     };
   },

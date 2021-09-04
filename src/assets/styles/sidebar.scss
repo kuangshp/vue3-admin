@@ -2,11 +2,11 @@
 
   .sidebar-container {
     height: 100%;
-    background-color: $menuBg;
+    background-color: #304156;
 
     // menu未收起时样式
     &-menu:not(.el-menu--collapse) {
-      width: $sideBarWidth;
+      width: 240px;
     }
 
     // 菜单收起时的样式调整
@@ -21,10 +21,10 @@
     .el-submenu {
       .el-menu {
         .el-menu-item {
-          background-color: $subMenuBg !important;
+          background-color: #1f2d3d !important;
 
           &:hover {
-            background-color: $subMenuHover !important;
+            background-color: #001528 !important;
           }
         }
       }

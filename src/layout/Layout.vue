@@ -10,6 +10,7 @@
         <nav-bar @showSetting="openSetting" />
         <tags-view />
       </div>
+      <!-- 底部内容区域 -->
       <div class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
