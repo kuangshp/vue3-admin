@@ -7,7 +7,7 @@
     <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
-        <nav-bar @showSetting="openSetting" />
+        <app-header @showSetting="openSetting" />
         <tags-view />
       </div>
       <!-- 底部内容区域 -->
@@ -47,7 +47,7 @@ export default defineComponent({
   },
   components: {
     SideBar: defineAsyncComponent(() => import('./SideBar/SideBar.vue')),
-    NavBar: defineAsyncComponent(() => import('./NavBar/NavBar.vue')),
+    AppHeader: defineAsyncComponent(() => import('./AppHeader/AppHeader.vue')),
     TagsView: defineAsyncComponent(() => import('./TagsView/TagsView.vue')),
   },
 });

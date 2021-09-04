@@ -15,7 +15,7 @@ import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useStore } from '@/store/index';
 
 export default defineComponent({
-  name: 'NavBar',
+  name: 'AppHeader',
   components: {
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
