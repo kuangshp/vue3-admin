@@ -63,9 +63,6 @@ export default defineComponent({
     flex-direction: column;
     .header {
       background: cyan;
-      .navbar {
-        height: 50px;
-      }
       .tags-view {
         height: 34px;
       }

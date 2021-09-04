@@ -46,12 +46,12 @@ export default defineComponent({
       if (!isHome(first)) {
         matched = (
           [
-            // {
-            //   path: '/home',
-            //   meta: {
-            //     title: '首页',
-            //   },
-            // },
+            {
+              path: '/home',
+              meta: {
+                title: '首页',
+              },
+            },
           ] as PartialRouteLocationMatched[]
         ).concat(matched);
       }

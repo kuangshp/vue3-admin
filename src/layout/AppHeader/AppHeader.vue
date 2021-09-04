@@ -1,7 +1,10 @@
 <template>
   <div class="navbar">
+    <!-- 切换按钮 -->
     <hambuger @toggleClick="toggleSidebar" :is-active="sidebar.opened" />
+    <!-- 面包屑导航 -->
     <breadcrumb />
+    <!-- 右边菜单 -->
     <div class="right-menu">
       <!-- 全屏 -->
       <screenfull id="screefull" class="right-menu-item hover-effect" />
@@ -20,8 +23,6 @@ export default defineComponent({
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
     Screenfull: defineAsyncComponent(() => import('./components/Screenfull.vue')),
-    // SizeSelect,
-    // Avatar,
   },
   emits: ['showSetting'],
   setup(props, { emit }) {
@@ -54,6 +55,7 @@ export default defineComponent({
   background: #fff;
   border-bottom: 1px solid rgba(0, 21, 41, 0.08);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  height: 50px;
   .right-menu {
     flex: 1;
     display: flex;
