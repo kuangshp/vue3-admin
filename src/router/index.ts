@@ -16,7 +16,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'menu',
-        component: () => import('@/views/system/menu/Index.vue'),
+        component: () => import('@/views/system/menu/Menu.vue'),
         meta: {
           title: '菜单管理',
           icon: 'list',
@@ -24,7 +24,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: 'role',
-        component: () => import('@/views/system/role/Index.vue'),
+        component: () => import('@/views/system/role/Role.vue'),
         meta: {
           title: '角色管理',
           icon: 'list',
@@ -32,7 +32,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: 'user',
-        component: () => import('@/views/system/user/Index.vue'),
+        component: () => import('@/views/system/user/User.vue'),
         meta: {
           title: '用户管理',
           icon: 'list',
@@ -60,14 +60,14 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [
       {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/Index.vue'),
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/home/Home.vue'),
         meta: {
-          title: 'Dashboard',
+          title: '首页',
         },
       },
     ],
