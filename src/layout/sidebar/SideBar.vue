@@ -28,7 +28,7 @@ import variables from '@/assets/styles/variables.scss';
 import { routes } from '@/router';
 import { useStore } from '@/store';
 export default defineComponent({
-  name: 'Sidebar',
+  name: 'SideBar',
   setup() {
     const route = useRoute();
     const store = useStore();

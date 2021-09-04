@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <!-- 侧边 -->
     <div class="sidebar-container">
-      <sidebar />
+      <side-bar />
     </div>
     <!-- 右边内容区域 -->
     <div class="main-container">
@@ -27,6 +27,7 @@
 import { defineComponent, defineAsyncComponent, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 export default defineComponent({
+  name: 'Layout',
   setup() {
     const route = useRoute();
     const key = computed(() => route.path);
@@ -40,9 +41,9 @@ export default defineComponent({
     };
   },
   components: {
-    Sidebar: defineAsyncComponent(() => import('./sidebar/Index.vue')),
-    Navbar: defineAsyncComponent(() => import('./navbar/Index.vue')),
-    TagsView: defineAsyncComponent(() => import('./tagsView/Index.vue')),
+    SideBar: defineAsyncComponent(() => import('./SideBar/SideBar.vue')),
+    NavBar: defineAsyncComponent(() => import('./NavBar/NavBar.vue')),
+    TagsView: defineAsyncComponent(() => import('./TagsView/TagsView.vue')),
   },
 });
 </script>

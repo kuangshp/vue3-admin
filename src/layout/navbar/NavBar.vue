@@ -20,7 +20,7 @@ import { useStore } from '@/store/index';
 // import Avatar from './avatar/index.vue';
 
 export default defineComponent({
-  name: 'Navbar',
+  name: 'NavBar',
   components: {
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
