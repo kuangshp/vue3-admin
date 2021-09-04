@@ -24,8 +24,7 @@ export default defineComponent({
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
     Screenfull: defineAsyncComponent(() => import('./components/Screenfull.vue')),
   },
-  emits: ['showSetting'],
-  setup(props, { emit }) {
+  setup() {
     // 使用我们自定义的useStore 具备类型提示
     const store = useStore();
     // 点击切换
@@ -35,15 +34,9 @@ export default defineComponent({
     // 从getters中获取sidebar
     const sidebar = computed(() => store.getters.sidebar);
 
-    // 打开设置面板
-    const openShowSetting = () => {
-      emit('showSetting', true);
-    };
-
     return {
       toggleSidebar,
       sidebar,
-      openShowSetting,
     };
   },
 });

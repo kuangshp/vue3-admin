@@ -20,11 +20,11 @@ type PartialRouteLocationMatched = Partial<RouteLocationMatched>;
 export default defineComponent({
   name: 'Breadcrumb',
   setup() {
-    const route = useRoute(); // 相当于this.$route对象
-    const router = useRouter(); // 相当于this.$router对象
+    const route = useRoute(); // 相当于this.$route对象,用于获取路由参数
+    const router = useRouter(); // 相当于this.$router对象,用于路由的跳转
     const levelList = ref<Array<PartialRouteLocationMatched>>([]); // 导航列表 存放matched里筛选的路由记录
 
-    // 判断是不是Dashboard路由
+    // 判断是不是home路由
     const isHome = (route?: PartialRouteLocationMatched) => {
       const name = route && route.name;
       if (!name) {
@@ -41,8 +41,8 @@ export default defineComponent({
       ) as PartialRouteLocationMatched[];
       // 获取第一个匹配路由记录
       const first = matched[0];
-      // 我们要把dashboard作为首页 始终固定在面包屑导航第一个 Dashboard/System/Menu Management
-      // 如果第一个匹配到的路由记录不是dashboard 我们自己就把它放在记录数组的第一项
+      // 我们要把home作为首页 始终固定在面包屑导航第一个 home/System/Menu Management
+      // 如果第一个匹配到的路由记录不是home 我们自己就把它放在记录数组的第一项
       if (!isHome(first)) {
         matched = (
           [
@@ -64,6 +64,7 @@ export default defineComponent({
       getBreadcrumb();
     });
 
+    // 监听路由的变化，重新调用获取面包屑的方法
     watch(
       () => route.path,
       () => {
@@ -101,7 +102,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
-  /* float: left; */
   line-height: 50px;
   font-size: 14px;
   margin-left: 8px;
@@ -111,9 +111,6 @@ export default defineComponent({
   color: #97a8be;
   cursor: text;
 }
-</style>
-
-<style lang="scss">
 .breadcrumb-enter-active,
 .breadcrumb-leave-active {
   transition: all 0.5s;
