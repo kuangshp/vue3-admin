@@ -2,7 +2,7 @@ import { App } from 'vue';
 import ElementPlus from 'element-plus';
 // 单独引入一个
 import { ElMessage, ElNotification, ElMessageBox } from 'element-plus';
-import '../element-variables.scss';
+import '../assets/styles/element-variables.scss';
 import locale from 'element-plus/lib/locale/lang/zh-cn';
 import 'dayjs/locale/zh-cn';
 

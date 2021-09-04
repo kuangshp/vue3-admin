@@ -61,10 +61,6 @@
       "npm run lint",
       "prettier --write",
       "git add"
-    ],
-    "*.{css,scss}": [
-      "stylelint src/**/*.css --fix",
-      "stylelint src/**/*.scss --fix"
     ]
   }
 }
