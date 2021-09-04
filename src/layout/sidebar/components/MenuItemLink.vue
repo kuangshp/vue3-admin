@@ -11,7 +11,7 @@ import { isExternal } from '@/utils';
 // 针对路径是外链 就渲染为a标签 如果是正常路由路径 就渲染为 router-link
 // el-menu组件的router属性去掉了  不开启路由模式
 export default defineComponent({
-  name: 'SidebarItemLink',
+  name: 'MenuItemLink',
   props: {
     to: {
       type: String,

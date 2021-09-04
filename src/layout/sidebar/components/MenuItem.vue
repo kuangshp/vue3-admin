@@ -2,10 +2,7 @@
   <div class="sidebar-item-container">
     <!-- 一个路由下只有一个子路由的时候 只渲染这个子路由 -->
     <template v-if="isRenderSingleRoute && theOnlyOneChildRoute">
-      <sidebar-item-link
-        v-if="theOnlyOneChildRoute.meta"
-        :to="resolvePath(theOnlyOneChildRoute.path)"
-      >
+      <menu-item-link v-if="theOnlyOneChildRoute.meta" :to="resolvePath(theOnlyOneChildRoute.path)">
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <el-icon style="margin-right: 10px">
             <folder-opened />
@@ -14,7 +11,7 @@
             <span>{{ theOnlyOneChildRoute.meta.title }}</span>
           </template>
         </el-menu-item>
-      </sidebar-item-link>
+      </menu-item-link>
     </template>
     <!-- 多个子路由时 -->
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
@@ -24,14 +21,14 @@
         </el-icon>
         <span class="submenu-title">{{ item.meta.title }}</span>
       </template>
-      <sidebar-item
+      <menu-item
         v-for="child in item.children"
         :key="child.path"
         :is-nest="true"
         :item="child"
         :base-path="resolvePath(child.path)"
       >
-      </sidebar-item>
+      </menu-item>
     </el-submenu>
   </div>
 </template>
@@ -44,7 +41,7 @@ import { FolderOpened } from '@element-plus/icons';
 import { isExternal } from '@/utils';
 
 export default defineComponent({
-  name: 'SidebarItem',
+  name: 'MenuItem',
   props: {
     item: {
       // 当前路由（此时的父路由）
@@ -135,7 +132,7 @@ export default defineComponent({
   },
   components: {
     FolderOpened,
-    SidebarItemLink: defineAsyncComponent(() => import('./SidebarItemLink.vue')),
+    MenuItemLink: defineAsyncComponent(() => import('./MenuItemLink.vue')),
   },
 });
 </script>

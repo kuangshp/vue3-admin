@@ -11,7 +11,7 @@
       :collapse-transition="true"
     >
       <!-- 循环导航菜单 -->
-      <sidebar-item
+      <menu-item
         v-for="route in menuRoutes"
         :key="route.path"
         :item="route"
@@ -44,7 +44,7 @@ export default defineComponent({
     };
   },
   components: {
-    SidebarItem: defineAsyncComponent(() => import('./components/SidebarItem.vue')),
+    MenuItem: defineAsyncComponent(() => import('./components/MenuItem.vue')),
   },
 });
 </script>
