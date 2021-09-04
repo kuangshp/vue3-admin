@@ -30,6 +30,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: '角色管理',
           icon: 'list',
+          noCache: true,
         },
       },
       {
@@ -39,6 +40,8 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: '用户管理',
           icon: 'list',
+          // 设置tagsView缓存
+          noCache: true,
         },
       },
     ],

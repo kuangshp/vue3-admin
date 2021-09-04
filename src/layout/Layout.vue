@@ -13,7 +13,7 @@
       <div class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive>
+            <keep-alive :include="cachedViews">
               <component :is="Component" :key="key" />
             </keep-alive>
           </transition>
@@ -26,18 +26,22 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useStore } from '@/store';
 export default defineComponent({
   name: 'Layout',
   setup() {
     const route = useRoute();
+    const store = useStore();
     const key = computed(() => route.path);
     const showSettings = ref(false);
     const openSetting = () => {
       showSettings.value = true;
     };
+    const cachedViews = computed(() => store.state.tagsView.cachedViews);
     return {
       key,
       openSetting,
+      cachedViews,
     };
   },
   components: {
