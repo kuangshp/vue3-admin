@@ -8,7 +8,7 @@
     <div class="main-container">
       <div class="header">
         <navbar @showSetting="openSetting" />
-        <div class="tags-view">tagsview</div>
+        <tags-view />
       </div>
       <div class="app-main">
         <router-view v-slot="{ Component }">
@@ -42,6 +42,7 @@ export default defineComponent({
   components: {
     Sidebar: defineAsyncComponent(() => import('./sidebar/Index.vue')),
     Navbar: defineAsyncComponent(() => import('./navbar/Index.vue')),
+    TagsView: defineAsyncComponent(() => import('./tagsView/Index.vue')),
   },
 });
 </script>

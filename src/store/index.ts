@@ -2,12 +2,14 @@ import { InjectionKey } from 'vue';
 import { createStore, Store, useStore as baseUseStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import app, { IAppState } from '@/store/modules/app';
+import tagsView, { ITagsViewState } from '@/store/modules/tagsView';
 // import test, { ICountState } from './modules/test'
 import getters from './getters';
 
 // 模块声明在根状态下
 export interface IRootState {
   app: IAppState;
+  tagsView: ITagsViewState;
   // test: ICountState;
 }
 
@@ -45,6 +47,7 @@ export default createStore<IRootState>({
   getters,
   modules: {
     app,
+    tagsView,
     // test // 只是测试多模块持久化
   },
 });
