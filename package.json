@@ -13,10 +13,13 @@
     "element-plus": "^1.0.2-beta.28",
     "normalize.css": "^8.0.1",
     "path-to-regexp": "^6.2.0",
+    "screenfull": "^5.1.0",
+    "svg-sprite-loader": "^6.0.9",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.7.10",

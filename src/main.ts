@@ -9,7 +9,9 @@ import '@/assets/styles/index.scss';
 
 const app = createApp(App);
 installElementPlus(app);
-app.use(store, key).use(router).mount('#app');
+import initSvgIcon from '@/icons/index';
+
+app.use(store, key).use(router).use(initSvgIcon).mount('#app');
 
 // vue实例上挂载属性类型声明
 declare module '@vue/runtime-core' {

@@ -4,6 +4,8 @@
     <breadcrumb />
     <div class="right-menu">
       <!-- 设置 -->
+      <!-- 全屏 -->
+      <screenfull id="screefull" class="right-menu-item hover-effect" />
     </div>
   </div>
 </template>
@@ -22,7 +24,7 @@ export default defineComponent({
   components: {
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
-    // Screenfull,
+    Screenfull: defineAsyncComponent(() => import('./components/Screenfull.vue')),
     // SizeSelect,
     // Avatar,
   },
