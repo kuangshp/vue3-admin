@@ -7,7 +7,7 @@
     <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
-        <navbar @showSetting="openSetting" />
+        <nav-bar @showSetting="openSetting" />
         <tags-view />
       </div>
       <div class="app-main">

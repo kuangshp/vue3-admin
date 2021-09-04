@@ -12,12 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, computed } from 'vue';
-// import Breadcrumb from '@/components/Breadcrumb/index.vue';
-// import Hambuger from '@/components/Hambuger/index.vue';
 import { useStore } from '@/store/index';
-// import Screenfull from '@/components/Screenfull/index.vue';
-// import SizeSelect from '@/components/SizeSelect/index.vue';
-// import Avatar from './avatar/index.vue';
 
 export default defineComponent({
   name: 'NavBar',
