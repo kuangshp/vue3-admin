@@ -1,28 +1,38 @@
 <template>
   <div class="tags-view-container">
-    <div class="tags-view-wrapper">
-      <router-link
-        class="tags-view-item"
-        :class="{
-          active: isActive(tag),
-        }"
-        v-for="(tag, index) in visitedTags"
-        :key="index"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        tag="span"
-      >
-        {{ tag.title }}
-        <span class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></span>
-      </router-link>
-    </div>
+    <scroll-panel>
+      <div class="tags-view-wrapper">
+        <router-link
+          class="tags-view-item"
+          :class="{
+            active: isActive(tag),
+          }"
+          v-for="(tag, index) in visitedTags"
+          :key="index"
+          :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+          tag="span"
+        >
+          {{ tag.title }}
+          <!-- affix固定的路由tag是无法删除 -->
+          <span
+            v-if="!isAffix(tag)"
+            class="el-icon-close"
+            @click.prevent.stop="closeSelectedTag(tag)"
+          ></span>
+        </router-link>
+      </div>
+    </scroll-panel>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, onMounted } from 'vue';
+import { defineComponent, computed, watch, onMounted, defineAsyncComponent } from 'vue';
 import { useRoute, RouteRecordRaw, useRouter } from 'vue-router';
 import { useStore } from '@/store';
 import { RouteLocationWithFullPath } from '@/store/modules/tagsView';
+import { routes } from '@/router';
+import path from 'path';
+import ScrollPanel from './ScrollPanel.vue';
 
 export default defineComponent({
   name: 'TagsView',
@@ -32,6 +42,46 @@ export default defineComponent({
     const route = useRoute();
     // 可显示的tags view
     const visitedTags = computed(() => store.state.tagsView.visitedViews);
+
+    // 从路由表中过滤出要affixed tagviews
+    const fillterAffixTags = (
+      routes: Array<RouteLocationWithFullPath | RouteRecordRaw>,
+      basePath = '/'
+    ) => {
+      let tags: RouteLocationWithFullPath[] = [];
+      routes.forEach((route) => {
+        if (route.meta && route.meta.affix) {
+          // 把路由路径解析成完整路径，路由可能是相对路径
+          const tagPath = path.resolve(basePath, route.path);
+          tags.push({
+            name: route.name,
+            path: tagPath,
+            fullPath: tagPath,
+            meta: { ...route.meta },
+          } as RouteLocationWithFullPath);
+        }
+
+        // 深度优先遍历 子路由（子路由路径可能相对于route.path父路由路径）
+        if (route.children) {
+          const childTags = fillterAffixTags(route.children, route.path);
+          if (childTags.length) {
+            tags = [...tags, ...childTags];
+          }
+        }
+      });
+      return tags;
+    };
+
+    // 初始添加affix的tag
+    const initTags = () => {
+      const affixTags = fillterAffixTags(routes);
+      for (const tag of affixTags) {
+        if (tag.name) {
+          store.dispatch('tagsView/addVisitedView', tag);
+        }
+      }
+    };
+
     // 添加tag
     const addTags = () => {
       const { name } = route;
@@ -50,6 +100,7 @@ export default defineComponent({
 
     // 最近当前router到tags view
     onMounted(() => {
+      initTags();
       addTags();
     });
 
@@ -69,8 +120,8 @@ export default defineComponent({
         router.push(lastView.fullPath as string);
       } else {
         // 集合中都没有tag view时
-        // 如果刚刚删除的正是Dashboard 就重定向回Dashboard（首页）
-        if (view.name === 'Dashboard') {
+        // 如果刚刚删除的正是home 就重定向回home（首页）
+        if (view.name === 'home') {
           router.replace({ path: ('/redirect' + view.fullPath) as string });
         } else {
           // tag都没有了 删除的也不是Dashboard 只能跳转首页
@@ -90,22 +141,31 @@ export default defineComponent({
       });
     };
 
+    // 是否是始终固定在tagsview上的tag
+    const isAffix = (tag: RouteLocationWithFullPath) => {
+      return tag.meta && tag.meta.affix;
+    };
+
     return {
       visitedTags,
       isActive,
       closeSelectedTag,
+      isAffix,
     };
+  },
+  components: {
+    ScrollPanel: defineAsyncComponent(() => import('./ScrollPanel.vue')),
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .tags-view-container {
-  width: 100%;
   height: 34px;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  overflow: hidden;
   .tags-view-wrapper {
     .tags-view-item {
       display: inline-block;
@@ -126,9 +186,14 @@ export default defineComponent({
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
+        background-color: #409eff;
         color: #fff;
-        border-color: #42b983;
+        border-color: #409eff;
+        ::v-deep {
+          .el-dropdown {
+            color: #fff;
+          }
+        }
         &::before {
           position: relative;
           display: inline-block;

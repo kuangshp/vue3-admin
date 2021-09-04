@@ -25,12 +25,12 @@ export default defineComponent({
     const levelList = ref<Array<PartialRouteLocationMatched>>([]); // 导航列表 存放matched里筛选的路由记录
 
     // 判断是不是Dashboard路由
-    const isDashboard = (route?: PartialRouteLocationMatched) => {
+    const isHome = (route?: PartialRouteLocationMatched) => {
       const name = route && route.name;
       if (!name) {
         return false;
       }
-      return (name as string).trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase();
+      return (name as string).trim().toLocaleLowerCase() === 'Home'.toLocaleLowerCase();
     };
 
     // 获取面包屑导航
@@ -43,26 +43,18 @@ export default defineComponent({
       const first = matched[0];
       // 我们要把dashboard作为首页 始终固定在面包屑导航第一个 Dashboard/System/Menu Management
       // 如果第一个匹配到的路由记录不是dashboard 我们自己就把它放在记录数组的第一项
-      if (!isDashboard(first)) {
+      if (!isHome(first)) {
         matched = (
           [
-            {
-              path: '/dashboard',
-              meta: {
-                title: 'Dashboard',
-              },
-            },
+            // {
+            //   path: '/home',
+            //   meta: {
+            //     title: '首页',
+            //   },
+            // },
           ] as PartialRouteLocationMatched[]
         ).concat(matched);
       }
-      // route.meta.breadcrumb自定义属性 如果为false 匹配到时 将不会再面包屑导航显示该路由
-      // {
-      //  path: 'menu',
-      //  meta: {
-      //    title: 'Menu Management',
-      //    breadcrumb: false // 不显示在面包屑导航 默认true
-      //  }
-      // }
       levelList.value = matched.filter(
         (item) => item.meta && item.meta.title && item.meta.breadcrumb !== false
       );

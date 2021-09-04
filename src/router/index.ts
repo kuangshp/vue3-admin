@@ -68,6 +68,8 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         component: () => import('@/views/home/Home.vue'),
         meta: {
           title: '首页',
+          // 固定不能被删除
+          affix: true,
         },
       },
     ],

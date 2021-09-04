@@ -25,7 +25,7 @@ import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // 导入scss变量在组件中使用
 import variables from '@/assets/styles/variables.scss';
-import { routes } from '@/router';
+import { asyncRoutes } from '@/router';
 import { useStore } from '@/store';
 export default defineComponent({
   name: 'SideBar',
@@ -38,7 +38,7 @@ export default defineComponent({
       const { path } = route;
       return path;
     });
-    const menuRoutes = computed(() => routes);
+    const menuRoutes = computed(() => asyncRoutes);
     return {
       isCollapse,
       activeMenu,
