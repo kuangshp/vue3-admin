@@ -15,6 +15,7 @@ import screenfull, { Screenfull } from 'screenfull';
 export default defineComponent({
   name: 'ScreenFull',
   setup() {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { proxy } = getCurrentInstance()!;
     const isFullscreen = ref(false);
     const handleClick = () => {
