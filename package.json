@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
@@ -22,6 +23,8 @@
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@types/node": "^16.7.10",
     "@types/path-to-regexp": "^1.7.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
@@ -38,10 +41,30 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "prettier": "^2.2.1",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.4",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "typescript": "~4.1.5",
     "vue-cli-plugin-element-plus": "~0.0.13"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,vue}": [
+      "npm run lint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint src/**/*.css --fix",
+      "stylelint src/**/*.scss --fix"
+    ]
   }
 }
