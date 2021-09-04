@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #f00">
+  <div>
     <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" @click="handleClick" />
   </div>
 </template>
