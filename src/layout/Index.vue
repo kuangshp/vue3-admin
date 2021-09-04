@@ -7,7 +7,7 @@
     <!-- 右边内容区域 -->
     <div class="main-container">
       <div class="header">
-        <div class="navbar">navbar</div>
+        <navbar @showSetting="openSetting" />
         <div class="tags-view">tagsview</div>
       </div>
       <div class="app-main">
@@ -24,18 +24,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent, computed } from 'vue';
+import { defineComponent, defineAsyncComponent, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 export default defineComponent({
   setup() {
     const route = useRoute();
     const key = computed(() => route.path);
+    const showSettings = ref(false);
+    const openSetting = () => {
+      showSettings.value = true;
+    };
     return {
       key,
+      openSetting,
     };
   },
   components: {
     Sidebar: defineAsyncComponent(() => import('./sidebar/Index.vue')),
+    Navbar: defineAsyncComponent(() => import('./navbar/Index.vue')),
   },
 });
 </script>

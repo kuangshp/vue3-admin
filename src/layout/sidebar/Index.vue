@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h5 @click="isCollapse = !isCollapse">展收测试</h5>
     <el-menu
       class="sidebar-container-menu"
       mode="vertical"
@@ -22,16 +21,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, defineAsyncComponent, computed } from 'vue';
+import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // 导入scss变量在组件中使用
 import variables from '@/assets/styles/variables.scss';
 import { routes } from '@/router';
+import { useStore } from '@/store';
 export default defineComponent({
   name: 'Sidebar',
   setup() {
-    const isCollapse = ref(false);
     const route = useRoute();
+    const store = useStore();
+    const isCollapse = computed(() => !store.getters.sidebar.opened);
     const scssVariables = computed(() => variables);
     const activeMenu = computed(() => {
       const { path } = route;
