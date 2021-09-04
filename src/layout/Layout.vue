@@ -73,9 +73,8 @@ export default defineComponent({
       }
     }
     .app-main {
-      /* 50= navbar  50  如果有tagsview + 34  */
+      padding: 1rem;
       .app-main {
-        /* navbar 50px  */
         min-height: calc(100vh - 50px);
       }
 
