@@ -26,16 +26,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, onMounted, defineAsyncComponent } from 'vue';
+import path from 'path';
+import { defineComponent, computed, watch, onMounted } from 'vue';
 import { useRoute, RouteRecordRaw, useRouter } from 'vue-router';
 import { useStore } from '@/store';
 import { RouteLocationWithFullPath } from '@/store/modules/tagsView';
 import { routes } from '@/router';
-import path from 'path';
 import ScrollPanel from './ScrollPanel.vue';
 
 export default defineComponent({
   name: 'TagsView',
+  components: {
+    ScrollPanel,
+  },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -120,8 +123,8 @@ export default defineComponent({
         router.push(lastView.fullPath as string);
       } else {
         // 集合中都没有tag view时
-        // 如果刚刚删除的正是home 就重定向回home（首页）
-        if (view.name === 'home') {
+        // 如果刚刚删除的正是Dashboard 就重定向回Dashboard（首页）
+        if (view.name === 'Dashboard') {
           router.replace({ path: ('/redirect' + view.fullPath) as string });
         } else {
           // tag都没有了 删除的也不是Dashboard 只能跳转首页
@@ -153,9 +156,6 @@ export default defineComponent({
       isAffix,
     };
   },
-  components: {
-    ScrollPanel: defineAsyncComponent(() => import('./ScrollPanel.vue')),
-  },
 });
 </script>
 
@@ -186,14 +186,9 @@ export default defineComponent({
         margin-right: 15px;
       }
       &.active {
-        background-color: #409eff;
+        background-color: #42b983;
         color: #fff;
-        border-color: #409eff;
-        ::v-deep {
-          .el-dropdown {
-            color: #fff;
-          }
-        }
+        border-color: #42b983;
         &::before {
           position: relative;
           display: inline-block;
