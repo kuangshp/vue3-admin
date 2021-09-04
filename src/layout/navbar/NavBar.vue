@@ -26,8 +26,8 @@ export default defineComponent({
   emits: ['showSetting'],
   setup(props, { emit }) {
     // 使用我们自定义的useStore 具备类型提示
-    // store.state.app.sidebar 对于getters里的属性没有类型提示
     const store = useStore();
+    // 点击切换
     const toggleSidebar = () => {
       store.dispatch('app/toggleSidebar');
     };

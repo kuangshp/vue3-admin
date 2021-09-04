@@ -87,7 +87,9 @@ export default defineComponent({
 
     // 添加tag
     const addTags = () => {
+      console.log('addTags', route);
       const { name } = route;
+      console.log(name, '===监听变化==');
       if (name) {
         store.dispatch('tagsView/addView', route);
       }

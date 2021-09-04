@@ -30,7 +30,7 @@ const persisteAppState = createPersistedState({
   key: 'vuex_app', // 存储名 默认都是vuex 多个模块需要指定 否则会覆盖
   // paths: ['app'] // 针对app这个模块持久化
   // 只针对app模块下sidebar.opened状态持久化
-  paths: ['app.sidebar.opened'], // 通过点连接符指定state路径
+  paths: ['app.sidebar.opened', 'tagsView.visitedViews'], // 通过点连接符指定state路径
 });
 
 // 针对test模块持久化
