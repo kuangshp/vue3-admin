@@ -3,9 +3,9 @@
     <hambuger @toggleClick="toggleSidebar" :is-active="sidebar.opened" />
     <breadcrumb />
     <div class="right-menu">
-      <!-- 设置 -->
       <!-- 全屏 -->
       <screenfull id="screefull" class="right-menu-item hover-effect" />
+      <!-- 个人中心 -->
     </div>
   </div>
 </template>
