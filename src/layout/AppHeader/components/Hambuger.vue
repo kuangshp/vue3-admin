@@ -16,24 +16,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent, computed } from 'vue';
+import { useStore } from '@/store/index';
 export default defineComponent({
   name: 'Hambuger',
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
-  },
   emits: ['toggleClick'],
-  setup(props, { emit }) {
+  setup() {
+    const store = useStore();
+    // 点击切换
     const toggleClick = () => {
-      emit('toggleClick');
+      store.dispatch('app/toggleSidebar');
     };
 
+    // 从getters中获取sidebar
+    const isActive = computed(() => store.getters.sidebar);
     return {
       toggleClick,
+      isActive,
     };
   },
 });

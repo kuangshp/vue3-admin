@@ -1,21 +1,20 @@
 <template>
   <div class="navbar">
     <!-- 切换按钮 -->
-    <hambuger @toggleClick="toggleSidebar" :is-active="sidebar.opened" />
+    <hambuger />
     <!-- 面包屑导航 -->
     <breadcrumb />
     <!-- 右边菜单 -->
     <div class="right-menu">
       <!-- 全屏 -->
-      <screenfull id="screefull" class="right-menu-item hover-effect" />
+      <screenfull />
       <!-- 个人中心 -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent, computed } from 'vue';
-import { useStore } from '@/store/index';
+import { defineComponent, defineAsyncComponent } from 'vue';
 
 export default defineComponent({
   name: 'AppHeader',
@@ -23,21 +22,6 @@ export default defineComponent({
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
     Screenfull: defineAsyncComponent(() => import('./components/Screenfull.vue')),
-  },
-  setup() {
-    // 使用我们自定义的useStore 具备类型提示
-    const store = useStore();
-    // 点击切换
-    const toggleSidebar = () => {
-      store.dispatch('app/toggleSidebar');
-    };
-    // 从getters中获取sidebar
-    const sidebar = computed(() => store.getters.sidebar);
-
-    return {
-      toggleSidebar,
-      sidebar,
-    };
   },
 });
 </script>
@@ -55,23 +39,6 @@ export default defineComponent({
     align-items: center;
     justify-content: flex-end;
     padding-right: 15px;
-    .setting {
-      font-size: 26px;
-    }
-    &-item {
-      padding: 0 8px;
-      font-size: 18px;
-      color: #5a5e66;
-      vertical-align: text-bottom;
-      &.hover-effect {
-        cursor: pointer;
-        transition: background 0.3s;
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.025);
-        }
-      }
-    }
   }
 }
 </style>
