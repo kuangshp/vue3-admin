@@ -26,7 +26,7 @@
       </template>
       <menu-item
         v-for="child in item.children"
-        :key="child.path"
+        :key="child.id"
         :is-nest="true"
         :item="child"
         :base-path="resolvePath(child.path)"
@@ -143,6 +143,9 @@ export default defineComponent({
     margin-right: 16px;
     margin-left: 5px;
     vertical-align: middle;
+  }
+  .el-submenu__icon-arrow {
+    top: 58%;
   }
 }
 </style>
