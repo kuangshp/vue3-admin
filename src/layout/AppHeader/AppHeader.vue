@@ -9,6 +9,7 @@
       <!-- 全屏 -->
       <screenfull />
       <!-- 个人中心 -->
+      <user-info style="margin-left: 15px" />
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ export default defineComponent({
     Breadcrumb: defineAsyncComponent(() => import('./components/Breadcrumb.vue')),
     Hambuger: defineAsyncComponent(() => import('./components/Hambuger.vue')),
     Screenfull: defineAsyncComponent(() => import('./components/Screenfull.vue')),
+    UserInfo: defineAsyncComponent(() => import('./components/UserInfo.vue')),
   },
 });
 </script>
