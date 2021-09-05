@@ -39,7 +39,7 @@ export const menusList = [
     id: 6,
     path: 'https://www.baidu.com/',
     title: '去百度',
-    icon: 'el-icon',
+    icon: 'el-icon-s-promotion',
     pid: -1,
   },
 ];
