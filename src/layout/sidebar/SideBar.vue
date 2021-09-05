@@ -24,6 +24,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
+// 从后端请求回来的菜单接口数据
 import { asyncRoutes } from '@/router';
 import { useStore } from '@/store';
 export default defineComponent({

@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-item-container">
-    <!-- 一个路由下只有一个子路由的时候 只渲染这个子路由 -->
+    <!-- 如果是外部连接的路由 -->
     <template v-if="isRenderSingleRoute && theOnlyOneChildRoute">
       <menu-item-link v-if="theOnlyOneChildRoute.meta" :to="resolvePath(theOnlyOneChildRoute.path)">
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
@@ -13,7 +13,7 @@
         </el-menu-item>
       </menu-item-link>
     </template>
-    <!-- 多个子路由时 -->
+    <!-- 递归调用自己渲染路由 -->
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
         <el-icon style="margin-right: 10px">
@@ -56,10 +56,8 @@ export default defineComponent({
   },
   setup(props) {
     const { item } = toRefs(props);
-
     // 渲染菜单主要先看子路由
     // 比如我们的路由 一级路由一般都是layout组件 二级路由才是我们考虑要渲染成菜单的
-
     // 子路由数量
     const showingChildNumber = computed(() => {
       // hidden路由排除掉 只算可渲染子路由
