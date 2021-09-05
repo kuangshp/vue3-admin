@@ -34,4 +34,12 @@ export const menusList = [
     icon: 'el-icon-s-operation',
     pid: 2,
   },
+  {
+    // 外链路由
+    id: 6,
+    path: 'https://www.baidu.com/',
+    title: '去百度',
+    icon: 'el-icon',
+    pid: -1,
+  },
 ];
