@@ -55,6 +55,7 @@ import { defineComponent, ref, reactive, toRefs, onMounted } from 'vue';
 import { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { useRouteQuery } from '@/hooks';
+import { LoginService } from '@/services';
 type IElFormInstance = InstanceType<typeof ElForm>;
 
 export default defineComponent({
@@ -107,25 +108,23 @@ export default defineComponent({
     // 登录
     const { redirect, otherQuery } = useRouteQuery();
     const handleLogin = () => {
-      (loginFormRef.value as IElFormInstance).validate((valid) => {
+      (loginFormRef.value as IElFormInstance).validate(async (valid) => {
         if (valid) {
           loading.value = true;
-          router.push({
-            path: redirect.value || '/',
-            query: otherQuery.value,
-          });
-          // store
-          //   .dispatch('user/login', loginState.loginForm)
-          //   .then(() => {
-          //     // 登录成功后跳转之前被访问页或首页
-          //     router.push({
-          //       path: redirect.value || '/',
-          //       query: otherQuery.value,
-          //     });
-          //   })
-          //   .finally(() => {
-          //     loading.value = false;
-          //   });
+          try {
+            const result = await LoginService.loginApi(loginState.loginForm);
+            console.log(result, '========');
+            if (result == null) {
+              router.push({
+                path: redirect.value || '/',
+                query: otherQuery.value,
+              });
+            }
+          } catch (e) {
+            console.log(e);
+          } finally {
+            loading.value = false;
+          }
         } else {
           console.log('error submit!!');
         }

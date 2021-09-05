@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { storage } from './storage';
 import { authToken } from '../constants';
+import { ElMessage } from 'element-plus';
 
-const prefix: string = process.env.BASE_API_URL as string;
+const prefix: string = process.env.VUE_APP_API_URL as string;
 interface IPrintPanel {
   method?: string;
   url?: string;
@@ -58,7 +59,7 @@ class Request {
         if (Object.is(code, 0)) {
           return Promise.resolve(result);
         } else {
-          // Message.error(message);
+          ElMessage.error(message);
           // 将失败的接口打印到控制台上
           this.printPanel('后端返回失败', { method, url, data });
           return Promise.reject(message);
