@@ -9,7 +9,6 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     redirect: '/system/user',
     meta: {
       title: '系统管理',
-      // icon: 'lock',
       // 就算只有一个子节点也现实父节点
       alwaysShow: true,
     },
@@ -20,7 +19,6 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         component: () => import('@/views/system/menu/Menu.vue'),
         meta: {
           title: '菜单管理',
-          icon: 'list',
         },
       },
       {
@@ -29,7 +27,6 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         component: () => import('@/views/system/role/Role.vue'),
         meta: {
           title: '角色管理',
-          icon: 'list',
           noCache: false,
         },
       },
@@ -39,7 +36,6 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         component: () => import('@/views/system/user/User.vue'),
         meta: {
           title: '用户管理',
-          icon: 'list',
           // 设置tagsView缓存,false或者不写的时候会缓存
           noCache: false,
         },
@@ -79,6 +75,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/Login.vue'),
   },
 ];
 
