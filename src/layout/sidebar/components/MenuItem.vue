@@ -8,11 +8,11 @@
       >
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <i
-            style="margin-right: 10px"
+            class="menu-icon"
             v-if="theOnlyOneChildRoute.icon"
             :class="theOnlyOneChildRoute.icon"
           ></i>
-          <el-icon style="margin-right: 10px" v-else>
+          <el-icon class="menu-icon" v-else>
             <folder-opened />
           </el-icon>
           <template #title>
@@ -24,8 +24,8 @@
     <!-- 递归调用自己渲染路由 -->
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <i style="margin-right: 10px" v-if="item.icon" :class="item.icon"></i>
-        <el-icon v-else style="margin-right: 10px">
+        <i class="menu-icon" v-if="item.icon" :class="item.icon"></i>
+        <el-icon v-else class="menu-icon">
           <folder-opened />
         </el-icon>
         <span class="submenu-title">{{ item.title }}</span>
@@ -102,11 +102,6 @@ export default defineComponent({
         path: '', // resolvePath避免resolve拼接时 拼接重复
       };
     });
-    // menu icon
-    const icon = computed(() => {
-      // 子路由 如果没有icon就用父路由的
-      return theOnlyOneChildRoute.value?.meta?.icon || (props.item.meta && props.item.meta.icon);
-    });
 
     // 拼接路径 父路径+子路径（相对路径）
     const resolvePath = (childPath: string) => {
@@ -130,7 +125,6 @@ export default defineComponent({
     );
     return {
       theOnlyOneChildRoute,
-      icon,
       resolvePath,
       isRenderSingleRoute,
     };
