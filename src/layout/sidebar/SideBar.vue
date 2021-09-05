@@ -25,8 +25,10 @@
 import { defineComponent, defineAsyncComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // 从后端请求回来的菜单接口数据
-import { asyncRoutes } from '@/router';
+// import { asyncRoutes } from '@/router';
+import { getTreeList } from '@/utils';
 import { useStore } from '@/store';
+import { menusList } from './menus';
 export default defineComponent({
   name: 'SideBar',
   setup() {
@@ -37,7 +39,10 @@ export default defineComponent({
       const { path } = route;
       return path;
     });
-    const menuRoutes = computed(() => asyncRoutes);
+    const menuRoutes = computed(() => {
+      console.log(getTreeList(menusList));
+      return getTreeList(menusList);
+    });
     return {
       isCollapse,
       activeMenu,

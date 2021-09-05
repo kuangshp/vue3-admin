@@ -19,7 +19,7 @@
         <el-icon style="margin-right: 10px">
           <folder-opened />
         </el-icon>
-        <span class="submenu-title">{{ item.meta.title }}</span>
+        <span class="submenu-title">{{ item.title }}</span>
       </template>
       <menu-item
         v-for="child in item.children"
