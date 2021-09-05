@@ -115,7 +115,7 @@ const authRoutes = async (
   } else if (storage.getItem(authToken)) {
     next();
   } else {
-    next('/login');
+    next({ name: 'login', replace: true });
   }
 };
 // 路由拦截
