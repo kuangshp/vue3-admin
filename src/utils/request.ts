@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { storage } from './storage';
 import { authToken } from '../constants';
 
-const prefix: string = process.env.REACT_APP_BASE_API_URL as string;
+const prefix: string = process.env.BASE_API_URL as string;
 interface IPrintPanel {
   method?: string;
   url?: string;
