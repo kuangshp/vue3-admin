@@ -5,3 +5,5 @@ export * from './object';
 export * from './request';
 export * from './storage';
 export * from './obj-type';
+export * from './str';
+export * from './set-title';

@@ -1,5 +1,14 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHashHistory,
+  NavigationGuardNext,
+  RouteLocationNormalized,
+  RouteRecordName,
+  RouteRecordRaw,
+} from 'vue-router';
 import Layout from '@/Layout/Layout.vue';
+import { setTitle, storage } from '@/utils';
+import { authToken } from '@/constants';
 
 // 自己定义的路由
 export const asyncRoutes: Array<RouteRecordRaw> = [
@@ -15,7 +24,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'menu',
-        name: 'Menu',
+        name: 'menu',
         component: () => import('@/views/system/menu/Menu.vue'),
         meta: {
           title: '菜单管理',
@@ -23,7 +32,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: 'role',
-        name: 'Role',
+        name: 'role',
         component: () => import('@/views/system/role/Role.vue'),
         meta: {
           title: '角色管理',
@@ -32,7 +41,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
       {
         path: 'user',
-        name: 'User',
+        name: 'user',
         component: () => import('@/views/system/user/User.vue'),
         meta: {
           title: '用户管理',
@@ -66,7 +75,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'home',
-        name: 'Home',
+        name: 'home',
         component: () => import('@/views/home/Home.vue'),
         meta: {
           title: '首页',
@@ -78,7 +87,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/views/login/Login.vue'),
   },
 ];
@@ -91,6 +100,34 @@ export const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+const whiteList: RouteRecordName[] = ['login'];
+const authRoutes = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const currentName: RouteRecordName | null | undefined = to.name;
+  // 如果是白名单的直接放行
+  if (currentName && whiteList.includes(currentName)) {
+    next();
+  } else if (storage.getItem(authToken)) {
+    next();
+  } else {
+    next('/login');
+  }
+};
+// 路由拦截
+router.beforeEach(
+  (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    authRoutes(to, from, next);
+    setTitle(to.meta.title as string);
+    next();
+  }
+);
+router.afterEach(() => {
+  window.scrollTo(0, 0);
 });
 
 export default router;
