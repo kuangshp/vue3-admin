@@ -7,7 +7,12 @@
         :to="resolvePath(theOnlyOneChildRoute.path)"
       >
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
-          <el-icon style="margin-right: 10px">
+          <i
+            style="margin-right: 10px"
+            v-if="theOnlyOneChildRoute.icon"
+            :class="theOnlyOneChildRoute.icon"
+          ></i>
+          <el-icon style="margin-right: 10px" v-else>
             <folder-opened />
           </el-icon>
           <template #title>
@@ -19,7 +24,8 @@
     <!-- 递归调用自己渲染路由 -->
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <template #title>
-        <el-icon style="margin-right: 10px">
+        <i style="margin-right: 10px" v-if="item.icon" :class="item.icon"></i>
+        <el-icon v-else style="margin-right: 10px">
           <folder-opened />
         </el-icon>
         <span class="submenu-title">{{ item.title }}</span>
