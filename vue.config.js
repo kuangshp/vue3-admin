@@ -1,6 +1,8 @@
 'use strict';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const menus = require('./menu-data.js');
 
 const resolve = (dir) => path.join(__dirname, dir);
 
@@ -33,6 +35,14 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true,
+    },
+    before(app) {
+      app.get('/api/category', (req, res) => {
+        res.json({
+          code: 0,
+          data: menus,
+        });
+      });
     },
   },
 };
