@@ -55,6 +55,9 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         path: 'config',
         name: 'config',
         component: () => import('@/views/config/config/Config.vue'),
+        meta: {
+          title: '配置中心',
+        },
       },
     ],
   },

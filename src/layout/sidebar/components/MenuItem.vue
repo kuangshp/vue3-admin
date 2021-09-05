@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-item-container">
-    <!-- 如果是外部连接的路由 -->
+    <!-- 如果是外部连接和单个路由的时候 -->
     <template v-if="isRenderSingleRoute && theOnlyOneChildRoute">
       <menu-item-link
         v-if="theOnlyOneChildRoute.title"
