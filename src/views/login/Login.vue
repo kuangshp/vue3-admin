@@ -56,6 +56,9 @@ import { ElForm } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { useRouteQuery } from '@/hooks';
 import { LoginService } from '@/services';
+import { storage } from '@/utils';
+import { authToken, currentUser } from '@/constants';
+import { ILoginVo } from '@/vo';
 type IElFormInstance = InstanceType<typeof ElForm>;
 
 export default defineComponent({
@@ -112,14 +115,15 @@ export default defineComponent({
         if (valid) {
           loading.value = true;
           try {
-            const result = await LoginService.loginApi(loginState.loginForm);
-            console.log(result, '========');
-            if (result == null) {
-              router.push({
-                path: redirect.value || '/',
-                query: otherQuery.value,
-              });
-            }
+            const result: ILoginVo = await LoginService.loginApi(loginState.loginForm);
+            // 存储token
+            storage.setItem(authToken, result.token);
+            // 用户信息存储
+            storage.setItem(currentUser, JSON.stringify(result));
+            router.push({
+              path: redirect.value || '/',
+              query: otherQuery.value,
+            });
           } catch (e) {
             console.log(e);
           } finally {
