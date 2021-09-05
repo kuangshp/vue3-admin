@@ -47,6 +47,18 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: '/config',
+    component: Layout,
+    redirect: '/config/config',
+    children: [
+      {
+        path: 'config',
+        name: 'config',
+        component: () => import('@/views/config/config/Config.vue'),
+      },
+    ],
+  },
+  {
     // 外链路由
     path: '/external-link',
     component: Layout,

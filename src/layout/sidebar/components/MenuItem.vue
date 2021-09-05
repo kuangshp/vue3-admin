@@ -2,13 +2,16 @@
   <div class="sidebar-item-container">
     <!-- 如果是外部连接的路由 -->
     <template v-if="isRenderSingleRoute && theOnlyOneChildRoute">
-      <menu-item-link v-if="theOnlyOneChildRoute.meta" :to="resolvePath(theOnlyOneChildRoute.path)">
+      <menu-item-link
+        v-if="theOnlyOneChildRoute.title"
+        :to="resolvePath(theOnlyOneChildRoute.path)"
+      >
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <el-icon style="margin-right: 10px">
             <folder-opened />
           </el-icon>
           <template #title>
-            <span>{{ theOnlyOneChildRoute.meta.title }}</span>
+            <span>{{ theOnlyOneChildRoute.title }}</span>
           </template>
         </el-menu-item>
       </menu-item-link>
@@ -93,7 +96,6 @@ export default defineComponent({
         path: '', // resolvePath避免resolve拼接时 拼接重复
       };
     });
-
     // menu icon
     const icon = computed(() => {
       // 子路由 如果没有icon就用父路由的
@@ -120,7 +122,6 @@ export default defineComponent({
         !alwaysShowRootMenu.value &&
         (!theOnlyOneChildRoute.value?.children || noShowingChildren.value)
     );
-
     return {
       theOnlyOneChildRoute,
       icon,
