@@ -97,7 +97,6 @@ export default defineComponent({
     watch(
       () => route.path,
       () => {
-        console.log(route.path, '=====');
         if (route.path != '/login') {
           addTags();
         }

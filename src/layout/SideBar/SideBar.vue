@@ -40,7 +40,6 @@ export default defineComponent({
       return path;
     });
     const menuRoutes = computed(() => {
-      console.log(getTreeList(menusList));
       return getTreeList(menusList);
     });
     return {
