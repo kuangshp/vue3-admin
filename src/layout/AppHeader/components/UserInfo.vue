@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, getCurrentInstance } from 'vue';
 import { storage } from '@/utils';
 import { currentUser } from '@/constants';
 import { useRouter } from 'vue-router';
@@ -27,9 +27,22 @@ export default defineComponent({
   name: 'UserInfo',
   setup() {
     const router = useRouter();
+    // eslint-disable-next-line
+    const { proxy } = getCurrentInstance()!;
     const logout = () => {
-      storage.clear();
-      router.push('/login');
+      proxy
+        ?.$confirm('你确实要退出吗?', '退出提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        })
+        .then(() => {
+          storage.clear();
+          router.push('/login');
+        })
+        .catch(() => {
+          console.log('');
+        });
     };
     const userInfo = JSON.parse(storage.getItem(currentUser));
     const username = computed(() => userInfo.username || '');
