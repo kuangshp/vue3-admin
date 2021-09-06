@@ -124,8 +124,12 @@ export default defineComponent({
     margin-left: 5px;
     vertical-align: middle;
   }
-  .el-submenu__icon-arrow {
+  .is-active .el-submenu__icon-arrow {
     top: 58%;
+    display: none;
+  }
+  .is-opened .el-submenu__icon-arrow {
+    display: inline-block;
   }
 }
 </style>
