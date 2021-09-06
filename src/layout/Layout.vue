@@ -8,14 +8,14 @@
     <div class="main-container">
       <div class="header">
         <app-header />
-        <!-- <tags-view /> -->
+        <tags-view />
       </div>
       <!-- 底部内容区域 -->
       <div class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
-            <!-- <keep-alive :include="cachedViews"> -->
-            <keep-alive>
+            <keep-alive :include="cachedViews">
+              <!-- <keep-alive> -->
               <component :is="Component" :key="key" />
             </keep-alive>
           </transition>
@@ -44,7 +44,7 @@ export default defineComponent({
   components: {
     SideBar: defineAsyncComponent(() => import('./SideBar/SideBar.vue')),
     AppHeader: defineAsyncComponent(() => import('./AppHeader/AppHeader.vue')),
-    // TagsView: defineAsyncComponent(() => import('./TagsView/TagsView.vue')),
+    TagsView: defineAsyncComponent(() => import('./TagsView/TagsView.vue')),
   },
 });
 </script>

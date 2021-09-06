@@ -97,7 +97,10 @@ export default defineComponent({
     watch(
       () => route.path,
       () => {
-        addTags();
+        console.log(route.path, '=====');
+        if (route.path != '/login') {
+          addTags();
+        }
       }
     );
 
@@ -123,11 +126,11 @@ export default defineComponent({
         router.push(lastView.fullPath as string);
       } else {
         // 集合中都没有tag view时
-        // 如果刚刚删除的正是Dashboard 就重定向回Dashboard（首页）
-        if (view.name === 'Dashboard') {
+        // 如果刚刚删除的正是home 就重定向回home（首页）
+        if (view.name === 'home') {
           router.replace({ path: ('/redirect' + view.fullPath) as string });
         } else {
-          // tag都没有了 删除的也不是Dashboard 只能跳转首页
+          // tag都没有了 删除的也不是home 只能跳转首页
           router.push('/');
         }
       }

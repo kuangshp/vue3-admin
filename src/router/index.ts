@@ -6,7 +6,7 @@ import {
   RouteRecordName,
   RouteRecordRaw,
 } from 'vue-router';
-import Layout from '@/Layout/Layout.vue';
+import Layout from '@/layout/Layout.vue';
 import { setTitle, storage } from '@/utils';
 import { authToken } from '@/constants';
 
