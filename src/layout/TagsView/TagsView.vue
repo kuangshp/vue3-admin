@@ -7,13 +7,22 @@
           :class="{
             active: isActive(tag),
           }"
+          :style="{
+            backgroundColor: isActive(tag) ? '#42b983' : '',
+            borderColor: isActive(tag) ? '#fff' : '',
+            color: isActive(tag) ? '#fff' : '',
+          }"
           v-for="tag of visitedTags"
           :key="tag"
           :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
           tag="span"
         >
           <el-dropdown trigger="contextmenu" @command="(command) => handleTagCommand(command, tag)">
-            <span>
+            <span
+              :style="{
+                color: isActive(tag) ? '#fff' : '',
+              }"
+            >
               {{ tag.title }}
               <!-- affix固定的路由tag是无法删除 -->
               <span
@@ -164,7 +173,7 @@ export default defineComponent({
       store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view;
         nextTick(() => {
-          router.replace('/redirect' + fullPath);
+          router.replace('' + fullPath);
         });
       });
     };
@@ -192,7 +201,7 @@ export default defineComponent({
         // 集合中都没有tag view时
         // 如果刚刚删除的正是home 就重定向回home（首页）
         if (view.name === 'home') {
-          router.replace({ path: ('/redirect' + view.fullPath) as string });
+          router.replace({ path: ('' + view.fullPath) as string });
         } else {
           // tag都没有了 删除的也不是home 只能跳转首页
           router.push('/');
@@ -220,6 +229,7 @@ export default defineComponent({
       visitedTags,
       isActive,
       closeSelectedTag,
+      handleTagCommand,
       isAffix,
     };
   },
