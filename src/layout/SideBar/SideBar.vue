@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="logo-container">
-      <div class="logo-icon" :class="{ 'is-collapse': isCollapse }"></div>
+      <router-link to="/home">
+        <div class="logo-icon" :class="{ 'is-collapse': isCollapse }"></div>
+      </router-link>
     </div>
     <el-menu
       class="sidebar-container-menu"
