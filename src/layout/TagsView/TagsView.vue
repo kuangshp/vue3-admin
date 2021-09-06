@@ -87,9 +87,9 @@ export default defineComponent({
 
     // 添加tag
     const addTags = () => {
-      const { name } = route;
+      const { name, meta, path, fullPath } = route;
       if (name) {
-        store.dispatch('tagsView/addView', route);
+        store.dispatch('tagsView/addView', { name, meta, path, fullPath });
       }
     };
 
