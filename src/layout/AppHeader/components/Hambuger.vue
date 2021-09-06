@@ -1,7 +1,7 @@
 <template>
   <div class="hamburger-container" style="padding: 0 15px" @click="toggleClick">
     <svg
-      :class="{ 'is-active': isActive }"
+      :class="{ 'is-active': isCollapse }"
       class="hamburger"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"
@@ -29,10 +29,10 @@ export default defineComponent({
     };
 
     // 从getters中获取sidebar
-    const isActive = computed(() => store.getters.sidebar);
+    const isCollapse = computed(() => store.getters.sidebar.opened);
     return {
       toggleClick,
-      isActive,
+      isCollapse,
     };
   },
 });
