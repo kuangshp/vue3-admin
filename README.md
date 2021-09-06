@@ -1,24 +1,23 @@
-# vue3-admin
+## `vue-admin`介绍
 
-## Project setup
-```
-yarn install
-```
+针对企业后台管理项目搭建的基础框架模型，实现基本的布局、登录权限、多环境区分
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
 
-### Compiles and minifies for production
-```
-yarn build
-```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## 使用方式
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* 1、下载代码
+* 2、安装依赖包
+* 3、运行项目
+
+
+
+## 四、主页页面
+
+* 1、登录页面
+
+  ![image-20210906150010155](images/image-20210906150010155.png)
+
+* 2、主要界面
+
+  ![image-20210906150101640](images/image-20210906150101640.png)
