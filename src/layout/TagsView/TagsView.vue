@@ -12,13 +12,25 @@
           :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
           tag="span"
         >
-          {{ tag.title }}
-          <!-- affix固定的路由tag是无法删除 -->
-          <span
-            v-if="!isAffix(tag)"
-            class="el-icon-close"
-            @click.prevent.stop="closeSelectedTag(tag)"
-          ></span>
+          <el-dropdown trigger="contextmenu" @command="(command) => handleTagCommand(command, tag)">
+            <span>
+              {{ tag.title }}
+              <!-- affix固定的路由tag是无法删除 -->
+              <span
+                v-if="!isAffix(tag)"
+                class="el-icon-close"
+                @click.prevent.stop="closeSelectedTag(tag)"
+              ></span>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="refresh">刷新</el-dropdown-item>
+                <el-dropdown-item command="all">关闭所有</el-dropdown-item>
+                <el-dropdown-item command="other">关闭其他</el-dropdown-item>
+                <el-dropdown-item command="self" v-if="!tag.title">关闭</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </router-link>
       </div>
     </scroll-panel>
@@ -27,13 +39,20 @@
 
 <script lang="ts">
 import path from 'path';
-import { defineComponent, computed, watch, onMounted } from 'vue';
+import { defineComponent, computed, watch, onMounted, nextTick } from 'vue';
 import { useRoute, RouteRecordRaw, useRouter } from 'vue-router';
 import { useStore } from '@/store';
 import { RouteLocationWithFullPath } from '@/store/modules/tagsView';
 import { routes } from '@/router';
 import ScrollPanel from './ScrollPanel.vue';
 
+// 右键菜单
+enum TagCommandType {
+  All = 'all',
+  Other = 'other',
+  Self = 'self',
+  Refresh = 'refresh',
+}
 export default defineComponent({
   name: 'TagsView',
   components: {
@@ -103,6 +122,52 @@ export default defineComponent({
       }
     );
 
+    // 右键菜单
+    const handleTagCommand = (command: TagCommandType, view: RouteLocationWithFullPath) => {
+      switch (command) {
+        case TagCommandType.All: // 右键删除标签导航所有tag 除了affix为true的
+          handleCloseAllTag(view);
+          break;
+        case TagCommandType.Other: // 关闭其他tag 除了affix为true的和当前右键的tag
+          handleCloseOtherTag(view);
+          break;
+        case TagCommandType.Self: // 关闭当前右键的tag affix为true的tag下拉菜单中无此项
+          closeSelectedTag(view);
+          break;
+        case TagCommandType.Refresh: // 刷新当前右键选中tag对应的路由
+          refreshSelectedTag(view);
+      }
+    };
+
+    // 删除所有tag 除了affix为true的
+    const handleCloseAllTag = (view: RouteLocationWithFullPath) => {
+      // 对于是affix的tag是不会被删除的
+      store.dispatch('tagsView/delAllView').then(() => {
+        // 关闭所有后 就让切换到剩下affix中最后一个tag
+        toLastView(visitedTags.value, view);
+      });
+    };
+
+    // 删除其他tag 除了当前右键的tag
+    const handleCloseOtherTag = (view: RouteLocationWithFullPath) => {
+      store.dispatch('tagsView/delOthersViews', view).then(() => {
+        if (!isActive(view)) {
+          // 删除其他tag后 让该view路由激活
+          router.push(view.path);
+        }
+      });
+    };
+
+    // 右键刷新 清空当前对应路由缓存
+    const refreshSelectedTag = (view: RouteLocationWithFullPath) => {
+      // 刷新前 将该路由名称从缓存列表中移除
+      store.dispatch('tagsView/delCachedView', view).then(() => {
+        const { fullPath } = view;
+        nextTick(() => {
+          router.replace('/redirect' + fullPath);
+        });
+      });
+    };
     // 最近当前router到tags view
     onMounted(() => {
       initTags();
