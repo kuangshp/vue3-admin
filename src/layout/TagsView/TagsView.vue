@@ -44,7 +44,7 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     // 可显示的tags view
-    const visitedTags = computed(() => store.state.tagsView.visitedViews);
+    const visitedTags = computed(() => store.state.tagsView.visitedViews.filter(Boolean));
 
     // 从路由表中过滤出要affixed tagviews
     const fillterAffixTags = (
