@@ -156,6 +156,10 @@ export default defineComponent({
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: 100%;
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
   .el-form-item {
     border: 1px solid #dcdee2;
     border-radius: 5px;

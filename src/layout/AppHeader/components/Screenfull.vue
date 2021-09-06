@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" @click="handleClick" />
+  <div @click="handleClick">
+    <img class="icon" src="@/assets/images/reduce-icon.png" v-if="isFullscreen" />
+    <img class="icon" src="@/assets/images/expanded-icon.png" v-else />
   </div>
 </template>
 
@@ -54,3 +55,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+</style>
