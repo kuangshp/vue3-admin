@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="logo-container">
+      <div class="logo-icon" :class="{ 'is-collapse': isCollapse }"></div>
+    </div>
     <el-menu
       class="sidebar-container-menu"
       mode="vertical"
@@ -54,4 +57,18 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.logo-container {
+  width: 100%;
+  height: 50px;
+  .logo-icon {
+    width: 90%;
+    margin: 0 auto;
+    height: 50px;
+  }
+  .is-collapse {
+    height: 50px;
+    width: 100%;
+  }
+}
+</style>

@@ -123,7 +123,7 @@ router.beforeEach(
   (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     authRoutes(to, from, next);
     setTitle(to.meta.title as string);
-    next();
+    // next();
   }
 );
 router.afterEach(() => {
