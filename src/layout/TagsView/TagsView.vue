@@ -7,8 +7,8 @@
           :class="{
             active: isActive(tag),
           }"
-          v-for="(tag, index) in visitedTags"
-          :key="index"
+          v-for="tag of visitedTags"
+          :key="tag"
           :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
           tag="span"
         >
