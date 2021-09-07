@@ -35,6 +35,7 @@ export default defineComponent({
     const store = useStore();
     const key = computed(() => route.path);
     const cachedViews = computed(() => store.state.tagsView.cachedViews);
+    console.log(cachedViews, '====');
     return {
       key,
       cachedViews,

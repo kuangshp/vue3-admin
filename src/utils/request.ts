@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { storage } from './storage';
 import { authToken } from '../constants';
 import { ElMessage } from 'element-plus';
-
+console.log(process.env);
 const prefix: string = process.env.VUE_APP_API_URL as string;
 interface IPrintPanel {
   method?: string;
