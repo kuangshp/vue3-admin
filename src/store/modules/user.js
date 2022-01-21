@@ -1,6 +1,7 @@
 import * as types from '../mutation-types';
 import { storage } from '@/utils';
 import { authToken } from '@/constants';
+import { LoginService } from '@/services';
 // import router from '@/router';
 export default {
   namespaced: true, // 命名模块
@@ -19,5 +20,18 @@ export default {
     },
   },
   // 处理异步操作
-  actions: {},
+  actions: {
+    loginApi({ commit }, postData) {
+      return new Promise((resolve, reject) => {
+        LoginService.loginApi(postData)
+          .then((res) => {
+            commit('SET_TOKEN', res.token);
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+  },
 };

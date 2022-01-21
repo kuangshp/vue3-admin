@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cacheables } from 'cacheables';
-import { MAX_AGE } from 'src/constants';
+import { MAX_AGE } from '@/constants';
 import { objCleanEmpty, objValueTrim } from '../utils';
 
 const cache = new Cacheables({
