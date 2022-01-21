@@ -25,7 +25,8 @@ export default {
       return new Promise((resolve, reject) => {
         LoginService.loginApi(postData)
           .then((res) => {
-            commit('SET_TOKEN', res.token);
+            commit(types.SET_TOKEN, res.token);
+            commit(types.SET_USER_INFO, res);
             resolve(res);
           })
           .catch((err) => {

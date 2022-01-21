@@ -29,11 +29,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex';
 // 导入效验规则
 import { validatePassword } from './rules';
 
 // 导入router
 import router from '@/router';
+
+const store = useStore();
+
 const loginForm = ref({
   username: 'admin',
   password: '123456',
@@ -67,9 +71,11 @@ const loginFromRef = ref(null);
 const isLogin = ref(false);
 const submitClick = () => {
   isLogin.value = true;
-  loginFromRef.value.validate((v) => {
+  loginFromRef.value.validate(async (v) => {
     if (v) {
       // TODO这里不做接口请求，直接跳转到首页
+      const result = await store.dispatch('user/loginApi', loginForm.value);
+      console.log(result, '登录结果');
       router.push('/');
       isLogin.value = false;
     } else {

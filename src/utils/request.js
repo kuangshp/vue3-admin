@@ -3,8 +3,8 @@ import axios from 'axios';
 import { storage } from './storage';
 import { authToken } from '../constants';
 import { ElMessage } from 'element-plus';
-console.log(process.env, '当前环境');
 const prefix = process.env.VUE_APP_API_URL;
+console.log(process.env, '当前环境', prefix);
 class Request {
   constructor() {
     // 基础的配置
