@@ -18,5 +18,6 @@ export default {
       state.userInfo = info;
     },
   },
+  // 处理异步操作
   actions: {},
 };
