@@ -14,8 +14,8 @@ module.exports = {
       name: 'docs:文档变更',
     },
     {
-      value: 'styles',
-      name: 'styles:代码格式化(不影响代码运行的变动)',
+      value: 'style',
+      name: 'style:代码格式化(不影响代码运行的变动)',
     },
     {
       value: 'refactor',
