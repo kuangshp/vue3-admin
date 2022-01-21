@@ -1,5 +1,7 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import getters from './getters';
+
 /********************************自动导入模块 start********************************/
 const path = require('path');
 const file = require.context('./modules', true, /\.js/);
@@ -20,4 +22,5 @@ const persistedAppState = createPersistedState({
 export default createStore({
   plugins: [persistedAppState],
   modules,
+  getters,
 });
