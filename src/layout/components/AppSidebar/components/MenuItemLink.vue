@@ -1,39 +1,22 @@
 <template>
-  <component :is="type" v-bind="linkProps">
-    <slot />
-  </component>
+  <el-menu-item :index="route.path" @click="openLink">
+    <MenuItem :title="route.title" :icon="route.icon" />
+  </el-menu-item>
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
-import { isExternal } from '@/utils';
+import { defineProps } from 'vue';
+import MenuItem from './MenuItem';
+
 const props = defineProps({
-  to: {
-    type: String,
+  route: {
+    // 当前路由（此时的父路由）
+    type: Object,
     required: true,
   },
 });
-// 判断接收的路径 是不是外链
-const isExt = computed(() => isExternal(props.to));
-const type = computed(() => {
-  if (isExt.value) {
-    return 'a';
-  }
-  return 'router-link';
-});
-
-const linkProps = computed(() => {
-  if (isExt.value) {
-    return {
-      // a 标签的一些原生属性
-      href: props.to,
-      target: '_blank',
-      rel: 'noopener',
-    };
-  }
-  // router-link只需一个to props
-  return {
-    to: props.to,
-  };
-});
+const openLink = () => {
+  console.log('点击了');
+  window.open(props.route.path, '_blank');
+};
 </script>
