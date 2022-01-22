@@ -1,9 +1,11 @@
 <template>
   <div class="side-bar">
-    <div class="logo-container">
-      <el-avatar shape="square" :size="logoHeight"></el-avatar>
-      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">admin-web</h1>
-    </div>
+    <router-link to="/">
+      <div class="logo-container">
+        <el-avatar shape="square" :size="logoHeight"></el-avatar>
+        <h1 class="logo-title" v-if="$store.getters.sidebarOpened">admin-web</h1>
+      </div>
+    </router-link>
     <el-scrollbar>
       <SidebarMenu></SidebarMenu>
     </el-scrollbar>
