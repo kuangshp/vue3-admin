@@ -22,8 +22,8 @@
   box-sizing: border-box;
 }
 // 动画
-.fade-transform-leave-active,
-.fade-transform-enter-active {
+.fade-transform-enter-active,
+.fade-transform-leave-active {
   transition: all 0.5s;
 }
 
