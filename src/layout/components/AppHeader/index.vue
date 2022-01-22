@@ -15,12 +15,12 @@
           <i class="el-icon-s-tools"></i>
         </div>
         <template #dropdown>
-          <el-dropdown-menu class="user-dropdown">
+          <el-dropdown-menu class="user-dropdown" style="width: 100px">
             <router-link to="/">
               <el-dropdown-item> 首页 </el-dropdown-item>
             </router-link>
-            <a target="_blank" href="">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+            <a target="_blank" href="javascript:void(0);">
+              <el-dropdown-item>个人主页</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="logout"> 退出登录 </el-dropdown-item>
           </el-dropdown-menu>
