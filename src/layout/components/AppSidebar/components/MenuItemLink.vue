@@ -1,5 +1,5 @@
 <template>
-  <el-menu-item :index="route.path" @click="openLink">
+  <el-menu-item index="" @click="openLink">
     <MenuItem :title="route.title" :icon="route.icon" />
   </el-menu-item>
 </template>
@@ -16,7 +16,6 @@ const props = defineProps({
   },
 });
 const openLink = () => {
-  console.log('点击了');
   window.open(props.route.path, '_blank');
 };
 </script>
