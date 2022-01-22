@@ -1,9 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import layout from '@/layout';
 
 const publicRoutes = [
   {
     path: '/login',
     component: () => import('@/views/Login'),
+  },
+  {
+    path: '/',
+    // 注意：带有路径“/”的记录中的组件“默认”是一个不返回 Promise 的函数
+    component: layout,
   },
 ];
 
