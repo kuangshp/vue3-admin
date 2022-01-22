@@ -8,7 +8,7 @@
     text-color="#fff"
     active-text-color="#409EFF"
     :unique-opened="true"
-    :collapse="$store.getters.sidebarOpened"
+    :collapse="!$store.getters.sidebarOpened"
     :collapse-transition="true"
     :default-active="activeMenu"
   >

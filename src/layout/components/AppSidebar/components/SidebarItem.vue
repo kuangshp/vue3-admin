@@ -1,9 +1,11 @@
 <template>
-  <el-submenu>
+  <el-sub-menu>
     <template #title>
       <MenuItem :title="route.title" :icon="route.icon" />
     </template>
-  </el-submenu>
+    <!-- 递归渲染子菜单 -->
+    <SidebarItem v-for="item in route.children" :key="item.path" :route="item"></SidebarItem>
+  </el-sub-menu>
 </template>
 
 <script setup>

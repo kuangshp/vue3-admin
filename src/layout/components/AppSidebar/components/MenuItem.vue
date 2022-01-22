@@ -6,7 +6,7 @@
 
 <script setup>
 import { defineProps } from 'vue';
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     required: true,
@@ -16,7 +16,6 @@ const props = defineProps({
     required: true,
   },
 });
-console.log(props.value, '===111==>>');
 </script>
 
 <style lang="scss" scoped></style>
