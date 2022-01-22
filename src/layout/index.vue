@@ -46,7 +46,7 @@ import AppMain from './components/AppMain';
   width: calc(100% - #{$hideSideBarWidth});
 }
 .sidebar-container {
-  background-color: #c1c4ca;
+  background-color: #545c64;
   border-right: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
 }

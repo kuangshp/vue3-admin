@@ -1,7 +1,7 @@
 <template>
   <div class="side-bar">
     <div class="logo-container">
-      <el-avatar :size="logoHeight" shape="square" src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png" />
+      <el-avatar shape="square" :size="logoHeight"></el-avatar>
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">admin-web</h1>
     </div>
     <el-scrollbar>
