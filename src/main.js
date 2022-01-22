@@ -5,6 +5,8 @@ import store from './store';
 import installElementPlus from './plugins/element';
 import installIcons from './icons';
 import './utils/request';
+// 导入全局样式
+import './assets/style/index.scss';
 
 const app = createApp(App);
 installElementPlus(app);
