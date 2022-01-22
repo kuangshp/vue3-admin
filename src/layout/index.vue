@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧 menu -->
-    <Sidebar id="guide-sidebar" class="sidebar-container" />
+    <AppSidebar id="guide-sidebar" class="sidebar-container" />
     <div class="main-container">
       <div class="fixed-header">
         <!-- 顶部的 header -->
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import Sidebar from './components/Sidebar';
+import AppSidebar from './components/AppSidebar';
 import AppHeader from './components/AppHeader';
 import TagsView from './components/TagsView';
 import AppMain from './components/AppMain';
@@ -46,7 +46,7 @@ import AppMain from './components/AppMain';
   width: calc(100% - #{$hideSideBarWidth});
 }
 .sidebar-container {
-  background-color: #f00;
+  background-color: #c1c4ca;
 }
 // .app-wrapper {
 //   position: relative;
