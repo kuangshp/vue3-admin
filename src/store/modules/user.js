@@ -1,7 +1,7 @@
 import { storage } from '@/utils';
 import { authToken } from '@/constants';
 import { LoginService } from '@/services';
-// import router from '@/router';
+import router from '@/router';
 export default {
   namespaced: true, // 命名模块
   state: () => ({
@@ -32,6 +32,13 @@ export default {
             reject(err);
           });
       });
+    },
+    // 退出api
+    logoutApi({ commit }) {
+      commit('SET_TOKEN', '');
+      commit('SET_USER_INFO', {});
+      storage.clear();
+      router.push('/login');
     },
   },
 };

@@ -3,21 +3,23 @@
   <el-menu
     class="sidebar-container-menu"
     mode="vertical"
-    :default-active="activeMenu"
+    router
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#409EFF"
-    :collapse="isCollapse"
+    :unique-opened="true"
+    :collapse="$store.getters.sidebarOpened"
     :collapse-transition="true"
+    :default-active="activeMenu"
   >
     <!-- 循环导航菜单 -->
-    <menu-item v-for="route in menuRoutes" :key="route.path" :item="route" :base-path="route.path" />
+    <SidebarItem v-for="item in menuRoutes" :key="item.path" :route="item" :base-path="route.path" />
   </el-menu>
 </template>
 <script setup>
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-import MenuItem from './MenuItem';
+import SidebarItem from './SidebarItem';
 import { getTreeList } from '@/utils';
 import { menusList } from './../menus';
 
@@ -25,6 +27,7 @@ import { menusList } from './../menus';
 const menuRoutes = computed(() => {
   return getTreeList(menusList);
 });
+console.log(menuRoutes, '格式化后菜单');
 // 计算高亮 menu 的方法
 const route = useRoute();
 const activeMenu = computed(() => {
