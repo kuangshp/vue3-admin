@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧 menu -->
     <Sidebar id="guide-sidebar" class="sidebar-container" />
     <div class="main-container">

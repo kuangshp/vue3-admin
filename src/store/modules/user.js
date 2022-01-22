@@ -1,4 +1,3 @@
-import * as types from '../mutation-types';
 import { storage } from '@/utils';
 import { authToken } from '@/constants';
 import { LoginService } from '@/services';
@@ -10,12 +9,12 @@ export default {
     userInfo: {},
   }),
   mutations: {
-    [types.SET_TOKEN](state, token) {
+    SET_TOKEN(state, token) {
       state.token = token;
       // 存储到本地
       storage.setItem(authToken, token);
     },
-    [types.SET_USER_INFO](state, info) {
+    SET_USER_INFO(state, info) {
       state.userInfo = info;
     },
   },
@@ -25,8 +24,8 @@ export default {
       return new Promise((resolve, reject) => {
         LoginService.loginApi(postData)
           .then((res) => {
-            commit(types.SET_TOKEN, res.token);
-            commit(types.SET_USER_INFO, res);
+            commit('SET_TOKEN', res.token);
+            commit('SET_USER_INFO', res);
             resolve(res);
           })
           .catch((err) => {

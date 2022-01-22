@@ -1,8 +1,12 @@
 <template>
-  <div class="header">导航</div>
+  <div class="header">
+    <Hamburger />
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Hamburger from './components/Hamburger';
+</script>
 
 <style lang="scss" scoped>
 .header {
