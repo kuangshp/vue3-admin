@@ -13,7 +13,7 @@
     :default-active="activeMenu"
   >
     <!-- 循环导航菜单 -->
-    <SidebarItem v-for="item in menuRoutes" :key="item.path" :route="item" :base-path="route.path" />
+    <SidebarItem v-for="item in menuRoutes" :key="item.path" :route="item" />
   </el-menu>
 </template>
 <script setup>
