@@ -1,11 +1,39 @@
 <template>
   <div class="header">
+    <!-- 左右切换 -->
     <Hamburger />
+    <!-- 面包屑导航 -->
+    <Breadcrumb class="breadcrumb-container" />
+    <!-- 右边用户中心及退出 -->
+    <div class="right-menu">
+      <!-- 全屏 -->
+      <Screenfull class="right-menu-item hover-effect" />
+      <!-- 头像 -->
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <el-avatar shape="square" :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
+          <i class="el-icon-s-tools"></i>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu class="user-dropdown">
+            <router-link to="/">
+              <el-dropdown-item> 首页 </el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="">
+              <el-dropdown-item>课程主页</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click="logout"> 退出登录 </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Hamburger from './components/Hamburger';
+import Breadcrumb from './components/Breadcrumb';
+import Screenfull from './components/Screenfull';
 </script>
 
 <style lang="scss" scoped>
