@@ -1,9 +1,66 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import layout from '@/layout';
 
+// 私有路由
+const privateRoutes = [
+  {
+    path: '/system',
+    component: layout,
+    redirect: '/system/user',
+    meta: {
+      title: '系统管理',
+    },
+    children: [
+      {
+        path: 'menu',
+        name: 'menu',
+        component: () => import('@/views/System/Menu'),
+        meta: {
+          title: '菜单管理',
+        },
+      },
+      {
+        path: 'role',
+        name: 'role',
+        component: () => import('@/views/System/Role'),
+        meta: {
+          title: '角色管理',
+          noCache: false,
+        },
+      },
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/System/User'),
+        meta: {
+          title: '用户管理',
+          // 设置tagsView缓存,false或者不写的时候会缓存
+          noCache: false,
+        },
+      },
+    ],
+  },
+  {
+    path: '/config',
+    component: layout,
+    redirect: '/config/config',
+    children: [
+      {
+        path: 'config',
+        name: 'config',
+        component: () => import('@/views/Config'),
+        meta: {
+          title: '配置中心',
+        },
+      },
+    ],
+  },
+];
+// 公共路由
 const publicRoutes = [
   {
     path: '/login',
+    name: 'login',
     component: () => import('@/views/Login'),
   },
   {
@@ -13,12 +70,13 @@ const publicRoutes = [
     redirect: '/home',
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'home',
         component: () => import('@/views/Home'),
         meta: {
           title: '首页',
-          icon: 'el-icon-user',
+          // 固定不能被删除
+          affix: true,
         },
       },
     ],
@@ -27,7 +85,7 @@ const publicRoutes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: publicRoutes,
+  routes: [...publicRoutes, ...privateRoutes],
 });
 // // 路由白名单
 // const whiteList = ['/login'];

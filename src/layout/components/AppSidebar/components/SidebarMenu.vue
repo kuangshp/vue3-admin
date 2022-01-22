@@ -27,7 +27,6 @@ import { menusList } from './../menus';
 const menuRoutes = computed(() => {
   return getTreeList(menusList);
 });
-console.log(menuRoutes, '格式化后菜单');
 // 计算高亮 menu 的方法
 const route = useRoute();
 const activeMenu = computed(() => {
