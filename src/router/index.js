@@ -12,7 +12,7 @@ const privateRoutes = [
     },
     children: [
       {
-        path: '/system/menu',
+        path: 'menu',
         name: 'menu',
         component: () => import('@/views/System/Menu'),
         meta: {
@@ -20,7 +20,7 @@ const privateRoutes = [
         },
       },
       {
-        path: '/system/role',
+        path: 'role',
         name: 'role',
         component: () => import('@/views/System/Role'),
         meta: {
@@ -29,7 +29,7 @@ const privateRoutes = [
         },
       },
       {
-        path: '/system/user',
+        path: 'user',
         name: 'user',
         component: () => import('@/views/System/User'),
         meta: {
