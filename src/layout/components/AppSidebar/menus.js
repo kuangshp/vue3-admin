@@ -1,14 +1,14 @@
 export const menusList = [
   {
     id: 1,
-    icon: 'el-icon-document',
+    icon: 'config',
     path: 'config',
     title: '配置中心',
     pid: -1,
   },
   {
     id: 2,
-    icon: 'el-icon-setting',
+    icon: 'system',
     path: 'system',
     title: '系统管理',
     pid: -1,
@@ -17,21 +17,21 @@ export const menusList = [
     id: 3,
     path: 'user',
     title: '用户管理',
-    icon: 'el-icon-s-custom',
+    icon: 'user',
     pid: 2,
   },
   {
     id: 4,
     path: 'role',
     title: '角色管理',
-    icon: 'el-icon-document-copy',
+    icon: 'role',
     pid: 2,
   },
   {
     id: 5,
     path: 'menu',
     title: '菜单管理',
-    icon: 'el-icon-s-operation',
+    icon: 'tree',
     pid: 2,
   },
   {
@@ -39,7 +39,7 @@ export const menusList = [
     id: 6,
     path: 'https://www.baidu.com/',
     title: '去百度',
-    icon: 'el-icon-s-promotion',
+    icon: 'link',
     pid: -1,
   },
 ];
