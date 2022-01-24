@@ -12,7 +12,6 @@ export default {
     },
     // 添加tags
     addTagsViewList(state, tag) {
-      console.log('进来了', tag);
       // 如果之前添加的就不添加了
       const isFind = state.tagsViewList.find((item) => item.path === tag.path);
       if (!isFind) {
