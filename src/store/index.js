@@ -15,8 +15,8 @@ file.keys().forEach((key) => {
 const persistedAppState = createPersistedState({
   storage: window.sessionStorage, // 指定storage 也可自定义
   key: 'vuex_app', // 存储名 默认都是vuex 多个模块需要指定 否则会覆盖
-  // 只针对user模块下持久化,如果具体到那个state的时候可以eg.user.userInfo
-  paths: ['user'],
+  // 只针对user模块下持久化,如果具体到那个state的时候可以eg:user.userInfo
+  paths: ['user', 'app.tagsViewList'],
 });
 export default createStore({
   plugins: [persistedAppState],

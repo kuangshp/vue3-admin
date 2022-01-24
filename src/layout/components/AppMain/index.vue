@@ -10,7 +10,52 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { isTags } from '@/utils';
+
+const route = useRoute();
+const store = useStore();
+// 获取标题
+const getTitle = (to) => {
+  let title = '';
+  // 如果没配置title的时候
+  if (!to.meta) {
+    const pathAry = to.path.split('/')[1];
+    // 取最后一个
+    title = pathAry.pop();
+  } else {
+    title = to.meta.title;
+  }
+  return title;
+};
+// 监听路由的变化
+watch(
+  route,
+  (to) => {
+    // 如果不需要缓存的直接跳过
+    if (!isTags(to.path)) {
+      return;
+    }
+    // 将要缓存的数据提交到store中
+    const { fullPath, meta, name, params, path, query } = to;
+    store.commit('app/addTagsViewList', {
+      fullPath,
+      meta,
+      name,
+      params,
+      path,
+      query,
+      title: getTitle(to),
+    });
+  },
+  {
+    immediate: true,
+  },
+);
+</script>
 
 <style lang="scss" scoped>
 .app-main {

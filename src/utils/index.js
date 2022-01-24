@@ -3,3 +3,4 @@ export * from './request';
 export * from './storage';
 export * from './object';
 export * from './menus';
+export * from './tags';
