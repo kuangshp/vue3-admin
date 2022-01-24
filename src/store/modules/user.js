@@ -2,15 +2,15 @@ import { storage } from '@/utils';
 import { authToken } from '@/constants';
 import { LoginService } from '@/services';
 import router from '@/router';
+
 export default {
   namespaced: true, // 命名模块
   state: () => ({
-    token: storage.getItem(authToken) || '',
     userInfo: {},
   }),
   mutations: {
     SET_TOKEN(state, token) {
-      state.token = token;
+      console.log('state', state);
       // 存储到本地
       storage.setItem(authToken, token);
     },
@@ -38,6 +38,7 @@ export default {
       commit('SET_TOKEN', '');
       commit('SET_USER_INFO', {});
       storage.clear();
+      window.sessionStorage.clear();
       router.push('/login');
     },
   },

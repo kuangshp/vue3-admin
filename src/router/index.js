@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import layout from '@/layout';
-import store from '@/store';
-import { setTitle } from '@/utils';
+import { authToken } from '@/constants';
+import { setTitle, storage } from '@/utils';
 
 // 私有路由
 const privateRoutes = [
@@ -93,17 +93,12 @@ const router = createRouter({
 const whiteList = ['/login'];
 // 路由前置守卫
 router.beforeEach(async (to, from, next) => {
-  console.log('路由进来了', store.getters.token);
+  console.log('路由进来了', storage.getItem(authToken));
   // 存在token, 进入主页,不存在就到登录页面
-  if (store.getters.token) {
+  if (storage.getItem(authToken)) {
     if (to.path === '/login') {
       next('/');
     } else {
-      // 判断用户资料是否获取
-      // if (!store.getters.hasUserInfo) {
-      //   // 去触发action的获取用户信息
-      //   await store.dispatch('user/getUserInfo');
-      // }
       next();
     }
   } else {

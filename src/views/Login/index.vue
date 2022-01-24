@@ -75,6 +75,8 @@ const submitClick = () => {
     if (v) {
       // TODO这里不做接口请求，直接跳转到首页
       const result = await store.dispatch('user/loginApi', loginForm.value);
+      // 获取菜单
+      await store.dispatch('menus/menusApi');
       console.log(result, '登录结果');
       router.push('/');
       isLogin.value = false;
