@@ -1,8 +1,76 @@
 <template>
-  <div class="tags-view-container">标签导航</div>
+  <div class="tags-view-container">
+    <el-scrollbar class="tags-view-wrapper">
+      <router-link
+        @contextmenu.prevent="openMenu($event, index)"
+        class="tags-view-item"
+        :class="isActive(tag) ? 'active' : ''"
+        :style="{
+          backgroundColor: isActive(tag) ? '#304156' : '',
+          borderColor: isActive(tag) ? '#304156' : '',
+        }"
+        v-for="(tag, index) in $store.getters.tagsViewList"
+        :key="tag.fullPath"
+        :to="{ path: tag.fullPath }"
+      >
+        {{ tag.title }}
+        <svg-icon icon="close" v-show="!isActive(tag)" class="el-icon-close" @click.prevent.stop="onCloseClick(index)"></svg-icon>
+      </router-link>
+    </el-scrollbar>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { reactive, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+const route = useRoute();
+const store = useStore();
+
+// 选中的序列号
+const selectIndex = ref(0);
+// 是否显示右键弹框
+const visible = ref(false);
+// 右键的时候鼠标位置
+const menuStyle = reactive({
+  left: 0,
+  top: 0,
+});
+/**
+ * 是否被选中
+ */
+const isActive = (tag) => {
+  return tag.path === route.path;
+};
+
+// 导航右键操作
+const openMenu = (e, index) => {
+  const { x, y } = e;
+  menuStyle.left = x + 'px';
+  menuStyle.top = y + 'px';
+  selectIndex.value = index;
+  visible.value = true;
+};
+// 关闭右键弹框
+const closeMenu = () => {
+  visible.value = false;
+};
+watch(visible, (val) => {
+  if (val) {
+    document.body.addEventListener('click', closeMenu);
+  } else {
+    document.body.removeEventListener('click', closeMenu);
+  }
+});
+
+// 关闭当前tag
+const onCloseClick = (index) => {
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index: index,
+  });
+};
+</script>
 
 <style lang="scss" scoped>
 .tags-view-container {
@@ -16,7 +84,7 @@
     position: relative;
     cursor: pointer;
     height: 26px;
-    line-height: 26px;
+    line-height: 28px;
     border: 1px solid #d8dce5;
     color: #495060;
     background: #fff;
@@ -47,8 +115,6 @@
     .el-icon-close {
       width: 16px;
       height: 16px;
-      line-height: 10px;
-      vertical-align: 2px;
       border-radius: 50%;
       text-align: center;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
