@@ -97,6 +97,9 @@ $cursor: #fff;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
+  background-image: url('../../assets/images/login.svg');
+  background-repeat: no-repeat;
+  background-position: 50%;
   overflow: hidden;
 
   .login-form {
