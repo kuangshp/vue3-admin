@@ -17,6 +17,8 @@
         <svg-icon icon="close" v-show="!isActive(tag)" class="el-icon-close" @click.prevent.stop="onCloseClick(index)"></svg-icon>
       </router-link>
     </el-scrollbar>
+    <!-- 右键弹框 -->
+    <ContextMenu v-show="visible" :style="menuStyle" :index="selectIndex"></ContextMenu>
   </div>
 </template>
 
@@ -24,6 +26,8 @@
 import { reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
+import ContextMenu from './components/ContextMenu';
+
 const route = useRoute();
 const store = useStore();
 
