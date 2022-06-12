@@ -11,6 +11,7 @@
   "dependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@element-plus/icons-vue": "^2.0.4",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.28",
     "husky": "^8.0.1",
@@ -35,6 +36,7 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "svg-sprite-loader": "^6.0.11",
     "vue-cli-plugin-element-plus": "~0.0.13"
   },
   "config": {

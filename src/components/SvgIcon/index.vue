@@ -8,8 +8,9 @@
 </template>
 
 <script setup>
+import { isExternal as external } from '@/utils/validate';
 import { defineProps, computed } from 'vue';
-import { isExternal as external } from '@/utils';
+// 定义props
 const props = defineProps({
   // icon 图标
   icon: {
@@ -41,7 +42,7 @@ const styleExternalIcon = computed(() => ({
 const iconName = computed(() => `#icon-${props.icon}`);
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .svg-icon {
   width: 1em;
   height: 1em;

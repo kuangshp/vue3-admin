@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm" ref="loginForm">
+    <el-form class="login-form" :model="loginForm" :rules="loginRules" ref="loginFromRef">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -16,8 +16,8 @@
           <svg-icon icon="password"></svg-icon>
         </span>
         <el-input placeholder="请输入密码" name="password" v-model="loginForm.password" :type="passwordType"></el-input>
-        <span class="show-pwd">
-          <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" @click="onChangePwdType"></svg-icon>
+        <span class="show-pwd" @click="onChangePwdType">
+          <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></svg-icon>
         </span>
       </el-form-item>
 
@@ -29,13 +29,30 @@
 <script setup>
 import { ref } from 'vue';
 const loginForm = ref({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: '123456',
 });
 
 const loading = ref(false);
 
 const passwordType = ref('password');
+
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '用户名必填字段',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: '密码必填字段',
+    },
+  ],
+});
 
 const onChangePwdType = () => {
   // 使用 ref 声明的数据，在script中使用时，需要加value来获取具体的值，但是在template中使用时，不需要加value
@@ -46,7 +63,9 @@ const onChangePwdType = () => {
   }
 };
 // 登录操作
-const handleLogin = () => {};
+const handleLogin = () => {
+  console.log('登录');
+};
 </script>
 
 <style lang="scss" scoped>
@@ -126,6 +145,7 @@ $cursor: #fff;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+    top: 5px;
   }
   ::v-deep .lang-select {
     position: absolute;
