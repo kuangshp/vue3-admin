@@ -6,18 +6,18 @@
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
-          <el-icon><Avatar /></el-icon>
+          <svg-icon icon="user"></svg-icon>
         </span>
         <el-input placeholder="请输入用户名" name="username" type="text" v-model="loginForm.username" />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <el-icon><Avatar /></el-icon>
+          <svg-icon icon="password"></svg-icon>
         </span>
         <el-input placeholder="请输入密码" name="password" v-model="loginForm.password" :type="passwordType"></el-input>
         <span class="show-pwd">
-          <el-icon><Avatar /></el-icon>
+          <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" @click="onChangePwdType"></svg-icon>
         </span>
       </el-form-item>
 
@@ -29,12 +29,22 @@
 <script setup>
 import { ref } from 'vue';
 const loginForm = ref({
-  username: 'admin',
-  password: '123456',
+  username: '',
+  password: '',
 });
 
 const loading = ref(false);
 
+const passwordType = ref('password');
+
+const onChangePwdType = () => {
+  // 使用 ref 声明的数据，在script中使用时，需要加value来获取具体的值，但是在template中使用时，不需要加value
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text';
+  } else {
+    passwordType.value = 'password';
+  }
+};
 // 登录操作
 const handleLogin = () => {};
 </script>
@@ -79,6 +89,7 @@ $cursor: #fff;
         padding: 12px 5px 12px 15px;
         color: $light_gray;
         height: 47px;
+        // 光标的颜色
         caret-color: $cursor;
       }
     }
