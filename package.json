@@ -12,6 +12,7 @@
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "core-js": "^3.6.5",
+    "element-plus": "^1.0.2-beta.28",
     "husky": "^8.0.1",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",
@@ -33,7 +34,13 @@
     "lint-staged": "^9.5.0",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-element-plus": "~0.0.13"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -43,10 +50,5 @@
       "vue-cli-service lint",
       "git add"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    }
   }
 }
