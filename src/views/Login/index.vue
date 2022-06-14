@@ -112,11 +112,6 @@ $cursor: #fff;
         caret-color: $cursor;
       }
     }
-    .tips {
-      font-size: 16px;
-      color: white;
-      line-height: 24px;
-    }
   }
 
   .svg-container {
