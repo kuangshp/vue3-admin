@@ -3,6 +3,7 @@ import { ElMessage } from 'element-plus';
 import { isCheckTimeout } from '@/utils';
 import store from '@/store';
 
+console.log('当前地址', process.env.VUE_APP_BASE_API);
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,

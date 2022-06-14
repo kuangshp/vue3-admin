@@ -28,6 +28,8 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import { validatePassword } from './rule';
 const loginForm = ref({
   username: 'admin',
@@ -35,7 +37,9 @@ const loginForm = ref({
 });
 
 const loading = ref(false);
-
+const loginFromRef = ref(null);
+const store = useStore();
+const router = useRouter();
 const passwordType = ref('password');
 
 const loginRules = ref({
@@ -66,6 +70,24 @@ const onChangePwdType = () => {
 // 登录操作
 const handleLogin = () => {
   console.log('登录');
+  // 1.进行表单验证
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return;
+
+    // 2.触发登陆操作
+    loading.value = true;
+    store
+      .dispatch('user/login', loginForm.value)
+      .then(() => {
+        loading.value = false;
+        // TODO: 3.登录后操作
+        router.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+        loading.value = false;
+      });
+  });
 };
 </script>
 
