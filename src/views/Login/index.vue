@@ -28,6 +28,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { validatePassword } from './rule';
 const loginForm = ref({
   username: 'admin',
   password: '123456',
@@ -49,7 +50,7 @@ const loginRules = ref({
     {
       required: true,
       trigger: 'blur',
-      validator: '密码必填字段',
+      validator: validatePassword(),
     },
   ],
 });

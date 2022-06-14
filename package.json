@@ -12,6 +12,7 @@
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@element-plus/icons-vue": "^2.0.4",
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.28",
     "husky": "^8.0.1",
