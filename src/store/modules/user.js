@@ -34,7 +34,6 @@ export default {
           password,
         })
           .then((data) => {
-            // this.commit('user/setToken', data.token)
             commit('setToken', data.token);
             // 保存登录时间
             setTimeStamp();

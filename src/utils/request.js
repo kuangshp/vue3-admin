@@ -34,11 +34,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   // 请求成功
   (response) => {
-    const { code, message, data } = response.data;
+    const { code, message, result } = response.data;
     //   要根据success的成功与否决定下面的操作
     if (Object.is(code, 0)) {
       // 成功返回解析后的数据
-      return data;
+      return result;
     } else {
       // 失败(请求成功，业务失败)，消息提示
       ElMessage.error(message); // 提示错误消息
@@ -50,7 +50,7 @@ service.interceptors.response.use(
     // 处理 token 超时问题
     if (error.response && error.response.data && error.response.data.code === 401) {
       // token超时
-      // store.dispatch('user/logout');
+      store.dispatch('user/logout');
     }
     ElMessage.error(error.message); // 提示错误信息
     return Promise.reject(error);
