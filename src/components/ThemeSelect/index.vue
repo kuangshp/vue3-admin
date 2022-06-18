@@ -10,11 +10,15 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
+  <SelectColor v-model="selectColorVisible" />
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import SelectColor from './components/SelectColor';
+const selectColorVisible = ref(false);
 const handleSetTheme = () => {
-  console.log('点了');
+  selectColorVisible.value = true;
 };
 </script>
 
