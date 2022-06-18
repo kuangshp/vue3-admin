@@ -24,6 +24,8 @@ const i18n = createI18n({
   legacy: false,
   // 全局使用t函数
   globalInjection: true,
+  // 关闭控制台警告
+  silentFallbackWarn: true,
   locale: getLanguage(),
   messages: message,
 });
