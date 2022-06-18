@@ -7,6 +7,10 @@
 
 <script setup>
 import SidebarMenu from './components/SidebarMenu';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+// 获取到全部的路由
+console.log(router.getRoutes());
 </script>
 
 <style lang="scss" scoped></style>

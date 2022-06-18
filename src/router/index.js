@@ -102,13 +102,6 @@ const privateRoutes = [
           title: 'articleEditor',
         },
       },
-      {
-        path: '/article/:id',
-        component: () => import('@/views/article-detail/index'),
-        meta: {
-          title: 'articleDetail',
-        },
-      },
     ],
   },
 ];
