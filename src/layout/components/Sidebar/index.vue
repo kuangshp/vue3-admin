@@ -1,7 +1,10 @@
 <template>
   <div class="sidebar">
     <h1>导航</h1>
-    <SidebarMenu />
+    <!-- 加上有滚动条 -->
+    <el-scrollbar>
+      <SidebarMenu />
+    </el-scrollbar>
   </div>
 </template>
 
