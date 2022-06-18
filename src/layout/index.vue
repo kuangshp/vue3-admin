@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左边导航 -->
-    <Sidebar class="sidebar-container" :style="{ backgroundColor: variables.menuBg }"></Sidebar>
+    <Sidebar class="sidebar-container" :style="{ backgroundColor: $store.getters.cssVar.menuBg }"></Sidebar>
     <!-- 右边内容区域 -->
     <div class="main-container">
       <!-- 头部导航 -->
