@@ -2,6 +2,8 @@
   <div class="navbar">
     <!-- 左侧折叠 -->
     <Hamburger class="hamburger-container" />
+    <!-- 面包屑 -->
+    <Breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -28,6 +30,7 @@
 <script setup>
 import { useStore } from 'vuex';
 import Hamburger from '@/components/Hamburger';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const store = useStore();
 const logout = () => {
