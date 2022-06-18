@@ -35,7 +35,7 @@ export default {
         })
           .then((data) => {
             commit('setToken', data.token);
-            // 保存登录时间
+            // 保存登录时间(用于做主动退出)
             setTimeStamp();
             resolve();
           })

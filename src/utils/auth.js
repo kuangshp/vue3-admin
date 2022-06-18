@@ -14,7 +14,7 @@ export const setTimeStamp = () => {
   setItem(TIME_STAMP, Date.now());
 };
 /**
- * 是否超时
+ * 检查是否超时
  */
 export const isCheckTimeout = () => {
   // 当前时间戳
