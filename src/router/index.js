@@ -4,102 +4,55 @@ import Layout from '@/layout';
 // 私有路由
 const privateRoutes = [
   {
-    path: '/user',
+    path: '/system',
     component: Layout,
     meta: {
-      title: 'user',
+      title: 'system',
       icon: 'personnel',
     },
-    redirect: '/user/manage',
+    redirect: '/system/account',
     children: [
       {
-        path: '/user/manage',
-        name: 'userManage',
-        component: () => import('@/views/user-manage/index'),
+        path: '/system/account',
+        name: 'account',
+        component: () => import('@/views/System/Account/index.vue'),
         meta: {
-          title: 'userManage',
+          title: 'account',
           icon: 'personnel-manage',
         },
       },
       {
-        path: '/user/role',
+        path: '/system/role',
         name: 'role',
-        component: () => import('@/views/role-list/index'),
+        component: () => import('@/views/System/Role/index.vue'),
         meta: {
-          title: 'roleList',
+          title: 'role',
           icon: 'role',
         },
       },
       {
-        path: '/user/permission',
-        name: 'permissionList',
-        component: () => import('@/views/permission-list/index'),
+        path: '/system/access',
+        name: 'access',
+        component: () => import('@/views/System/Access/index.vue'),
         meta: {
-          title: 'permissionList',
+          title: 'access',
           icon: 'permission',
-        },
-      },
-      {
-        path: '/user/info/:id',
-        name: 'userInfo',
-        component: () => import('@/views/user-info/index'),
-        meta: {
-          title: 'userInfo',
-          // 不需要出现在左侧导航中
-          // icon: 'permission',
-        },
-      },
-      {
-        path: '/user/import',
-        name: 'import',
-        component: () => import('@/views/import/index'),
-        meta: {
-          title: 'excelImport',
-          // icon: 'excelImport',
         },
       },
     ],
   },
   {
-    path: '/article',
+    path: '/file',
     component: Layout,
-    redirect: '/article/ranking',
-    meta: {
-      title: 'article',
-      icon: 'article',
-    },
+    redirect: '/file/file',
     children: [
       {
-        path: '/article/ranking',
-        name: 'articleRanking',
-        component: () => import('@/views/article-ranking/index'),
+        path: '/file/file',
+        name: 'file',
+        component: () => import('@/views/File/index'),
         meta: {
-          title: 'articleRanking',
+          title: 'file',
           icon: 'article-ranking',
-        },
-      },
-      {
-        path: '/article/:id',
-        name: 'articleDetail',
-        component: () => import('@/views/article-detail/index'),
-        meta: {
-          title: 'articleDetail',
-        },
-      },
-      {
-        path: '/article/create',
-        name: 'articleCreate',
-        component: () => import('@/views/article-create/index'),
-        meta: {
-          title: 'articleCreate',
-          icon: 'article-create',
-        },
-      },
-      {
-        path: '/article/editor/:id',
-        component: () => import('@/views/article-create/index'),
-        meta: {
-          title: 'articleEditor',
         },
       },
     ],
@@ -127,16 +80,6 @@ const publicRoutes = [
         path: '/home',
         name: 'home',
         component: () => import('@/views/Home/index'),
-      },
-      // 个人中心
-      {
-        path: '/profile',
-        name: 'profile',
-        component: () => import('@/views/profile/index'),
-        meta: {
-          title: 'profile',
-          icon: 'el-icon-user',
-        },
       },
       // 404
       {
