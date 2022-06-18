@@ -1,9 +1,10 @@
 import { createApp } from 'vue';
+import i18n from '@/i18n';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import installElementPlus from './plugins/element';
-import i18n from '@/i18n';
+
 // 导入全局样式
 import './assets/styles/index.scss';
 // 导入 svgIcon

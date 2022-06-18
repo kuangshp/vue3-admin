@@ -25,7 +25,7 @@ const i18n = createI18n({
   globalInjection: true,
   // 关闭控制台警告
   silentFallbackWarn: true,
-  locale: getLanguage() || 'zh',
+  locale: getLanguage(),
   messages: message,
 });
 export default i18n;
