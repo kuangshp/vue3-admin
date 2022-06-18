@@ -15,7 +15,7 @@
 import { watch } from 'vue';
 import { isTags } from '@/utils';
 import { useRoute } from 'vue-router';
-import { generateTitle } from '@/utils/i18n';
+import { generateTitle, watchSwitchLang } from '@/utils/i18n';
 import { useStore } from 'vuex';
 
 const route = useRoute();
@@ -59,6 +59,21 @@ watch(
     immediate: true,
   },
 );
+
+/**
+ * 国际化 tags
+ */
+watchSwitchLang(() => {
+  store.getters.tagsViewList.forEach((route, index) => {
+    store.commit('app/changeTagsView', {
+      index,
+      tag: {
+        ...route,
+        title: getTitle(route),
+      },
+    });
+  });
+});
 </script>
 
 <style lang="scss" scoped>
