@@ -116,7 +116,7 @@ const publicRoutes = [
     name: '/',
     // 重定向到/profile页面
     redirect: '/profile',
-    component: () => Layout,
+    component: Layout,
     // 只有一层的不要使用这个
     // meta: {
     //   title: 'profile',

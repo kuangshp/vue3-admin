@@ -3,4 +3,5 @@ export default {
   token: (state) => state.user.token,
   userInfo: (state) => state.user.userInfo,
   cssVar: () => variables,
+  sidebarOpened: (state) => state.app.sidebarOpened,
 };
