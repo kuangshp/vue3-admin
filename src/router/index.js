@@ -32,7 +32,7 @@ const privateRoutes = [
       },
       {
         path: '/user/permission',
-        name: 'role',
+        name: 'permissionList',
         component: () => import('@/views/permission-list/index'),
         meta: {
           title: 'permissionList',
