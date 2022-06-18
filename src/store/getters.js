@@ -4,4 +4,5 @@ export default {
   userInfo: (state) => state.user.userInfo,
   cssVar: () => variables,
   sidebarOpened: (state) => state.app.sidebarOpened,
+  language: (state) => state.app.language,
 };
