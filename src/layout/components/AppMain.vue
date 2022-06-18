@@ -44,6 +44,7 @@ watch(
   (to) => {
     // 并不是所有的路由都需要保存的
     if (!isTags(to.path)) return;
+    console.log(to, '11122');
     const { fullPath, meta, name, params, path, query } = to;
     store.commit('app/addTagsViewList', {
       fullPath,

@@ -80,6 +80,9 @@ const publicRoutes = [
         path: '/home',
         name: 'home',
         component: () => import('@/views/Home/index'),
+        meta: {
+          title: 'home',
+        },
       },
       // 404
       {

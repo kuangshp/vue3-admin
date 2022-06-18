@@ -14,5 +14,6 @@ export default {
     role: '角色中心',
     access: '资源管理',
     file: '文件中心',
+    home: '首页',
   },
 };

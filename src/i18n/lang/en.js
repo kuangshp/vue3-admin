@@ -14,5 +14,6 @@ export default {
     role: 'Role',
     access: 'Access',
     file: 'File',
+    home: 'Home',
   },
 };
