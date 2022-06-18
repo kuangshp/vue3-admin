@@ -95,6 +95,20 @@ const privateRoutes = [
           icon: 'article-create',
         },
       },
+      {
+        path: '/article/editor/:id',
+        component: () => import('@/views/article-create/index'),
+        meta: {
+          title: 'articleEditor',
+        },
+      },
+      {
+        path: '/article/:id',
+        component: () => import('@/views/article-detail/index'),
+        meta: {
+          title: 'articleDetail',
+        },
+      },
     ],
   },
 ];
