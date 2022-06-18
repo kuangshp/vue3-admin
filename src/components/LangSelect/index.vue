@@ -1,8 +1,6 @@
 <template>
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
-    <el-tooltip content="国际化" :effect="effect">
-      <svg-icon icon="language" />
-    </el-tooltip>
+    <svg-icon icon="language" />
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item :disabled="language === 'zh'" command="zh"> 中文 </el-dropdown-item>
@@ -14,20 +12,9 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { ElMessage } from 'element-plus';
-
-defineProps({
-  effect: {
-    type: String,
-    default: 'dark',
-    validator: function (value) {
-      // 这个值必须匹配下列字符串中的一个
-      return ['dark', 'light'].indexOf(value) !== -1;
-    },
-  },
-});
 
 const store = useStore();
 const language = computed(() => store.getters.language);
