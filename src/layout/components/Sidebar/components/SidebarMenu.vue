@@ -6,6 +6,7 @@
     :active-text-color="$store.getters.cssVar.menuActiveText"
     :unique-opened="true"
     router
+    :collapse="!$store.getters.sidebarOpened"
   >
     <SidebarItem v-for="item in routes" :key="item.path" :route="item"></SidebarItem>
   </el-menu>
