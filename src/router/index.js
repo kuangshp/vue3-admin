@@ -7,7 +7,32 @@ const publicRoutes = [
   },
   {
     path: '/',
+    // 重定向到/profile页面
+    redirect: '/profile',
     component: () => import('@/layout'),
+    children: [
+      // 个人中心
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('@/views/profile/index'),
+        meta: {
+          title: 'profile',
+          icon: 'el-icon-user',
+        },
+      },
+      // 404
+      {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/error-page/404'),
+      },
+      {
+        path: '/401',
+        name: '401',
+        component: () => import('@/views/error-page/401'),
+      },
+    ],
   },
 ];
 
