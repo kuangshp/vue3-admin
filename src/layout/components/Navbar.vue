@@ -5,6 +5,8 @@
     <!-- 面包屑 -->
     <Breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 全屏组件 -->
+      <Screenfull class="right-menu-item hover-effect" />
       <!-- 切换主题 -->
       <ThemeSelect class="right-menu-item hover-effect" />
       <!-- 切换国际化语言 -->
@@ -37,6 +39,7 @@ import Hamburger from '@/components/Hamburger';
 import Breadcrumb from '@/components/Breadcrumb';
 import LangSelect from '@/components/LangSelect';
 import ThemeSelect from '@/components/ThemeSelect';
+import Screenfull from '@/components/Screenfull';
 const store = useStore();
 const logout = () => {
   store.dispatch('user/logout');
