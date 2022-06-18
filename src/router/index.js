@@ -52,7 +52,7 @@ const privateRoutes = [
         component: () => import('@/views/File/index'),
         meta: {
           title: 'file',
-          icon: 'article-ranking',
+          icon: 'tree',
         },
       },
     ],
