@@ -1,5 +1,5 @@
 <template>
-  <el-menu :uniqueOpened="true" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+  <el-menu :uniqueOpened="true" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router>
     <SidebarItem v-for="item in routes" :key="item.path" :route="item"></SidebarItem>
   </el-menu>
 </template>

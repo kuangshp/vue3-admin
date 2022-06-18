@@ -113,6 +113,7 @@ const publicRoutes = [
   },
   {
     path: '/',
+    name: '/',
     // 重定向到/profile页面
     redirect: '/profile',
     component: () => Layout,
