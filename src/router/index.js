@@ -1,5 +1,104 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store';
+import Layout from '@/layout';
+// 私有路由
+const privateRoutes = [
+  {
+    path: '/user',
+    component: Layout,
+    meta: {
+      title: 'user',
+      icon: 'personnel',
+    },
+    redirect: '/user/manage',
+    children: [
+      {
+        path: '/user/manage',
+        name: 'userManage',
+        component: () => import('@/views/user-manage/index'),
+        meta: {
+          title: 'userManage',
+          icon: 'personnel-manage',
+        },
+      },
+      {
+        path: '/user/role',
+        name: 'role',
+        component: () => import('@/views/role-list/index'),
+        meta: {
+          title: 'roleList',
+          icon: 'role',
+        },
+      },
+      {
+        path: '/user/permission',
+        name: 'role',
+        component: () => import('@/views/permission-list/index'),
+        meta: {
+          title: 'permissionList',
+          icon: 'permission',
+        },
+      },
+      {
+        path: '/user/info/:id',
+        name: 'userInfo',
+        component: () => import('@/views/user-info/index'),
+        meta: {
+          title: 'userInfo',
+          // 不需要出现在左侧导航中
+          // icon: 'permission',
+        },
+      },
+      {
+        path: '/user/import',
+        name: 'import',
+        component: () => import('@/views/import/index'),
+        meta: {
+          title: 'excelImport',
+          // icon: 'excelImport',
+        },
+      },
+    ],
+  },
+  {
+    path: '/article',
+    component: Layout,
+    redirect: '/article/ranking',
+    meth: {
+      title: 'article',
+      icon: 'article',
+    },
+    children: [
+      {
+        path: '/article/ranking',
+        name: 'articleRanking',
+        component: () => import('@/views/article-ranking/index'),
+        meta: {
+          title: 'articleRanking',
+          icon: 'article-ranking',
+        },
+      },
+      {
+        path: '/article/:id',
+        name: 'articleDetail',
+        component: () => import('@/views/article-detail/index'),
+        meta: {
+          title: 'articleDetail',
+        },
+      },
+      {
+        path: '/article/create',
+        name: 'articleCreate',
+        component: () => import('@/views/article-create/index'),
+        meta: {
+          title: 'articleCreate',
+          icon: 'article-create',
+        },
+      },
+    ],
+  },
+];
+// 公开路由
 const publicRoutes = [
   {
     path: '/login',
@@ -9,7 +108,7 @@ const publicRoutes = [
     path: '/',
     // 重定向到/profile页面
     redirect: '/profile',
-    component: () => import('@/layout'),
+    component: () => Layout,
     children: [
       // 个人中心
       {
@@ -38,7 +137,7 @@ const publicRoutes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: publicRoutes,
+  routes: [...publicRoutes, ...privateRoutes],
 });
 
 // 白名单
