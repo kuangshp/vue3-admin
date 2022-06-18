@@ -8,4 +8,11 @@ export default {
     usernameError: 'username is require',
     passwordError: 'password length is not less then 6',
   },
+  route: {
+    system: 'System',
+    account: 'Account',
+    role: 'Role',
+    access: 'Access',
+    file: 'File',
+  },
 };

@@ -18,7 +18,6 @@ const message = {
 function getLanguage() {
   return store && store.getters && store.getters.language;
 }
-
 const i18n = createI18n({
   // 使用composition API
   legacy: false,
@@ -26,7 +25,7 @@ const i18n = createI18n({
   globalInjection: true,
   // 关闭控制台警告
   silentFallbackWarn: true,
-  locale: getLanguage(),
+  locale: getLanguage() || 'zh',
   messages: message,
 });
 export default i18n;
