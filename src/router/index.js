@@ -115,7 +115,7 @@ const publicRoutes = [
     path: '/',
     name: '/',
     // 重定向到/profile页面
-    redirect: '/profile',
+    redirect: '/home',
     component: Layout,
     // 只有一层的不要使用这个
     // meta: {
@@ -123,6 +123,11 @@ const publicRoutes = [
     //   icon: 'el-icon-user',
     // },
     children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/Home/index'),
+      },
       // 个人中心
       {
         path: '/profile',
