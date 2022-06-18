@@ -45,9 +45,11 @@ export const generateMenus = (routes, basePath = '') => {
     if (isNull(item.meta) && isNull(item.children)) return;
     // 存在 children 不存在 meta，进入迭代
     if (isNull(item.meta) && !isNull(item.children)) {
+      console.log(item, '1111');
       result.push(...generateMenus(item.children));
       return;
     }
+    // 处理没父节点的菜单
     // 合并 path 作为跳转路径
     const routePath = path.resolve(basePath, item.path);
     // 路由分离之后，存在同名父路由的情况，需要单独处理

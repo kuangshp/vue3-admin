@@ -64,7 +64,7 @@ const privateRoutes = [
     path: '/article',
     component: Layout,
     redirect: '/article/ranking',
-    meth: {
+    meta: {
       title: 'article',
       icon: 'article',
     },
