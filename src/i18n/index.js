@@ -1,14 +1,14 @@
 import { createI18n } from 'vue-i18n';
 import store from '@/store';
-import zhLocale from './lang/zh';
+import zhCNLocale from './lang/zh-CN';
 import enLocale from './lang/en';
 
 const message = {
   en: {
     ...enLocale,
   },
-  zh: {
-    ...zhLocale,
+  zhCN: {
+    ...zhCNLocale,
   },
 };
 

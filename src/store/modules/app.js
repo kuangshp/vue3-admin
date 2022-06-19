@@ -1,5 +1,6 @@
-import { LANG, TAGS_VIEW } from '@/constant';
-import { getItem, setItem } from '@/utils/storage';
+// import { LANG, TAGS_VIEW } from '@/constant';
+import { currentLanguage } from '@/utils';
+// import { getItem, setItem } from '@/utils/storage';
 
 export default {
   namespaced: true,
@@ -7,9 +8,9 @@ export default {
     // 左侧是否折叠
     sidebarOpened: true,
     // 设置国际化语言
-    language: getItem(LANG) || 'zh',
+    language: currentLanguage(),
     // tags数据
-    tagsViewList: getItem(TAGS_VIEW) || [],
+    tagsViewList: [],
   }),
   mutations: {
     triggerSidebarOpened(state) {
@@ -19,7 +20,7 @@ export default {
      * 设置国际化
      */
     setLanguage(state, lang) {
-      setItem(LANG, lang);
+      // setItem(LANG, lang);
       state.language = lang;
     },
     /**
@@ -32,7 +33,7 @@ export default {
       // 处理重复
       if (!isFind) {
         state.tagsViewList.push(tag);
-        setItem(TAGS_VIEW, state.tagsViewList);
+        // setItem(TAGS_VIEW, state.tagsViewList);
       }
     },
     /**
@@ -40,7 +41,7 @@ export default {
      */
     changeTagsView(state, { index, tag }) {
       state.tagsViewList[index] = tag;
-      setItem(TAGS_VIEW, state.tagsViewList);
+      // setItem(TAGS_VIEW, state.tagsViewList);
     },
     /**
      * 删除 tag
@@ -60,7 +61,7 @@ export default {
         // 删除右侧
         state.tagsViewList.splice(payload.index + 1, state.tagsViewList.length - payload.index + 1);
       }
-      setItem(TAGS_VIEW, state.tagsViewList);
+      // setItem(TAGS_VIEW, state.tagsViewList);
     },
   },
   actions: {},
