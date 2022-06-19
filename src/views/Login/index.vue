@@ -105,7 +105,10 @@ $cursor: #fff;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
-
+  background-image: url('../../assets/images/login.svg');
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100%;
   .login-form {
     position: relative;
     width: 520px;
