@@ -29,7 +29,6 @@ export default {
           password,
         })
           .then((data) => {
-            console.log(data, '请求结果');
             const { result } = data;
             commit('setToken', result.token);
             commit('setUserInfo', result);
