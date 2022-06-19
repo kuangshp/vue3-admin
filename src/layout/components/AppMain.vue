@@ -1,10 +1,10 @@
 <template>
   <div class="app-main">
     <!-- 带有切换动画，并且具备组件缓存 -->
-    <router-view v-slot="{ Component, route }">
+    <router-view v-slot="{ Component, route }" :key="route.path">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
-          <div><component :is="Component" :key="route.path" /></div>
+          <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
     </router-view>
@@ -44,7 +44,6 @@ watch(
   (to) => {
     // 并不是所有的路由都需要保存的
     if (!isTags(to.path)) return;
-    console.log(to, '11122');
     const { fullPath, meta, name, params, path, query } = to;
     store.commit('app/addTagsViewList', {
       fullPath,
