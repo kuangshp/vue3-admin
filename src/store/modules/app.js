@@ -57,6 +57,14 @@ export default {
         state.tagsViewList.splice(payload.index + 1, state.tagsViewList.length - payload.index + 1);
       }
     },
+    clearTagsView(state, payload) {
+      state.tagsViewList = payload;
+    },
   },
-  actions: {},
+  actions: {
+    // 退出登录逻辑
+    clearTagsView({ commit }) {
+      commit('clearTagsView', []);
+    },
+  },
 };

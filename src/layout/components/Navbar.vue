@@ -42,6 +42,7 @@ import ThemeSelect from '@/components/ThemeSelect';
 import Screenfull from '@/components/Screenfull';
 const store = useStore();
 const logout = () => {
+  store.dispatch('app/clearTagsView');
   store.dispatch('user/logout');
 };
 </script>
