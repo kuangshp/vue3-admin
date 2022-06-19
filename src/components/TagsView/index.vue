@@ -15,10 +15,10 @@
       >
         {{ tag.title }}
         <!-- 删除图标 -->
-        <i v-show="!isActive(tag)" class="el-icon-close" @click.prevent.stop="onCloseClick(index)" />
+        <i v-show="!isActive(tag) && tag.fullPath !== '/home'" class="el-icon-close" @click.prevent.stop="onCloseClick(index)" />
       </router-link>
     </el-scrollbar>
-    <!-- <context-menu v-show="visible" :style="menuStyle" :index="selectIndex"></context-menu> -->
+    <ContextMenu v-show="visible" :style="menuStyle" :index="selectIndex"></ContextMenu>
   </div>
 </template>
 
@@ -26,6 +26,8 @@
 import { useRoute } from 'vue-router';
 import { ref, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
+import ContextMenu from './components/ContextMenu';
+
 const route = useRoute();
 const store = useStore();
 

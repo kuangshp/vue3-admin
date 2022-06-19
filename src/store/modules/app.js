@@ -56,7 +56,7 @@ export default {
         // 删除当前位置之后的所有
         state.tagsViewList.splice(payload.index + 1, state.tagsViewList.length - payload.index + 1);
         // 删除当前位置之前的所有
-        state.tagsViewList.splice(0, payload.index);
+        state.tagsViewList.splice(1, payload.index - 1);
       } else if (payload.type === 'right') {
         // 删除右侧
         state.tagsViewList.splice(payload.index + 1, state.tagsViewList.length - payload.index + 1);

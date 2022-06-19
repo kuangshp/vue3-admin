@@ -16,4 +16,9 @@ export default {
     file: 'File',
     home: 'Home',
   },
+  tagsView: {
+    refresh: 'Refresh',
+    closeRight: 'Close Right',
+    closeOther: 'Close Other',
+  },
 };

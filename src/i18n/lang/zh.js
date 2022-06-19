@@ -16,4 +16,9 @@ export default {
     file: '文件中心',
     home: '首页',
   },
+  tagsView: {
+    refresh: '刷新',
+    closeRight: '关闭右侧',
+    closeOther: '关闭其他',
+  },
 };

@@ -102,7 +102,7 @@ $light_gray: #eee;
 $cursor: #fff;
 
 .login-container {
-  min-height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
