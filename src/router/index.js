@@ -74,6 +74,7 @@ router.beforeEach(async (to, from, next) => {
       // 模拟请求后菜单数据
       const menusList = ['account', 'role', 'file'];
       const filterRoutes = await store.dispatch('menu/filterRoutes', menusList);
+      console.log(filterRoutes, '路由');
       // 利用 addRoute 循环添加
       filterRoutes.forEach((item) => {
         router.addRoute(item);
