@@ -7,11 +7,15 @@ export default {
   state: () => ({
     // token：初次获取本地token实现自动登录效果，获取不到才赋值为空字符串
     token: '',
+    userInfo: {},
   }),
   mutations: {
     // 保存token：保存在vuex和本地localStorage
     setToken(state, token) {
       state.token = token;
+    },
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo;
     },
   },
   actions: {
@@ -25,7 +29,10 @@ export default {
           password,
         })
           .then((data) => {
-            commit('setToken', data.token);
+            console.log(data, '请求结果');
+            const { result } = data;
+            commit('setToken', result.token);
+            commit('setUserInfo', result);
             // 保存登录时间(用于做主动退出)
             setTimeStamp();
             resolve();
@@ -39,6 +46,7 @@ export default {
     logout({ commit }) {
       // 清除token
       commit('setToken', '');
+      commit('setUserInfo', {});
       // 清楚本地所有缓存数据
       window.localStorage.clear();
       window.sessionStorage.clear();

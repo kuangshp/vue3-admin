@@ -1,38 +1,94 @@
-/**
- * 存储数据
- */
-export const setItem = (key, value) => {
-  // 将数组、对象类型的数据转化为 JSON 字符串进行存储
-  if (typeof value === 'object') {
-    value = JSON.stringify(value);
+class LocalStorage {
+  prefix;
+  constructor(prefix = 'web') {
+    this.prefix = prefix;
   }
-  window.localStorage.setItem(key, value);
-};
 
-/**
- * 获取数据
- */
-export const getItem = (key) => {
-  const data = window.localStorage.getItem(key);
-  // 保存了两种类型的数据：基本数据类型和复杂数据类型
-  // 获取时需要对两种情况进行处理
-  try {
-    return JSON.parse(data);
-  } catch (err) {
-    return data;
+  /**
+   * @param {type}
+   * @return:
+   * @Description:获取本地存储的方法
+   * @Author: 水痕
+   * @LastEditors: 水痕
+   * @Date: 2019-08-16 13:30:46
+   */
+  getItem(key) {
+    key = this.getKey(key);
+    const storeData = window.localStorage.getItem(key);
+    if (storeData) {
+      const {
+        value,
+        options: { storeTime },
+      } = JSON.parse(storeData);
+      // 如果从存储中获取的时间大于当前的时间或者等于0的时候表示当前的localStorage有效
+      if (storeTime > new Date().getTime()) {
+        return value;
+      } else {
+        this.removeItem(key);
+        return null;
+      }
+    }
+    return null;
   }
-};
 
-/**
- * 删除数据
- */
-export const removeItem = (key) => {
-  window.localStorage.removeItem(key);
-};
+  /**
+   * @param {type}
+   * @return:
+   * @Description: 设置存储
+   * @Author: 水痕
+   * @LastEditors: 水痕
+   * @Date: 2019-08-16 13:31:00
+   */
+  setItem(key, value, time) {
+    key = this.getKey(key);
+    // 如果用户没传递时间进来就是一天
+    let newTime;
+    if (!time) {
+      newTime = new Date().getTime() + 1000 * 60 * 60 * 24 * 1;
+    } else {
+      newTime = new Date(time).getTime() || time.getTime();
+    }
+    const options = {
+      storeTime: newTime,
+      prefix: this.prefix,
+    };
+    window.localStorage.setItem(key, JSON.stringify({ value, options }));
+  }
 
-/**
- * 删除所有数据
- */
-export const removeAllItem = () => {
-  window.localStorage.clear();
-};
+  /**
+   * @param {type}
+   * @return:
+   * @Description: 删除存储
+   * @Author: 水痕
+   * @LastEditors: 水痕
+   * @Date: 2019-08-16 13:31:11
+   */
+  removeItem(key) {
+    key = this.getKey(key);
+    const value = this.getItem(key);
+    if (value) {
+      window.localStorage.removeItem(key);
+    }
+  }
+
+  /**
+   * 清空全部的storage
+   */
+  clear() {
+    window.localStorage.clear();
+  }
+
+  /**
+   * @param {type}
+   * @return:
+   * @Description: 私有方法获取key
+   * @Author: 水痕
+   * @LastEditors: 水痕
+   * @Date: 2019-08-16 13:31:22
+   */
+  getKey(key) {
+    return `${this.prefix}:${key}`;
+  }
+}
+
+export const storage = new LocalStorage('sea');

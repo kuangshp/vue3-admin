@@ -1,11 +1,7 @@
-import request from '@/utils/request';
+import BaseService from './../base.service';
 
-export class LoginService {
+export class LoginService extends BaseService {
   static async loginApi(postData) {
-    return await request({
-      url: '/admin/login',
-      method: 'POST',
-      data: postData,
-    });
+    return BaseService.post('/admin/login', postData);
   }
 }

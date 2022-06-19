@@ -1,17 +1,17 @@
 import { TIME_STAMP, TOKEN_TIMEOUT_VALUE } from '@/constant';
-import { getItem, setItem } from './storage';
+import { storage } from './storage';
 /**
  * 获取时间戳
  */
 export const getTimeStamp = () => {
-  return getItem(TIME_STAMP);
+  return storage.getItem(TIME_STAMP);
 };
 
 /**
  * 设置时间戳
  */
 export const setTimeStamp = () => {
-  setItem(TIME_STAMP, Date.now());
+  storage.setItem(TIME_STAMP, Date.now());
 };
 /**
  * 检查是否超时

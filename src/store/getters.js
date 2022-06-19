@@ -1,5 +1,5 @@
 // import variables from '@/assets/styles/variables.scss';
-import { generateColors, getItem } from '@/utils';
+import { generateColors, storage } from '@/utils';
 import { MAIN_COLOR } from '@/constant';
 export default {
   token: (state) => state.user.token,
@@ -7,7 +7,7 @@ export default {
   cssVar: (state) => {
     return {
       ...state.theme.variables,
-      ...generateColors(getItem(MAIN_COLOR)),
+      ...generateColors(storage.getItem(MAIN_COLOR)),
     };
   },
   sidebarOpened: (state) => state.app.sidebarOpened,

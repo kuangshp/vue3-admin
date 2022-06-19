@@ -1,3 +1,10 @@
+export const base = 'tiempos-admin';
+export const appName = 'tiempos-admin';
+export const authToken = 'token';
+export const authMobile = '';
+export const authEmail = 'auth-email';
+export const currentUser = 'current-user';
+
 export const TOKEN = 'token';
 // token 时间戳
 export const TIME_STAMP = 'timeStamp';
@@ -11,3 +18,5 @@ export const MAIN_COLOR = 'mainColor';
 export const DEFAULT_COLOR = '#409eff';
 // tags
 export const TAGS_VIEW = 'tagsView';
+// axios请求缓存
+export const MAX_AGE = 5000;
