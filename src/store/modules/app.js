@@ -50,7 +50,6 @@ export default {
       // 删除当前
       if (payload.type === 'index') {
         state.tagsViewList.splice(payload.index, 1);
-        return;
       } else if (payload.type === 'other') {
         // 删除其他
         // 删除当前位置之后的所有
