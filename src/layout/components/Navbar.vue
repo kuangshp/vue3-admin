@@ -15,7 +15,7 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <el-avatar shape="square" :size="40"></el-avatar>
-          <i class="el-icon-s-tools"></i>
+          <!-- <i class="el-icon-s-tools"></i> -->
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
