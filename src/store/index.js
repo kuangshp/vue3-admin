@@ -3,6 +3,7 @@ import user from './modules/user';
 import app from './modules/app';
 import theme from './modules/theme';
 import getters from './getters';
+import menu from './modules/menu';
 
 export default createStore({
   getters,
@@ -10,5 +11,6 @@ export default createStore({
     user,
     app,
     theme,
+    menu,
   },
 });
