@@ -20,8 +20,6 @@ import Navbar from './components/Navbar.vue';
 import Sidebar from './components/Sidebar';
 import AppMain from './components/AppMain.vue';
 import TagsView from '@/components/TagsView/index.vue';
-import variables from '@/assets/styles/variables.scss';
-console.log(variables, 'js样式');
 </script>
 
 <style lang="scss" scoped>
