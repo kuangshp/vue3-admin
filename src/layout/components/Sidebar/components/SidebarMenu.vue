@@ -32,7 +32,6 @@ const activeMenu = computed(() => {
   const { path } = route;
   return path;
 });
-console.log(JSON.stringify(routes.value));
 </script>
 
 <style lang="scss" scoped></style>
