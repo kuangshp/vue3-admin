@@ -73,7 +73,6 @@ const onChangePwdType = () => {
 };
 // 登录操作
 const handleLogin = () => {
-  console.log('登录');
   // 1.进行表单验证
   loginFromRef.value.validate((valid) => {
     if (!valid) return;
