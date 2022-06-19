@@ -4,6 +4,7 @@ export default {
   state: () => ({
     // 路由表：初始拥有静态路由权限
     routes: publicRoutes,
+    isLoadMenu: false,
   }),
   mutations: {
     /**
@@ -12,6 +13,7 @@ export default {
     setRoutes(state, newRoutes) {
       // 永远在静态路由的基础上增加新路由
       state.routes = [...publicRoutes, ...newRoutes];
+      state.isLoadMenu = true;
     },
   },
   actions: {

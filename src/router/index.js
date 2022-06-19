@@ -70,15 +70,18 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       next('/');
     } else {
-      // 处理用户权限，筛选出需要添加的路由
-      // 模拟请求后菜单数据
-      const menusList = ['account', 'role', 'file'];
-      const filterRoutes = await store.dispatch('menu/filterRoutes', menusList);
-      console.log(filterRoutes, '路由');
-      // 利用 addRoute 循环添加
-      filterRoutes.forEach((item) => {
-        router.addRoute(item);
-      });
+      if (!store.getters.isLoadMenu) {
+        // 处理用户权限，筛选出需要添加的路由
+        // 模拟请求后菜单数据
+        const menusList = ['account', 'role', 'file'];
+        const filterRoutes = await store.dispatch('menu/filterRoutes', menusList);
+        console.log(filterRoutes, '路由');
+        // 利用 addRoute 循环添加
+        filterRoutes.forEach((item) => {
+          router.addRoute(item);
+        });
+        next({ ...to, replace: true });
+      }
       next();
     }
   } else {

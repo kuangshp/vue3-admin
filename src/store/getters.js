@@ -14,4 +14,5 @@ export default {
   language: (state) => state.app.language,
   mainColor: (state) => state.theme.mainColor,
   tagsViewList: (state) => state.app.tagsViewList,
+  isLoadMenu: (state) => state.menu.isLoadMenu,
 };
