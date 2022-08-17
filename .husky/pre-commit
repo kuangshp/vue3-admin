@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # npx eslint --ext .js,.vue src
+npx pretty-quick --staged
 npx lint-staged
