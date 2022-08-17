@@ -1,7 +1,7 @@
-@import "./variables.scss";
-@import "./mixin.scss";
-@import "./sidebar.scss";
-@import "./transition.scss";
+@import './variables.scss';
+@import './mixin.scss';
+@import './sidebar.scss';
+@import './transition.scss';
 
 html,
 body {
@@ -11,7 +11,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial,
+    sans-serif;
 }
 
 #app {
@@ -66,7 +67,7 @@ div:focus {
   /*滚动条里面小方块*/
   border-radius: 10px;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background-color: #409eff;
+  background-color: rgb(48, 65, 86);
 }
 
 ::-webkit-scrollbar-track {
