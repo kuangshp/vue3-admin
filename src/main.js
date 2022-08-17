@@ -8,7 +8,7 @@ import './utils/request';
 // 导入全局样式
 import './assets/styles/index.scss';
 // 导入 svgIcon
-import installIcons from '@/icons';
+import installIcons from '@/icons'
 
 const app = createApp(App);
 
