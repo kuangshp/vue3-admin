@@ -32,12 +32,12 @@ class Request {
     // 拦截请求的
     axios.interceptors.request.use(
       (config) => this.request(config),
-      (rejection) => this.requestError(rejection),
+      (rejection) => this.requestError(rejection)
     );
     // 拦截响应
     axios.interceptors.response.use(
       (res) => this.response(res),
-      (error) => this.responseError(error),
+      (error) => this.responseError(error)
     );
   }
   /**
@@ -182,7 +182,10 @@ class Request {
     if (config.method) {
       // IE上的同一个url请求会走cache
       if (config.method.toLowerCase() === 'post' && config.url) {
-        config.url = config.url.indexOf('?') > -1 ? config.url + '&t=' + this.generateNumber : config.url + '?t=' + this.generateNumber;
+        config.url =
+          config.url.indexOf('?') > -1
+            ? config.url + '&t=' + this.generateNumber
+            : config.url + '?t=' + this.generateNumber;
       } else if (config.method.toLowerCase() === 'get') {
         config.params = {
           t: this.generateNumber,

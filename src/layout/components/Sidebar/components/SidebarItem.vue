@@ -14,14 +14,14 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import MenuItem from './MenuItem.vue';
-defineProps({
-  route: {
-    type: Object,
-    required: true,
-  },
-});
+  import { defineProps } from 'vue';
+  import MenuItem from './MenuItem.vue';
+  defineProps({
+    route: {
+      type: Object,
+      required: true,
+    },
+  });
 </script>
 
 <style lang="scss" scoped></style>

@@ -23,7 +23,7 @@ export function watchSwitchLang(...cbs) {
     () => store.getters.language,
     () => {
       cbs.forEach((cb) => cb(store.getters.language));
-    },
+    }
   );
 }
 

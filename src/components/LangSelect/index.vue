@@ -11,23 +11,23 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { ElMessage } from 'element-plus';
+  import { useI18n } from 'vue-i18n';
+  import { computed } from 'vue';
+  import { useStore } from 'vuex';
+  import { ElMessage } from 'element-plus';
 
-const store = useStore();
-const language = computed(() => store.getters.language);
+  const store = useStore();
+  const language = computed(() => store.getters.language);
 
-// 切换语言的方法
-const i18n = useI18n();
-const handleSetLanguage = (lang) => {
-  // 切换 i18n 的 locale
-  i18n.locale.value = lang;
-  // 修改 vuex 中保存的 language
-  store.commit('app/setLanguage', lang);
-  ElMessage.success('切换成功');
-};
+  // 切换语言的方法
+  const i18n = useI18n();
+  const handleSetLanguage = (lang) => {
+    // 切换 i18n 的 locale
+    i18n.locale.value = lang;
+    // 修改 vuex 中保存的 language
+    store.commit('app/setLanguage', lang);
+    ElMessage.success('切换成功');
+  };
 </script>
 
 <style lang="scss" scoped></style>

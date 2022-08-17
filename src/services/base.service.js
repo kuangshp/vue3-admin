@@ -23,7 +23,7 @@ export default class BaseService {
       {
         cachePolicy: 'max-age',
         maxAge: isCache ? MAX_AGE : 0,
-      },
+      }
     );
   }
 
@@ -39,10 +39,14 @@ export default class BaseService {
   // 提供patch请求
   static async patch(url, postData = {}, clearEmptyData = true, isCache = false) {
     postData = clearEmptyData ? objCleanEmpty(objValueTrim(postData)) : objValueTrim(postData);
-    return cache.cacheable(() => axios.patch(url, objValueTrim(postData ?? {})), BaseService.cacheKey('PATCH', url), {
-      cachePolicy: 'max-age',
-      maxAge: isCache ? MAX_AGE : 0,
-    });
+    return cache.cacheable(
+      () => axios.patch(url, objValueTrim(postData ?? {})),
+      BaseService.cacheKey('PATCH', url),
+      {
+        cachePolicy: 'max-age',
+        maxAge: isCache ? MAX_AGE : 0,
+      }
+    );
   }
 
   // 提供put方法

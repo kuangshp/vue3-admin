@@ -53,7 +53,11 @@ export const objValueTrim = (obj) => {
       newObj[key] = obj[key];
     } else {
       //  Number.isFinite(obj[key])如果是数字的话就转换字符串去重空格
-      newObj[key] = Number.isFinite(obj[key]) ? +obj[key].toString().trim() : obj[key] ? obj[key].toString().trim() : '';
+      newObj[key] = Number.isFinite(obj[key])
+        ? +obj[key].toString().trim()
+        : obj[key]
+        ? obj[key].toString().trim()
+        : '';
     }
   }
   return newObj;

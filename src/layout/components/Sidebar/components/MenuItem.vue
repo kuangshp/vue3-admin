@@ -5,18 +5,18 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { generateTitle } from '@/utils';
-defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  icon: {
-    type: String,
-    required: true,
-  },
-});
+  import { defineProps } from 'vue';
+  import { generateTitle } from '@/utils';
+  defineProps({
+    title: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
+    },
+  });
 </script>
 
 <style lang="scss" scoped></style>

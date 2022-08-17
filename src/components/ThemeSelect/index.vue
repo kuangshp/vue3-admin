@@ -14,12 +14,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import SelectColor from './components/SelectColor';
-const selectColorVisible = ref(false);
-const handleSetTheme = () => {
-  selectColorVisible.value = true;
-};
+  import { ref } from 'vue';
+  import SelectColor from './components/SelectColor';
+  const selectColorVisible = ref(false);
+  const handleSetTheme = () => {
+    selectColorVisible.value = true;
+  };
 </script>
 
 <style lang="scss" scoped></style>
