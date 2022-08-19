@@ -115,6 +115,8 @@
 
   // 点击分页操作
   const paginationRef = ref(null);
+  const isFirstPage = ref(true); // 默认不能点击
+  const isLastPage = ref(true);
   const currentPage = reactive({
     pageSize: props.config.pagination.pageSize ?? 10,
     pageNumber: props.config.pagination.currentPage ?? 1,
@@ -132,5 +134,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import url('./index.scss');
+  @import './index.scss';
 </style>
