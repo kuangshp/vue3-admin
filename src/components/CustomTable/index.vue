@@ -8,10 +8,10 @@
       :max-height="config.maxHeight"
       :stripe="config.stripe ?? true"
       :border="config.border ?? true"
-      size="small"
+      :size="config.size || 'small'"
       :fit="config.fit ?? true"
       :show-header="config.showHeader"
-      :highlight-current-row="true"
+      :highlight-current-row="config.highlight === undefined ? true : config.highlight"
       :current-row-key="config.rowKey"
       :row-key="config.rowKey"
       :empty-text="config.emptyText ?? '暂无数据'"
@@ -78,18 +78,20 @@
     <!-- 分页处理 -->
     {{ config.pagination }}=={{ Object.keys(config.pagination).length }}
     <el-pagination
-      ref="pagination"
+      ref="paginationRef"
       class="pagination"
       :small="config.pagination.small"
       :total="config.pagination.total"
-      :page-size="config.pagination.pageSize || 10"
+      :page-size="config.pagination.pageSize ?? 10"
       :page-count="config.pagination.pageCount"
       :pager-count="config.pagination.pagerCount"
       :current-page="config.pagination.currentPage"
-      :layout="config.pagination.layout || 'total,prev, pager, next, jumper'"
+      :layout="config.pagination.layout ?? 'total,prev, pager, next, jumper'"
       :page-sizes="config.pagination.pageSizes || [5, 10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
       :hide-on-single-page="config.pagination.hideOnSinglePage"
+      @size-change="onPageSizeChange"
+      @current-change="onPageIndexChange"
     >
     </el-pagination>
   </div>
@@ -97,7 +99,7 @@
 
 <script setup>
   import { defineProps, ref } from 'vue';
-  defineProps({
+  const props = defineProps({
     config: {
       type: Object,
       required: true,
@@ -108,6 +110,20 @@
   const radioSelected = ref(null);
   const radioClick = (rowKey, rowData) => {
     console.log(rowKey, rowData);
+  };
+
+  // 点击分页操作
+  const paginationRef = ref(null);
+  const onPageIndexChange = (index) => {
+    props.config.pagination.onChange &&
+      props.config.pagination.onChange(index, paginationRef.value.pageSize);
+  };
+  const onPageSizeChange = (size) => {
+    props.config.pagination.onChange &&
+      props.config.pagination.onChange(
+        Math.min(paginationRef.value.currentPage, Math.ceil(paginationRef.value.total / size)),
+        size
+      );
   };
 </script>
 

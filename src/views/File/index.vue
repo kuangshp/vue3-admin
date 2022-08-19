@@ -41,6 +41,12 @@
     },
   ];
 
+  const onChangePageHandler = (pageNumber, pageSize) => {
+    console.log(pageNumber, pageSize);
+  };
+  const indexHandler = (index) => {
+    return index * 2;
+  };
   const tableConfig = reactive({
     selectable: true, // 是否选择能力
     multiple: true, // 是否单选
@@ -58,6 +64,7 @@
       {
         prop: 'date',
         label: '日期',
+        align: 'center',
       },
       {
         prop: 'age',
@@ -72,12 +79,10 @@
     tableData: tableData, // 表格数据
     pagination: {
       total: 200,
+      pageSize: 10,
+      onChange: onChangePageHandler,
     },
   });
-
-  const indexHandler = (index) => {
-    return index * 2;
-  };
 </script>
 
 <style lang="scss" scoped></style>
