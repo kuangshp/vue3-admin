@@ -98,15 +98,14 @@
 </template>
 
 <script setup>
-  import { defineProps, ref, toRef } from 'vue';
-  const props = defineProps({
+  import { defineProps, ref } from 'vue';
+  defineProps({
     config: {
       type: Object,
       required: true,
       default: () => {},
     },
   });
-  const config = toRef(props.config);
   // 单选功能
   const radioSelected = ref(null);
   const radioClick = (rowKey, rowData) => {
