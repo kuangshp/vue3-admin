@@ -59,7 +59,7 @@
         :fixed="field.field"
         :align="field.align"
         :formatter="field.formatter"
-        :header-align="field.align || left"
+        :header-align="field.align || 'left'"
         :render-header="field.renderHeader"
         :show-overflow-tooltip="field.tooltip === undefined ? true : field.tooltip"
       >
@@ -86,13 +86,11 @@
       :page-count="config.pagination.pageCount"
       :pager-count="config.pagination.pagerCount"
       :current-page="config.pagination.currentPage"
-      :layout="config.pagination.layout || 'total,prev, pager, next, slot,jumper'"
+      :layout="config.pagination.layout || 'total,prev, pager, next, jumper'"
       :page-sizes="config.pagination.pageSizes || [5, 10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
       :hide-on-single-page="config.pagination.hideOnSinglePage"
     >
-      <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
-      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button>
     </el-pagination>
   </div>
 </template>
@@ -151,36 +149,6 @@
           color: #fff;
           background-color: #e5e5e5;
         }
-      }
-
-      ::v-deep slot > .pagination-btn {
-        display: inline-block;
-        margin: 0 10px;
-        width: 34px;
-        height: 28px;
-        border: 1px solid #dcdfe6;
-        border-radius: 6px !important;
-        background-size: auto 10px;
-        background-repeat: no-repeat;
-        background-position: center;
-        cursor: pointer;
-
-        &:disabled {
-          cursor: not-allowed;
-        }
-
-        &:first-child {
-          background-image: url(~@/assets/images/goHomePage.png);
-        }
-
-        &:last-child {
-          background-image: url(~@/assets/images/goLastPage.png);
-        }
-      }
-
-      ::v-deep slot:nth-child(2) > .pagination-btn:last-child,
-      ::v-deep slot:nth-child(6) > .pagination-btn:first-child {
-        display: none;
       }
 
       ::v-deep .el-input__inner {
