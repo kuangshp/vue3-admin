@@ -76,7 +76,6 @@
       </el-table-column>
     </el-table>
     <!-- 分页处理 -->
-    {{ config.pagination }}=={{ Object.keys(config.pagination).length }}
     <el-pagination
       ref="paginationRef"
       class="pagination"
@@ -86,8 +85,8 @@
       :page-count="config.pagination.pageCount"
       :pager-count="config.pagination.pagerCount"
       :current-page="config.pagination.currentPage"
-      :layout="config.pagination.layout ?? 'total,prev, pager, next, jumper'"
-      :page-sizes="config.pagination.pageSizes || [5, 10, 20, 30, 40, 50]"
+      :layout="config.pagination.layout ?? 'total, sizes, prev, pager, next, jumper'"
+      :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
       :hide-on-single-page="config.pagination.hideOnSinglePage"
       @size-change="onPageSizeChange"
@@ -98,7 +97,7 @@
 </template>
 
 <script setup>
-  import { defineProps, ref } from 'vue';
+  import { defineProps, ref, reactive } from 'vue';
   const props = defineProps({
     config: {
       type: Object,
@@ -114,16 +113,19 @@
 
   // 点击分页操作
   const paginationRef = ref(null);
+  const currentPage = reactive({
+    pageSize: props.config.pagination.pageSize ?? 10,
+    pageNumber: props.config.pagination.currentPage ?? 1,
+  });
   const onPageIndexChange = (index) => {
+    currentPage.pageNumber = index;
     props.config.pagination.onChange &&
-      props.config.pagination.onChange(index, paginationRef.value.pageSize);
+      props.config.pagination.onChange(index, currentPage.pageSize);
   };
   const onPageSizeChange = (size) => {
+    currentPage.pageSize = size;
     props.config.pagination.onChange &&
-      props.config.pagination.onChange(
-        Math.min(paginationRef.value.currentPage, Math.ceil(paginationRef.value.total / size)),
-        size
-      );
+      props.config.pagination.onChange(currentPage.pageNumber, size);
   };
 </script>
 
