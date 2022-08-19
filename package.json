@@ -44,6 +44,8 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "stylelint": "^14.10.0",
+    "stylelint-config-standard": "^27.0.0",
     "svg-sprite-loader": "^6.0.11",
     "vue-cli-plugin-element-plus": "~0.0.13"
   },
@@ -60,6 +62,10 @@
       "prettier --config .prettierrc --write",
       "vue-cli-service lint",
       "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint src/**/*.css --fix",
+      "stylelint src/**/*.scss --fix"
     ]
   }
 }
