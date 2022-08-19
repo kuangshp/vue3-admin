@@ -6,6 +6,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  lintOnSave: false, // 关闭运行的时候就代码检查
   outputDir: path.join(__dirname, 'dist', pck.name),
   publicPath: '/' + pck.name,
   devServer: {
