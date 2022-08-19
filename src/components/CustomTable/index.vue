@@ -85,13 +85,15 @@
       :page-count="config.pagination.pageCount"
       :pager-count="config.pagination.pagerCount"
       :current-page="config.pagination.currentPage"
-      :layout="config.pagination.layout ?? 'total, sizes, prev, pager, next, jumper'"
+      :layout="config.pagination.layout ?? 'total, sizes, slot, prev, pager, next,slot, jumper'"
       :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
       :hide-on-single-page="config.pagination.hideOnSinglePage"
       @size-change="onPageSizeChange"
       @current-change="onPageIndexChange"
     >
+      <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
+      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button>
     </el-pagination>
   </div>
 </template>
@@ -168,7 +170,33 @@
           background-color: #e5e5e5;
         }
       }
+      .pagination-btn {
+        display: inline-block;
+        margin: 0 10px;
+        width: 34px;
+        height: 28px;
+        border: 1px solid #dcdfe6;
+        border-radius: 6px !important;
+        background-size: auto 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
 
+        &:disabled {
+          cursor: not-allowed;
+        }
+        &:nth-of-type(2),
+        &:nth-of-type(5) {
+          display: none !important;
+        }
+        &:nth-of-type(1) {
+          background-image: url(~@/assets/images/goHomePage.png);
+        }
+
+        &:nth-of-type(6) {
+          background-image: url(~@/assets/images/goLastPage.png);
+        }
+      }
       ::v-deep .el-input__inner {
         border-radius: 6px !important;
       }
