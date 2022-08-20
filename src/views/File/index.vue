@@ -49,9 +49,10 @@
   };
   const tableConfig = reactive({
     selectable: true, // 是否选择能力
-    multiple: true, // 是否单选
+    multiple: false, // 是否单选
     rowKey: 'id', //表格数据主键
     indexable: true, // 是否有序列号
+    selection: [],
     indexMethod: indexHandler, // 序号显示的方式
     indexLabel: 'No', // 序列号的表头名字
     summary: true, // 表格底部汇总
@@ -81,6 +82,10 @@
       total: 200,
       pageSize: 10,
       onChange: onChangePageHandler,
+      selectionChange: (selectList) => {
+        console.log(selectList[0], '点击的单选/多选');
+        tableConfig.selection = selectList;
+      },
     },
   });
 </script>

@@ -35,7 +35,7 @@
             <el-radio
               v-model="radioSelected"
               :label="scope.row[config.rowKey || 'id']"
-              @click="radioClick(scope.row[config.rowKey || 'id'], scope.row)"
+              @click.prevent="radioClick(scope.row[config.rowKey || 'id'], scope.row)"
               >{{ '' }}</el-radio
             >
           </template>
@@ -92,8 +92,8 @@
       @size-change="onPageSizeChange"
       @current-change="onPageIndexChange"
     >
-      <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
-      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button>
+      <!-- <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
+      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button> -->
     </el-pagination>
   </div>
 </template>
@@ -109,14 +109,24 @@
   });
   // 单选功能
   const radioSelected = ref(null);
+  const selectionList = ref([]);
   const radioClick = (rowKey, rowData) => {
-    console.log(rowKey, rowData);
+    console.log(props.config);
+    if (radioSelected.value == rowKey) {
+      radioSelected.value = null;
+      selectionList.value = [];
+    } else {
+      radioSelected.value = rowKey;
+      selectionList.value = [rowData];
+    }
+    props.config.pagination.selectionChange &&
+      props.config.pagination.selectionChange(selectionList.value);
   };
 
   // 点击分页操作
   const paginationRef = ref(null);
-  const isFirstPage = ref(true); // 默认不能点击
-  const isLastPage = ref(true);
+  // const isFirstPage = ref(true); // 默认不能点击
+  // const isLastPage = ref(true);
   const currentPage = reactive({
     pageSize: props.config.pagination.pageSize ?? 10,
     pageNumber: props.config.pagination.currentPage ?? 1,
