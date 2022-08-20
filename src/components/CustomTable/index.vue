@@ -1,5 +1,11 @@
 <template>
-  <div class="custom-table-wrapper">
+  <div
+    class="custom-table-wrapper"
+    v-loading="config.loading"
+    element-loading-text="数据加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(255, 255, 255, 0.7)"
+  >
     <el-table
       ref="customTable"
       :header-cell-style="{ backgroundColor: '#F6F6F6', 'text-align': 'left', color: '#666666' }"

@@ -49,6 +49,7 @@
     return index * 2;
   };
   const tableConfig = reactive({
+    loading: true,
     selectable: true, // 是否选择能力
     multiple: true, // 是否单选
     rowKey: 'id', //表格数据主键
@@ -90,6 +91,9 @@
       tableConfig.selection = selectList;
     },
   });
+  setTimeout(() => {
+    tableConfig.loading = false;
+  }, 1000);
 </script>
 
 <style lang="scss" scoped></style>
