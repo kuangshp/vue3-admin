@@ -16,6 +16,7 @@
       :row-key="config.rowKey"
       :empty-text="config.emptyText ?? '暂无数据'"
       :show-summary="config.summary"
+      @selection-change="selectionChange"
     >
       <!-- 判断是否开启选择功能 -->
       <template v-if="config.selectable">
@@ -119,6 +120,14 @@
       radioSelected.value = rowKey;
       selectionList.value = [rowData];
     }
+    props.config.pagination.selectionChange &&
+      props.config.pagination.selectionChange(selectionList.value);
+  };
+
+  // 多选功能
+  const selectionChange = (selection) => {
+    console.log(selection, '111');
+    selectionList.value = selection;
     props.config.pagination.selectionChange &&
       props.config.pagination.selectionChange(selectionList.value);
   };

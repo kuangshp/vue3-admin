@@ -83,7 +83,7 @@
       pageSize: 10,
       onChange: onChangePageHandler,
       selectionChange: (selectList) => {
-        console.log(selectList[0], '点击的单选/多选');
+        console.log(selectList, '点击的单选/多选');
         tableConfig.selection = selectList;
       },
     },
