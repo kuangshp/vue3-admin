@@ -162,6 +162,18 @@
     props.config.pagination,
     (newVal) => {
       console.log(newVal, '监听到');
+      if (newVal) {
+        if (newVal.pageNumber === 1) {
+          isFirstPage.value = true;
+        } else {
+          isFirstPage.value = false;
+        }
+        if (newVal.pageNumber * newVal.pageSize >= newVal.total) {
+          isLastPage.value = true;
+        } else {
+          isLastPage.value = false;
+        }
+      }
     },
     {
       immediate: true,
