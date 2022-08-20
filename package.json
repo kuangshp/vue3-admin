@@ -62,10 +62,6 @@
       "prettier --config .prettierrc --write",
       "vue-cli-service lint",
       "git add"
-    ],
-    "*.{css,scss}": [
-      "stylelint src/**/*.css --fix",
-      "stylelint src/**/*.scss --fix"
     ]
   }
 }

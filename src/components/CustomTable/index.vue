@@ -95,7 +95,7 @@
       :page-size="config.pagination.pageSize ?? 10"
       :page-count="config.pagination.pageCount"
       :pager-count="config.pagination.pagerCount"
-      :current-page="config.pagination.currentPage"
+      :current-page="config.pagination.pageNumber"
       :layout="config.pagination.layout ?? 'total, sizes, slot, prev, pager, next,slot, jumper'"
       :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
@@ -103,14 +103,14 @@
       @size-change="onPageSizeChange"
       @current-change="onPageIndexChange"
     >
-      <!-- <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
-      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button> -->
+      <button class="pagination-btn" :disabled="isFirstPage" @click="jumper()"></button>
+      <button class="pagination-btn" :disabled="isLastPage" @click="jumper(true)"></button>
     </el-pagination>
   </div>
 </template>
 
 <script setup>
-  import { defineProps, ref, reactive } from 'vue';
+  import { defineProps, ref, reactive, watch } from 'vue';
   const props = defineProps({
     config: {
       type: Object,
@@ -142,8 +142,8 @@
 
   // 点击分页操作
   const paginationRef = ref(null);
-  // const isFirstPage = ref(true); // 默认不能点击
-  // const isLastPage = ref(true);
+  const isFirstPage = ref(true); // 默认不能点击
+  const isLastPage = ref(true);
   const currentPage = reactive({
     pageSize: props.config.pagination.pageSize ?? 10,
     pageNumber: props.config.pagination.currentPage ?? 1,
@@ -158,6 +158,16 @@
     props.config.pagination.onChange &&
       props.config.pagination.onChange(currentPage.pageNumber, size);
   };
+  watch(
+    props.config.pagination,
+    (newVal) => {
+      console.log(newVal, '监听到');
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  );
 </script>
 
 <style lang="scss" scoped>

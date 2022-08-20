@@ -44,6 +44,8 @@
 
   const onChangePageHandler = (pageNumber, pageSize) => {
     console.log(pageNumber, pageSize);
+    tableConfig.pagination.pageNumber = pageNumber;
+    tableConfig.pagination.pageSize = pageSize;
   };
   const indexHandler = (index) => {
     return index * 2;
@@ -84,6 +86,7 @@
     pagination: {
       total: 200,
       pageSize: 10,
+      pageNumber: 1,
       onChange: onChangePageHandler, // 分页事件
     },
     selectionChange: (selectList) => {
