@@ -22,7 +22,10 @@
       :row-key="config.rowKey"
       :empty-text="config.emptyText ?? '暂无数据'"
       :show-summary="config.summary"
+      :sum-text="config.summaryText ?? '合计'"
       @selection-change="selectionChange"
+      @sort-change="config.sortChange ?? function () {}"
+      @filter-change="config.filterChange ?? function () {}"
     >
       <!-- 判断是否开启选择功能 -->
       <template v-if="config.selectable">
@@ -69,6 +72,7 @@
         :header-align="field.align || 'left'"
         :render-header="field.renderHeader"
         :show-overflow-tooltip="field.tooltip === undefined ? true : field.tooltip"
+        :sortable="field.sortable"
       >
         <!-- 如果是使用插槽的时候 -->
         <template v-if="field.type === 'slot'" #default="scope">

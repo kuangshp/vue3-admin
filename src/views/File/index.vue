@@ -74,6 +74,7 @@
         label: '年龄',
         type: 'slot',
         slotName: 'age',
+        sortable: true,
       },
       {
         prop: 'address',
