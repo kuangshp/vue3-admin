@@ -4,6 +4,7 @@
     <CustomTable :config="tableConfig">
       <template #age="{ row }">年龄:{{ row.age }}</template>
     </CustomTable>
+    {{ tableConfig.selection }}
   </div>
 </template>
 
@@ -49,7 +50,7 @@
   };
   const tableConfig = reactive({
     selectable: true, // 是否选择能力
-    multiple: false, // 是否单选
+    multiple: true, // 是否单选
     rowKey: 'id', //表格数据主键
     indexable: true, // 是否有序列号
     selection: [],
@@ -81,11 +82,12 @@
     pagination: {
       total: 200,
       pageSize: 10,
-      onChange: onChangePageHandler,
-      selectionChange: (selectList) => {
-        console.log(selectList, '点击的单选/多选');
-        tableConfig.selection = selectList;
-      },
+      onChange: onChangePageHandler, // 分页事件
+    },
+    selectionChange: (selectList) => {
+      // 单选多选回调
+      console.log(selectList, '点击的单选/多选');
+      tableConfig.selection = selectList;
     },
   });
 </script>

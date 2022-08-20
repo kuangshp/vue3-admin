@@ -120,16 +120,14 @@
       radioSelected.value = rowKey;
       selectionList.value = [rowData];
     }
-    props.config.pagination.selectionChange &&
-      props.config.pagination.selectionChange(selectionList.value);
+    props.config.selectionChange && props.config.selectionChange(selectionList.value);
   };
 
   // 多选功能
   const selectionChange = (selection) => {
     console.log(selection, '111');
     selectionList.value = selection;
-    props.config.pagination.selectionChange &&
-      props.config.pagination.selectionChange(selectionList.value);
+    props.config.selectionChange && props.config.selectionChange(selectionList.value);
   };
 
   // 点击分页操作
