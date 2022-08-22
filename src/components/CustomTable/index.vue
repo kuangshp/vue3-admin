@@ -53,7 +53,7 @@
       </template>
       <!-- 判断是否有序列号 -->
       <el-table-column
-        v-if="config.indexable === undefined ? true : config.indexable"
+        v-if="config.indexable ?? true"
         type="index"
         width="55"
         align="center"
@@ -71,7 +71,7 @@
         :formatter="field.formatter"
         :header-align="field.align || 'left'"
         :render-header="field.renderHeader"
-        :show-overflow-tooltip="field.tooltip === undefined ? true : field.tooltip"
+        :show-overflow-tooltip="field.tooltip ?? true"
         :sortable="field.sortable"
       >
         <!-- 如果是使用插槽的时候 -->
@@ -94,8 +94,8 @@
       :total="config.pagination.total"
       :page-size="config.pagination.pageSize ?? 10"
       :page-count="config.pagination.pageCount"
-      :pager-count="config.pagination.pagerCount"
-      :current-page="config.pagination.pageNumber"
+      :pager-count="config.pagination.pageCount"
+      :current-page="config.pagination.pageNumber ?? 1"
       :layout="config.pagination.layout ?? 'total, sizes, slot, prev, pager, next,slot, jumper'"
       :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
       :disabled="config.pagination.disabled"
@@ -158,21 +158,36 @@
     props.config.pagination.onChange &&
       props.config.pagination.onChange(currentPage.pageNumber, size);
   };
+  // 跳转到首页和尾页
+  const jumper = (isLast) => {
+    console.log(isLast);
+    if (isLast) {
+      const pageNumber = Math.min(
+        props.config.pagination.total / props.config.pagination.pageSize ?? 10
+      );
+      currentPage.pageNumber = pageNumber;
+      props.config.pagination.onChange &&
+        props.config.pagination.onChange(pageNumber, currentPage.pageSize);
+    } else {
+      const pageNumber = 1;
+      currentPage.pageNumber = pageNumber;
+      props.config.pagination.onChange &&
+        props.config.pagination.onChange(pageNumber, currentPage.pageSize);
+    }
+  };
+
   watch(
     props.config.pagination,
     (newVal) => {
-      console.log(newVal, '监听到');
-      if (newVal) {
-        if (newVal.pageNumber === 1) {
-          isFirstPage.value = true;
-        } else {
-          isFirstPage.value = false;
-        }
-        if (newVal.pageNumber * newVal.pageSize >= newVal.total) {
-          isLastPage.value = true;
-        } else {
-          isLastPage.value = false;
-        }
+      if (newVal.pageNumber <= 1) {
+        isFirstPage.value = true;
+      } else {
+        isFirstPage.value = false;
+      }
+      if (newVal.pageSize * newVal.pageNumber >= props.config.pagination.total) {
+        isLastPage.value = true;
+      } else {
+        isLastPage.value = false;
       }
     },
     {
