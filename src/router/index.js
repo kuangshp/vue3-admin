@@ -6,6 +6,7 @@ import account from './modules/account';
 import access from './modules/access';
 import role from './modules/role';
 import file from './modules/file';
+
 // 私有路由
 export const privateRoutes = [account, role, access, file];
 
