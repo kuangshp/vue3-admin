@@ -139,123 +139,123 @@
 </template>
 
 <script setup>
-import { defineProps, computed, ref, watch, defineEmits, onMounted } from 'vue';
-import { cloneDeep } from 'lodash';
-const props = defineProps({
-  isQueryPanel: {
-    type: Boolean,
-    default: true,
-  },
-  isDialog: {
-    type: Boolean,
-    default: false,
-  },
-  // 是否为行内元素
-  inline: {
-    type: Boolean,
-    default: true,
-  },
-  // 表单组件大小
-  size: {
-    type: String,
-    default: 'small',
-  },
-  // label宽度
-  labelWidth: {
-    type: String,
-    default: '',
-  },
-  // label对齐方式
-  labelPosition: {
-    type: String,
-    default: 'right',
-  },
-  // 一行有几列
-  col: {
-    type: Number,
-    default: 4,
-  },
-  // 是否折叠
-  collapse: {
-    type: Boolean,
-    default: true,
-  },
-  // 是否显示折叠的按钮
-  collapseAble: {
-    type: Boolean,
-    default: true,
-  },
-  // 是否禁用
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  // 是否只读
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-  // 组件的字段定义集合
-  formFields: {
-    type: Array,
-    default() {
-      return [];
+  import { defineProps, computed, ref, watch, defineEmits, onMounted } from 'vue';
+  import { cloneDeep } from 'lodash';
+  const props = defineProps({
+    isQueryPanel: {
+      type: Boolean,
+      default: true,
     },
-    required: true,
-  },
-  // 组件绑定的
-  formData: {
-    type: Object,
-    default: () => {},
-    required: true,
-  },
-  // 是否需要按钮组
-  actionable: {
-    type: Boolean,
-    default: true,
-  },
-  // 表单样式
-  formStyle: {
-    type: Object,
-    default: () => {},
-  },
-});
-// 当前是否折叠在一起
-const isCollapse = ref(props.collapse);
+    isDialog: {
+      type: Boolean,
+      default: false,
+    },
+    // 是否为行内元素
+    inline: {
+      type: Boolean,
+      default: true,
+    },
+    // 表单组件大小
+    size: {
+      type: String,
+      default: 'small',
+    },
+    // label宽度
+    labelWidth: {
+      type: String,
+      default: '',
+    },
+    // label对齐方式
+    labelPosition: {
+      type: String,
+      default: 'right',
+    },
+    // 一行有几列
+    col: {
+      type: Number,
+      default: 4,
+    },
+    // 是否折叠
+    collapse: {
+      type: Boolean,
+      default: true,
+    },
+    // 是否显示折叠的按钮
+    collapseAble: {
+      type: Boolean,
+      default: true,
+    },
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    // 是否只读
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    // 组件的字段定义集合
+    formFields: {
+      type: Array,
+      default() {
+        return [];
+      },
+      required: true,
+    },
+    // 组件绑定的
+    formData: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
+    // 是否需要按钮组
+    actionable: {
+      type: Boolean,
+      default: true,
+    },
+    // 表单样式
+    formStyle: {
+      type: Object,
+      default: () => {},
+    },
+  });
+  // 当前是否折叠在一起
+  const isCollapse = ref(props.collapse);
 
-// 计算列和行数
-const span = computed(() => {
-  if (props.col >= 5) {
-    return 6;
-  } else {
-    return Math.floor(24 / props.col);
-  }
-});
-
-// 监听表格数据拷贝一份
-const originData = ref({});
-watch(
-  props.formData,
-  (newVal) => {
-    if (newVal) {
-      originData.value = cloneDeep(newVal);
+  // 计算列和行数
+  const span = computed(() => {
+    if (props.col >= 5) {
+      return 6;
+    } else {
+      return Math.floor(24 / props.col);
     }
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-// 表单事件
-const emit = defineEmits(['query', 'resetForm']);
-const onSubmit = () => {
-  emit('query', props.formData);
-};
-const resetForm = () => {
-  emit('resetForm', originData);
-};
+  });
+
+  // 监听表格数据拷贝一份
+  const originData = ref({});
+  watch(
+    props.formData,
+    (newVal) => {
+      if (newVal) {
+        originData.value = cloneDeep(newVal);
+      }
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  );
+  // 表单事件
+  const emit = defineEmits(['query', 'resetForm']);
+  const onSubmit = () => {
+    emit('query', props.formData);
+  };
+  const resetForm = () => {
+    emit('resetForm', originData);
+  };
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+  @import './index.scss';
 </style>

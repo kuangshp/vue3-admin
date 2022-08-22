@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import NProgress from 'nprogress';
 import store from '@/store';
 import Layout from '@/layout';
 import account from './modules/account';
@@ -65,10 +66,12 @@ const whiteList = ['/login'];
  * @return {*}
  */
 router.beforeEach(async (to, from, next) => {
-  // 存在 token ，进入主页
+  NProgress.start();
+  // 存在 token,继续判断如果是登录页面的时候直接到首页，否则判断是有已经加载了菜单
   if (store.getters.token) {
     if (to.path === '/login') {
       next('/');
+      NProgress.done();
     } else {
       if (!store.getters.isLoadMenu) {
         // 处理用户权限，筛选出需要添加的路由
@@ -80,8 +83,11 @@ router.beforeEach(async (to, from, next) => {
           router.addRoute(item);
         });
         next({ ...to, replace: true });
+        NProgress.done();
+      } else {
+        next();
+        NProgress.done();
       }
-      next();
     }
   } else {
     // 到登录页面
@@ -90,7 +96,13 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       next('/login');
+      NProgress.done();
     }
   }
 });
+
+router.afterEach(() => {
+  NProgress.done();
+});
+
 export default router;
