@@ -94,7 +94,7 @@
       :total="config.pagination.total"
       :page-size="config.pagination.pageSize ?? 10"
       :page-count="config.pagination.pageCount"
-      :pager-count="config.pagination.pageCount"
+      :pager-count="config.pagination.pageNumber ?? 1"
       :current-page="config.pagination.pageNumber ?? 1"
       :layout="config.pagination.layout ?? 'total, sizes, slot, prev, pager, next,slot, jumper'"
       :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
