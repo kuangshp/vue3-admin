@@ -183,8 +183,8 @@
       </template>
     </el-row>
     <el-row v-show="actionable && !isDialog" type="flex" justify="end">
-      <el-col :span="span" style="text-align: end">
-        <el-form-item class="action-btn">
+      <el-col :span="span" style="text-align: end; padding-bottom: 30px">
+        <div class="action-btn">
           <el-button type="primary" class="button-80" size="small" @click="onSubmit"
             >查询</el-button
           >
@@ -199,7 +199,7 @@
             <template v-if="isCollapse">展开</template>
             <template v-else>折叠</template>
           </el-button>
-        </el-form-item>
+        </div>
       </el-col>
     </el-row>
   </el-form>
