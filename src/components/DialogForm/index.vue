@@ -11,7 +11,7 @@
       <CustomForm
         ref="customFormRef"
         v-bind="$attrs"
-        col="1"
+        :col="1"
         :isQueryPanel="false"
         :collapse="false"
         isDialog
