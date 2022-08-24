@@ -73,4 +73,17 @@
       border-radius: 6px !important;
     }
   }
+
+  .user-action {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: -14px;
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+  }
 }

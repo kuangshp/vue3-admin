@@ -1,7 +1,7 @@
 <template>
   <div style="height: 1000px"
     >文件中心
-    <CustomTable :config="tableConfig">
+    <CustomTable :config="tableConfig" isShowTopAction isShowTop>
       <template #age="{ row }">年龄:{{ row.age }}</template>
     </CustomTable>
     {{ tableConfig.selection }}

@@ -6,8 +6,35 @@
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(255, 255, 255, 0.7)"
   >
+    <!-- 表格上面的 -->
+    <div
+      v-if="isShowTop"
+      style="display: flex; flex-direction: row; justify-content: space-between; margin: 20px 0px"
+    >
+      <div class="btn-group">
+        <slot name="topAction"></slot>
+      </div>
+      <div class="user-action" v-if="isShowTopAction">
+        <img src="@/assets/images/refresh.png" @click="refreshHandler" />
+        <el-dropdown trigger="click">
+          <img src="@/assets/images/menu.png" />
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-checkbox-group v-model="checkedField" @change="handleCheckedFieldChange">
+                <el-dropdown-item v-for="item of config.tableFields" :key="item.prop">
+                  <el-checkbox :key="item.prop" :label="item.prop">{{
+                    item.label || item.prop
+                  }}</el-checkbox>
+                </el-dropdown-item>
+              </el-checkbox-group>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+    </div>
+    <!-- 表格内容 -->
     <el-table
-      ref="customTable"
+      ref="customTableRef"
       :header-cell-style="{ backgroundColor: '#F6F6F6', 'text-align': 'left', color: '#666666' }"
       :data="config.tableData"
       :height="config.height"
@@ -60,31 +87,32 @@
         :index="config.indexMethod"
         :label="config.indexLabel"
       ></el-table-column>
-      <el-table-column
-        v-for="(field, index) of config.tableFields"
-        :key="index"
-        :prop="field.prop"
-        :label="field.label ? field.label : field.prop"
-        :width="field.width"
-        :fixed="field.field"
-        :align="field.align"
-        :formatter="field.formatter"
-        :header-align="field.align || 'left'"
-        :render-header="field.renderHeader"
-        :show-overflow-tooltip="field.tooltip ?? true"
-        :sortable="field.sortable"
-      >
-        <!-- 如果是使用插槽的时候 -->
-        <template v-if="field.type === 'slot'" #default="scope">
-          <slot
-            :name="field.slotName ?? field.prop"
-            :field="field"
-            :row="scope.row"
-            :column="scope.column"
-            :index="scope.$index"
-          ></slot>
-        </template>
-      </el-table-column>
+      <template v-for="(field, index) of config.tableFields" :key="index">
+        <el-table-column
+          v-if="checkedField.includes(field.prop)"
+          :prop="field.prop"
+          :label="field.label ? field.label : field.prop"
+          :width="field.width"
+          :fixed="field.field"
+          :align="field.align"
+          :formatter="field.formatter"
+          :header-align="field.align || 'left'"
+          :render-header="field.renderHeader"
+          :show-overflow-tooltip="field.tooltip ?? true"
+          :sortable="field.sortable"
+        >
+          <!-- 如果是使用插槽的时候 -->
+          <template v-if="field.type === 'slot'" #default="scope">
+            <slot
+              :name="field.slotName ?? field.prop"
+              :field="field"
+              :row="scope.row"
+              :column="scope.column"
+              :index="scope.$index"
+            ></slot>
+          </template>
+        </el-table-column>
+      </template>
     </el-table>
     <!-- 分页处理 -->
     <el-pagination
@@ -94,7 +122,7 @@
       :total="config.pagination.total"
       :page-size="config.pagination.pageSize ?? 10"
       :page-count="config.pagination.pageCount"
-      :pager-count="config.pagination.pageNumber ?? 1"
+      :pager-count="config.pagination.pageCount"
       :current-page="config.pagination.pageNumber ?? 1"
       :layout="config.pagination.layout ?? 'total, sizes, slot, prev, pager, next,slot, jumper'"
       :page-sizes="config.pagination.pageSizes || [10, 20, 30, 40, 50]"
@@ -110,12 +138,20 @@
 </template>
 
 <script setup>
-  import { defineProps, ref, reactive, watch } from 'vue';
+  import { defineProps, ref, reactive, watch, defineEmits } from 'vue';
   const props = defineProps({
     config: {
       type: Object,
       required: true,
       default: () => {},
+    },
+    isShowTop: {
+      type: Boolean,
+      default: false,
+    },
+    isShowTopAction: {
+      type: Boolean,
+      default: false,
     },
   });
   // 单选功能
@@ -189,6 +225,61 @@
       } else {
         isLastPage.value = false;
       }
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  );
+
+  // 监听默认值反填上去
+  watch(
+    props.config.defaultValue,
+    (newVal) => {
+      if (Array.isArray(newVal) && newVal.length) {
+        if (props.config.multiple) {
+          // 多选的时候
+          setTimeout(() => {
+            multipleDefaultValue(newVal);
+          }, 0);
+        } else {
+          // 单选的时候
+          radioSelected.value = newVal[0];
+        }
+      }
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  );
+  const customTableRef = ref(null);
+  const multipleDefaultValue = (newVal) => {
+    // 1.先清空已经选择的数据
+    customTableRef.value.clearSelection();
+    // 2.循环表格数据,如果当前项在defaultValue数组中就选中
+    for (const item of props.config.tableData) {
+      if (newVal.includes(item[props.config.rowKey || 'id'])) {
+        customTableRef.value.toggleRowSelection(item, true);
+      }
+    }
+  };
+
+  // 刷新事件
+  const emit = defineEmits(['refresh']);
+  const refreshHandler = () => {
+    emit('refresh');
+  };
+
+  // 点击选择显示的表格列
+  const checkedField = ref([]);
+  const handleCheckedFieldChange = (field) => {
+    checkedField.value = field;
+  };
+  watch(
+    props.config.tableFields,
+    (newVal) => {
+      checkedField.value = newVal.map((item) => item.prop);
     },
     {
       immediate: true,
