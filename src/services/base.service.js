@@ -31,7 +31,7 @@ export default class BaseService {
   }
 
   // 提供delete请求
-  static async delete(url) {
-    return axios.delete(`${url}`);
+  static async delete(url, postData = []) {
+    return axios.delete(`${url}`, { body: postData });
   }
 }
