@@ -13,5 +13,3 @@ export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 1000;
 export const MAIN_COLOR = 'mainColor';
 // 默认色值
 export const DEFAULT_COLOR = '#409eff';
-// axios请求缓存
-export const MAX_AGE = 5000;
