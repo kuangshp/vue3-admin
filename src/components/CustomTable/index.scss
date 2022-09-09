@@ -3,7 +3,26 @@
   flex-direction: column;
   background-color: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.03);
-
+  .tools {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0px;
+    position: relative;
+    .user-action {
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      display: flex;
+      flex-direction: row;
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin: 0 5px;
+      }
+    }
+  }
   .el-table {
     width: 100%;
     border-radius: 8px 8px 0px 0px;
@@ -71,19 +90,6 @@
 
     ::v-deep .el-input__inner {
       border-radius: 6px !important;
-    }
-  }
-
-  .user-action {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    margin-bottom: -14px;
-    img {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      margin: 0 5px;
     }
   }
 }

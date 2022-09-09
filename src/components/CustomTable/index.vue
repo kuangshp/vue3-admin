@@ -7,14 +7,11 @@
     element-loading-background="rgba(255, 255, 255, 0.7)"
   >
     <!-- 表格上面的 -->
-    <div
-      v-if="isShowTop"
-      style="display: flex; flex-direction: row; justify-content: space-between; margin: 20px 0px"
-    >
-      <div class="btn-group">
-        <slot name="topAction"></slot>
+    <div class="tools" v-if="isShowTools || isShowAction">
+      <div class="btn-group" v-if="isShowTools">
+        <slot name="tools"></slot>
       </div>
-      <div class="user-action" v-if="isShowTopAction">
+      <div class="user-action" v-if="isShowAction">
         <img src="@/assets/images/refresh.png" @click="refreshHandler" />
         <el-dropdown trigger="click">
           <img src="@/assets/images/setting.png" />
@@ -145,11 +142,11 @@
       required: true,
       default: () => {},
     },
-    isShowTop: {
+    isShowTools: {
       type: Boolean,
       default: false,
     },
-    isShowTopAction: {
+    isShowAction: {
       type: Boolean,
       default: false,
     },
