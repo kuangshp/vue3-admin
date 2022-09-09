@@ -13,6 +13,7 @@
     :style="formStyle"
     :rules="rules"
   >
+    {{ span }}===
     <el-row type="flex" :gutter="20">
       <template v-for="field in isCollapse ? formFields.slice(0, col - 1) : formFields">
         <el-col

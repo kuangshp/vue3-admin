@@ -17,7 +17,7 @@
       <div class="user-action" v-if="isShowTopAction">
         <img src="@/assets/images/refresh.png" @click="refreshHandler" />
         <el-dropdown trigger="click">
-          <img src="@/assets/images/menu.png" />
+          <img src="@/assets/images/setting.png" />
           <template #dropdown>
             <el-dropdown-menu>
               <el-checkbox-group v-model="checkedField" @change="handleCheckedFieldChange">
