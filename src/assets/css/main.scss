@@ -1,0 +1,10 @@
+// 定义全局样式
+*{
+  margin: 0;
+  padding: 0;
+}
+
+[class*=" el-icon-lx"],
+[class^="el-icon-lx"] {
+  font-family: lx-iconfont !important;
+}
