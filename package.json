@@ -1,0 +1,55 @@
+{
+  "name": "vue3-admin",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "prepare": "husky install",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.config.js"
+  },
+  "dependencies": {
+    "element-plus": "^2.3.4",
+    "husky": "^8.0.3",
+    "install": "^0.13.0",
+    "nprogress": "^0.2.0",
+    "path-browserify": "^1.0.1",
+    "pinia": "^2.0.36",
+    "pinia-plugin-persistedstate": "^3.1.0",
+    "screenfull": "^6.0.2",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vue": "^3.3.2",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@types/path-browserify": "^1.0.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "eslint": "^8.39.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.14.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "unplugin-auto-import": "^0.15.3",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.3.5"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  }
+}
