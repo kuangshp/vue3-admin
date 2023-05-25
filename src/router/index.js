@@ -33,9 +33,9 @@ export const asyncRoutes = [
         },
       },
       {
-        path: '/system/resource',
-        name: 'resource',
-        component: () => import('@/views/System/Resource/index.vue'),
+        path: '/system/resources',
+        name: 'resources',
+        component: () => import('@/views/System/Resources/index.vue'),
         meta: {
           title: '资源管理',
           icon: 'permission',
