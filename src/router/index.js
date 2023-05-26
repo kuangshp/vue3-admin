@@ -52,7 +52,7 @@ export const asyncRoutes = [
         path: 'https://www.baidu.com/',
         redirect: '/',
         meta: {
-          title: 'External Link',
+          title: '去百度',
           icon: 'link',
         },
       },

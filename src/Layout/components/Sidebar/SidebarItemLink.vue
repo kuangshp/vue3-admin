@@ -8,7 +8,6 @@
   import { isExternal } from '@/utils';
 
   // 针对路径是外链 就渲染为a标签 如果是正常路由路径 就渲染为 router-link
-
   const props = defineProps({
     to: {
       type: String,
@@ -17,6 +16,7 @@
   });
   // 判断接收的路径 是不是外链
   const isExt = computed(() => isExternal(props.to));
+  console.log(isExt, '????');
   const type = computed(() => {
     if (isExt.value) {
       return 'a';

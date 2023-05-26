@@ -3,17 +3,22 @@
     <!-- 如果有一个孩子，或者没孩子，或者有一个孩子但是被hidden了 -->
     <template v-if="!alwaysShowRootMenu && theOnlyOneChildRoute">
       <!-- 如果没有meta属性意味着不必渲染了 -->
-      <el-menu-item
-        :index="resolvePath(theOnlyOneChildRoute.path)"
+      <SidebarItemLink
+        :to="resolvePath(theOnlyOneChildRoute.path)"
         v-if="theOnlyOneChildRoute.meta"
       >
-        <el-icon v-if="icon">
-          <SvgIcon class="menu-icon" :icon="icon"></SvgIcon>
-        </el-icon>
-        <template #title>
-          <span>{{ theOnlyOneChildRoute.meta?.title }}</span>
-        </template>
-      </el-menu-item>
+        <el-menu-item
+          :index="resolvePath(theOnlyOneChildRoute.path)"
+          v-if="theOnlyOneChildRoute.meta"
+        >
+          <el-icon v-if="icon">
+            <SvgIcon class="menu-icon" :icon="icon"></SvgIcon>
+          </el-icon>
+          <template #title>
+            <span>{{ theOnlyOneChildRoute.meta?.title }}</span>
+          </template>
+        </el-menu-item>
+      </SidebarItemLink>
     </template>
     <!-- 多个子路由时 -->
     <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
@@ -38,6 +43,7 @@
 
 <script setup>
   import path from 'path-browserify';
+  import SidebarItemLink from './SidebarItemLink.vue';
   import { isExternal } from '@/utils';
   const props = defineProps({
     item: {
