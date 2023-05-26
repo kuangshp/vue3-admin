@@ -56,9 +56,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .sidebar-container-menu {
-    width: 211px;
-  }
   .logo-container {
     height: v-bind(logoHeight) + 'px';
     padding: 10px 0 22px 0;
