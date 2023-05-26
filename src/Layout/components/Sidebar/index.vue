@@ -19,7 +19,6 @@
         :collapse="!props.sidebarOpened"
         :collapse-transition="true"
         :unique-opened="true"
-        router
       >
         <SideBarItem
           v-for="route in menuRoutes"
