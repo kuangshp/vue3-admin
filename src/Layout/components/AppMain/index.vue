@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <!-- 带有切换动画，并且具备组件缓存 -->
-    <router-view v-slot="{ Component, route }" :key="route.path">
+    <router-view v-slot="{ Component }" :key="route.path">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <component :is="Component" :key="route.path" />
