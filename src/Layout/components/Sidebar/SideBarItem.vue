@@ -7,10 +7,7 @@
         :to="resolvePath(theOnlyOneChildRoute.path)"
         v-if="theOnlyOneChildRoute.meta"
       >
-        <el-menu-item
-          :index="resolvePath(theOnlyOneChildRoute.path)"
-          v-if="theOnlyOneChildRoute.meta"
-        >
+        <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <el-icon v-if="icon">
             <SvgIcon class="menu-icon" :icon="icon"></SvgIcon>
           </el-icon>
@@ -21,7 +18,7 @@
       </SidebarItemLink>
     </template>
     <!-- 多个子路由时 -->
-    <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
+    <el-sub-menu v-else :index="item.path" popper-append-to-body>
       <template #title>
         <el-icon v-if="item.meta?.icon">
           <SvgIcon class="menu-icon" :icon="item.meta.icon"> </SvgIcon>

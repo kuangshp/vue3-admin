@@ -9,6 +9,10 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // https://vitejs.dev/config/
 export default defineConfig({
+  publicDir: 'static',
+  server: {
+    port: 3000,
+  },
   plugins: [
     vue(),
     vueJsx(),
