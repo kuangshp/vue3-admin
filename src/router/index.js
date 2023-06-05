@@ -11,7 +11,6 @@ export const asyncRoutes = [
       title: '系统管理',
       icon: 'personnel',
     },
-    name: 'account',
     redirect: '/system/account',
     children: [
       {
@@ -72,7 +71,7 @@ const constantRoutes = [
         component: () => import('@/views/Home/index.vue'),
         meta: {
           title: '首页',
-          hidden: true,
+          hidden: true, // 不需要再左边显示的
         },
       },
     ],
