@@ -111,19 +111,19 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start();
   if (appStore.globalToken) {
     if (to.path === '/login') {
-      next('/');
       NProgress.done();
+      next('/');
     } else {
       // TODO 处理菜单
-      next();
       NProgress.done();
+      next();
     }
   } else {
     if (whiteList.indexOf(to.path) > -1) {
       next();
     } else {
-      next('/login');
       NProgress.done();
+      next('/login');
     }
   }
 });
