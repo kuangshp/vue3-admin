@@ -23,6 +23,16 @@ export const asyncRoutes = [
         },
       },
       {
+        path: '/system/accountDetail',
+        name: 'accountDetail',
+        component: () => import('@/views/System/Account/Detail.vue'),
+        meta: {
+          title: '账号详情',
+          icon: 'personnel-manage',
+          hidden: true,
+        },
+      },
+      {
         path: '/system/role',
         name: 'role',
         component: () => import('@/views/System/Role/index.vue'),
@@ -72,6 +82,7 @@ const constantRoutes = [
         meta: {
           title: '首页',
           hidden: true, // 不需要再左边显示的
+          affix: true,
         },
       },
     ],
