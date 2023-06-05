@@ -1,10 +1,10 @@
 <template>
   <div class="app-main">
     <!-- 带有切换动画，并且具备组件缓存 -->
-    <router-view v-slot="{ Component }" :key="route.path">
+    <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive :include="includes">
-          <component :is="Component" :key="route.path" />
+        <keep-alive :max="10" :include="includes">
+          <component :is="Component" />
         </keep-alive>
       </transition>
     </router-view>
@@ -12,11 +12,9 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router';
   import { useTagsViewStore } from '@/stores/tagsView';
 
   const tagsViewStore = useTagsViewStore();
-  const route = useRoute();
   const includes = computed(() => tagsViewStore.cachedViews);
   console.log(includes.value, '缓存');
 </script>
