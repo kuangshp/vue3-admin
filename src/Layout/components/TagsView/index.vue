@@ -1,6 +1,6 @@
 <template>
   <div class="tags-view-container">
-    <el-scrollbar>
+    <el-scrollbar style="height: revert">
       <div class="tags-view-wrapper">
         <!-- 一个个tag view就是router-link -->
         <router-link
@@ -113,14 +113,14 @@
     tagsViewStore.delCachedView(view);
     // router.push(view.path) // 无法刷新页面，因为页面没有任何变化
 
-    router.push('/redirect' + view.path); // 跳转重定向路由
+    router.push(view.path); // 跳转重定向路由
   };
   // 关闭全部的
   const handleCloseAllTag = (view) => {
     // 对于是affix的tag是不会被删除的
     tagsViewStore.delAllView();
     // 关闭所有后 就让切换到剩下affix中最后一个tag
-    toLastView(visitedViews.value, view);
+    toLastView(tagsViewStore.visitedViews, view);
   };
   // 关闭其他
   const handleCloseOtherTag = (view) => {
