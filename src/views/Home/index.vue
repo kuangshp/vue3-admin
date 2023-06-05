@@ -1,7 +1,9 @@
 <template>
-  <div>首页</div>
-  <SvgIcon icon="password" />
-  <el-button @click="sayHi">按钮</el-button>
+  <div>
+    <div>首页</div>
+    <SvgIcon icon="password" />
+    <el-button @click="sayHi">按钮</el-button>
+  </div>
 </template>
 
 <script setup>

@@ -1,7 +1,9 @@
 <template>
-  <div>账号中心</div>
-  <el-button @click="goDetail">点击到详情</el-button>
-  <input placeholder="请输入" />
+  <div>
+    <div>账号中心</div>
+    <el-button @click="goDetail">点击到详情</el-button>
+    <input placeholder="请输入" />
+  </div>
 </template>
 
 <script setup>
