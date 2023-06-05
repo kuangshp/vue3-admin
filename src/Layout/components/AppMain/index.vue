@@ -18,6 +18,7 @@
   const tagsViewStore = useTagsViewStore();
   const route = useRoute();
   const includes = computed(() => tagsViewStore.cachedViews);
+  console.log(includes.value, '缓存');
 </script>
 
 <style lang="scss" scoped>
