@@ -10,6 +10,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // https://vitejs.dev/config/
 export default defineConfig({
   publicDir: 'static',
+  base: '/admin-web',
   server: {
     port: 3000,
   },
