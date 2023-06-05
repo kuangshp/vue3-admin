@@ -16,7 +16,7 @@
   });
   // 判断接收的路径 是不是外链
   const isExt = computed(() => isExternal(props.to));
-  console.log(isExt, '????');
+
   const type = computed(() => {
     if (isExt.value) {
       return 'a';

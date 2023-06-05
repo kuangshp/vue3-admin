@@ -1,41 +1,43 @@
 <template>
   <div class="tags-view-container">
-    <div class="tags-view-wrapper">
-      <!-- 一个个tag view就是router-link -->
-      <router-link
-        class="tags-view-item"
-        :class="{
-          active: isActive(tag),
-        }"
-        v-for="(tag, index) in tagsViewStore.visitedViews"
-        :key="index"
-        :to="{ path: tag.path, query: tag.query }"
-      >
-        <el-dropdown trigger="contextmenu" @command="(command) => handleTagCommand(command, tag)">
-          <span style="line-height: 26px">{{ tag.meta.title }}</span>
-          <!-- affix固定的路由tag是无法删除 -->
-          <span
-            v-if="!isAffix(tag)"
-            class="el-icon-close"
-            @click.prevent.stop="closeSelectedTag(tag)"
-          ></span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="all">关闭所有</el-dropdown-item>
-              <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-              <el-dropdown-item command="self" v-if="!tag.meta || !tag.meta.affix"
-                >关闭</el-dropdown-item
-              >
-              <el-dropdown-item command="refresh">刷新</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+    <el-scrollbar>
+      <div class="tags-view-wrapper">
+        <!-- 一个个tag view就是router-link -->
+        <router-link
+          class="tags-view-item"
+          :class="{
+            active: isActive(tag),
+          }"
+          v-for="(tag, index) in tagsViewStore.visitedViews"
+          :key="index"
+          :to="{ path: tag.path, query: tag.query }"
+        >
+          <el-dropdown trigger="contextmenu" @command="(command) => handleTagCommand(command, tag)">
+            <span style="line-height: 26px">{{ tag.meta.title }}</span>
+            <!-- affix固定的路由tag是无法删除 -->
+            <span
+              v-if="!isAffix(tag)"
+              class="el-icon-close"
+              @click.prevent.stop="closeSelectedTag(tag)"
+            ></span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="all">关闭所有</el-dropdown-item>
+                <el-dropdown-item command="other">关闭其他</el-dropdown-item>
+                <el-dropdown-item command="self" v-if="!tag.meta || !tag.meta.affix"
+                  >关闭</el-dropdown-item
+                >
+                <el-dropdown-item command="refresh">刷新</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
 
-        <el-icon class="icon-close" v-if="!isAffix(tag)">
-          <CloseBold @click.prevent.stop="closeSelectedTag(tag)" />
-        </el-icon>
-      </router-link>
-    </div>
+          <el-icon class="icon-close" v-if="!isAffix(tag)">
+            <CloseBold @click.prevent.stop="closeSelectedTag(tag)" />
+          </el-icon>
+        </router-link>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 
