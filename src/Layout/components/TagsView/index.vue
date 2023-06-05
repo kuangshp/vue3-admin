@@ -10,10 +10,6 @@
         v-for="(tag, index) in tagsViewStore.visitedViews"
         :key="index"
         :to="{ path: tag.path, query: tag.query }"
-        :style="{
-          backgroundColor: isActive(tag) ? themeColor : '',
-          borderColor: isActive(tag) ? themeColor : '',
-        }"
       >
         <el-dropdown trigger="contextmenu" @command="(command) => handleTagCommand(command, tag)">
           <span style="line-height: 26px">{{ tag.meta.title }}</span>
@@ -89,6 +85,47 @@
         // tag都没有了 删除的也不是home 只能跳转首页
         router.push('/');
       }
+    }
+  };
+
+  // 右键菜单的时候
+  const handleTagCommand = (command, view) => {
+    switch (command) {
+      case 'all': // 右键删除标签导航所有tag 除了affix为true的
+        handleCloseAllTag(view);
+        break;
+      case 'other': // 关闭其他tag 除了affix为true的和当前右键的tag
+        handleCloseOtherTag(view);
+        break;
+      case 'self': // 关闭当前右键的tag affix为true的tag下拉菜单中无此项
+        closeSelectedTag(view);
+        break;
+      case 'refresh': // 刷新当前右键选中tag对应的路由
+        refreshSelectedTag(view);
+        break;
+    }
+  };
+  // 刷新
+  const refreshSelectedTag = async (view) => {
+    // 刷新前 将该路由名称从缓存列表中移除
+    tagsViewStore.delCachedView(view);
+    // router.push(view.path) // 无法刷新页面，因为页面没有任何变化
+
+    router.push('/redirect' + view.path); // 跳转重定向路由
+  };
+  // 关闭全部的
+  const handleCloseAllTag = (view) => {
+    // 对于是affix的tag是不会被删除的
+    tagsViewStore.delAllView();
+    // 关闭所有后 就让切换到剩下affix中最后一个tag
+    toLastView(visitedViews.value, view);
+  };
+  // 关闭其他
+  const handleCloseOtherTag = (view) => {
+    tagsViewStore.delOthersViews(view);
+    if (!isActive(view)) {
+      // 删除其他tag后 让该view路由激活
+      router.push(view.path);
     }
   };
   // 监听路由添加到tagsView中
