@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import DefineOptions from 'unplugin-vue-define-options/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // https://vitejs.dev/config/
@@ -17,6 +18,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    DefineOptions(),
     // 导入svg的
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')], // icon存放的目录

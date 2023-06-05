@@ -5,6 +5,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  defineOptions({ name: 'role' });
+</script>
 
 <style lang="scss" scoped></style>

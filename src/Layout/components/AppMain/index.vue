@@ -3,7 +3,7 @@
     <!-- 带有切换动画，并且具备组件缓存 -->
     <router-view v-slot="{ Component }" :key="route.path">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
+        <keep-alive :include="includes">
           <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
@@ -13,7 +13,11 @@
 
 <script setup>
   import { useRoute } from 'vue-router';
+  import { useTagsViewStore } from '@/stores/tagsView';
+
+  const tagsViewStore = useTagsViewStore();
   const route = useRoute();
+  const includes = computed(() => tagsViewStore.cachedViews);
 </script>
 
 <style lang="scss" scoped>

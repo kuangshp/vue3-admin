@@ -8,7 +8,7 @@
 
 <script setup>
   import { useRouter } from 'vue-router';
-
+  defineOptions({ name: 'account' });
   const router = useRouter();
   const goDetail = () => {
     router.push({ name: 'accountDetail' });

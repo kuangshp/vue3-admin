@@ -111,9 +111,7 @@
   const refreshSelectedTag = async (view) => {
     // 刷新前 将该路由名称从缓存列表中移除
     tagsViewStore.delCachedView(view);
-    // router.push(view.path) // 无法刷新页面，因为页面没有任何变化
-
-    router.push(view.path); // 跳转重定向路由
+    router.go(0);
   };
   // 关闭全部的
   const handleCloseAllTag = (view) => {
