@@ -36,16 +36,14 @@
         <span class="submenu-title">{{ item.meta?.title }}</span>
       </template>
       <!-- 递归渲染 -->
-      <el-menu-item-group>
-        <SideBarItem
-          v-for="child in item.children"
-          :key="child.path"
-          :is-nest="true"
-          :item="child"
-          :base-path="resolvePath(child.path)"
-        >
-        </SideBarItem>
-      </el-menu-item-group>
+      <SideBarItem
+        v-for="child in item.children"
+        :key="child.path"
+        :is-nest="true"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+      >
+      </SideBarItem>
     </el-sub-menu>
   </template>
 </template>
