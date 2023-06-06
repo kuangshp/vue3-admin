@@ -59,7 +59,7 @@
 <style lang="scss" scoped>
   .logo-container {
     height: v-bind(logoHeight) + 'px';
-    padding: 10px 0 22px 0;
+    padding: 10px 0 10px 0;
     display: flex;
     align-items: center;
     justify-content: center;
