@@ -7,7 +7,7 @@
         :to="resolvePath(theOnlyOneChildRoute.path)"
         v-if="theOnlyOneChildRoute.meta"
         :style="{
-          width: !props.sidebarOpened ? '210px' : '54px',
+          width: !props.sidebarOpened ? '210px' : '64px',
           display: 'block',
           background: ' #304156',
         }"
@@ -27,7 +27,7 @@
       v-else
       :index="item.path"
       teleported
-      :style="{ width: !props.sidebarOpened ? '210px' : '54px' }"
+      :style="{ width: !props.sidebarOpened ? '210px' : '64px' }"
     >
       <template #title>
         <el-icon v-if="item.meta?.icon">

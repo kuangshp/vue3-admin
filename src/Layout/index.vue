@@ -54,7 +54,7 @@
     transition: width 0.28s;
   }
   .hideSidebar .fixed-header {
-    width: calc(100% - 54px);
+    width: calc(100% - 64px);
   }
 
   .sidebar-container {
@@ -129,11 +129,11 @@
 
   .hideSidebar {
     .sidebar-container {
-      width: 54px !important;
+      width: 64px !important;
     }
 
     .main-container {
-      margin-left: 54px;
+      margin-left: 64px;
     }
 
     .submenu-title-noDropdown {
