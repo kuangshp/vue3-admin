@@ -6,6 +6,11 @@
       <SideBarItemLink
         :to="resolvePath(theOnlyOneChildRoute.path)"
         v-if="theOnlyOneChildRoute.meta"
+        :style="{
+          width: !props.sidebarOpened ? '210px' : '54px',
+          display: 'block',
+          background: ' #304156',
+        }"
       >
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <el-icon v-if="icon">
@@ -18,7 +23,12 @@
       </SideBarItemLink>
     </template>
     <!-- 多个子路由时 TODO 需要处理-->
-    <el-sub-menu v-else :index="item.path" teleported>
+    <el-sub-menu
+      v-else
+      :index="item.path"
+      teleported
+      :style="{ width: !props.sidebarOpened ? '210px' : '54px' }"
+    >
       <template #title>
         <el-icon v-if="item.meta?.icon">
           <SvgIcon :icon="item.meta.icon"> </SvgIcon>
@@ -53,6 +63,11 @@
     basePath: {
       type: String,
       required: true,
+    },
+    // 修改宽度传递当前是否展开或者折叠
+    sidebarOpened: {
+      type: Boolean,
+      default: false,
     },
   });
 

@@ -21,6 +21,7 @@
         :unique-opened="true"
       >
         <SideBarItem
+          :sidebarOpened="!props.sidebarOpened"
           v-for="route in menuRoutes"
           :key="route.path"
           :item="route"
