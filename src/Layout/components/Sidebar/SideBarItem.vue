@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-item-container" v-if="!item.meta || !item.meta.hidden">
+  <template v-if="!item.meta || !item.meta.hidden">
     <!-- 如果有一个孩子，或者没孩子，或者有一个孩子但是被hidden了 -->
     <template v-if="!alwaysShowRootMenu && theOnlyOneChildRoute">
       <!-- 如果没有meta属性意味着不必渲染了 -->
@@ -17,7 +17,7 @@
         </el-menu-item>
       </SideBarItemLink>
     </template>
-    <!-- 多个子路由时 -->
+    <!-- 多个子路由时 TODO 需要处理-->
     <el-sub-menu v-else :index="item.path" teleported>
       <template #title>
         <el-icon v-if="item.meta?.icon">
@@ -26,16 +26,18 @@
         <span class="submenu-title">{{ item.meta?.title }}</span>
       </template>
       <!-- 递归渲染 -->
-      <SideBarItem
-        v-for="child in item.children"
-        :key="child.path"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-      >
-      </SideBarItem>
+      <el-menu-item-group>
+        <SideBarItem
+          v-for="child in item.children"
+          :key="child.path"
+          :is-nest="true"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+        >
+        </SideBarItem>
+      </el-menu-item-group>
     </el-sub-menu>
-  </div>
+  </template>
 </template>
 
 <script setup>
