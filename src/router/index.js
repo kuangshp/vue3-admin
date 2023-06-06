@@ -20,6 +20,7 @@ export const asyncRoutes = [
         meta: {
           title: '账号管理',
           icon: 'personnel-manage',
+          keepAlive: true,
         },
       },
       {
@@ -39,6 +40,7 @@ export const asyncRoutes = [
         meta: {
           title: '角色管理',
           icon: 'role',
+          keepAlive: true,
         },
       },
       {

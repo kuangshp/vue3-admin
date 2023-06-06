@@ -48,8 +48,8 @@ export const useTagsViewStore = defineStore('tagView', {
     // 添加到缓存中
     addCachedView(view) {
       if (this.cachedViews.includes(view.name)) return;
-      if (!view.meta.noCache) {
-        // 需要缓存
+      // 需要缓存
+      if (view.meta.keepAlive) {
         this.cachedViews.push(view.name);
       }
     },
