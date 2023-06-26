@@ -1,36 +1,10 @@
-# vue3-admin
+## `vue-admin`介绍
 
-This template should help get you started developing with Vue 3 in Vite.
+针对企业后台管理项目搭建的基础框架模型，实现基本的布局、登录权限、多环境区分、菜单权限、动态路由，如果你没有后端接口，[你可以使用 nestjs 后端项目](https://github.com/kuangshp/nestjs-mysql-api)
 
-## Recommended IDE Setup
+## 使用方式
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- 1、下载代码
+- 2、安装依赖包
+- 3、运行项目
 
