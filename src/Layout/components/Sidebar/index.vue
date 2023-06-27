@@ -34,6 +34,7 @@
 
 <script setup>
   import SideBarItem from './SideBarItem.vue';
+
   const logoHeight = 44;
   const props = defineProps({
     sidebarOpened: {

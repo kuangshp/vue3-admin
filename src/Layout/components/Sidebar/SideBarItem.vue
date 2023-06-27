@@ -53,7 +53,8 @@
 <script setup>
   import path from 'path-browserify';
   import SideBarItemLink from './SideBarItemLink.vue';
-  import { mockMenusList } from '@/constant';
+  import { useAppStore } from '@/stores/app';
+  const appStore = useAppStore();
   import { isExternal } from '@/utils';
   import { computed } from 'vue';
   const props = defineProps({
@@ -72,7 +73,7 @@
       default: false,
     },
   });
-  const menusList = computed(() => mockMenusList);
+  const menusList = computed(() => appStore.authMenusList);
   // 渲染菜单主要先看子路由
   // 比如我们的路由 一级路由一般都是layout组件 二级路由才是我们考虑要渲染成菜单的
   const showingChildNumber = computed(() => {
