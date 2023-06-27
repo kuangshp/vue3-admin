@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 import SystemRouter from './modules/system';
+import { mockMenusList } from '@/constant';
 import NProgress from 'nprogress';
 // 假设异步路由
 export const asyncRoutes = [
@@ -58,18 +59,24 @@ const router = createRouter({
   routes,
 });
 // 白名单
-const whiteList = ['/login'];
+const whiteList = ['/login', 'home'];
 router.beforeEach(async (to, from, next) => {
   const appStore = useAppStore();
   NProgress.start();
   if (appStore.globalToken) {
-    if (to.path === '/login') {
+    if (to.name === '/login') {
       NProgress.done();
       next('/');
     } else {
       // TODO 处理菜单
-      NProgress.done();
-      next();
+      // 模拟后端返回的菜单权限菜单
+      if (mockMenusList.includes(to.name) || whiteList.includes(to.name)) {
+        NProgress.done();
+        next();
+      } else {
+        NProgress.done();
+        next('/home');
+      }
     }
   } else {
     if (whiteList.indexOf(to.path) > -1) {

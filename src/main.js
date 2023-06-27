@@ -11,7 +11,7 @@ import installElementPlus from './plugins/element';
 // store 数据持久化
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 // 自定义图标
-import installIcons from './icons';
+import installIcons from "./icons"
 
 const app = createApp(App);
 
