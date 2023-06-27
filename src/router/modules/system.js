@@ -16,6 +16,17 @@ export default {
         icon: 'personnel-manage',
         keepAlive: true,
       },
+      // children: [
+      //   {
+      //     path: '/system/accountDetail',
+      //     name: 'accountDetail',
+      //     component: () => import('@/views/System/Account/Detail.vue'),
+      //     meta: {
+      //       title: '账号详情',
+      //       icon: 'personnel-manage',
+      //     },
+      //   },
+      // ],
     },
     {
       path: '/system/accountDetail',

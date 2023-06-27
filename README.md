@@ -20,11 +20,10 @@
 
 ## 菜单权限
 
-* 1、模拟当前用户拥有的权限列表，实际开发中请求后端数据接口，覆盖这个数据就可以
+- 1、模拟当前用户拥有的权限列表，实际开发中请求后端数据接口，覆盖这个数据就可以
 
   ```js
   // TODO 实际开发替换模拟后端返回的菜单列表
-  authMenusList: ['account', 'resources', 'accountDetail', 'baidu'],
+  authMenusList: ['account', 'resources', 'accountDetail', 'baidu','role'],
   ```
 
-  

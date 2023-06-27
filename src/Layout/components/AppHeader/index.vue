@@ -39,6 +39,7 @@
   const router = useRouter();
   const logout = () => {
     appStore.clearGlobalToken();
+    window.localStorage.clear();
     router.push('/login');
   };
 </script>

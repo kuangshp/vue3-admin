@@ -19,12 +19,13 @@
         :collapse="!props.sidebarOpened"
         :collapse-transition="true"
         :unique-opened="true"
+        router
       >
         <SideBarItem
           :sidebarOpened="!props.sidebarOpened"
           v-for="route in menuRoutes"
           :key="route.path"
-          :item="route"
+          :route="route"
           :base-path="route.path"
         ></SideBarItem>
       </el-menu>

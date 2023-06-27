@@ -6,20 +6,12 @@ import NProgress from 'nprogress';
 export const asyncRoutes = [
   SystemRouter,
   {
-    // 外链路由
-    path: '/external-link',
-    component: () => import('@/Layout/index.vue'),
-    name: 'baidu',
-    children: [
-      {
-        path: 'https://www.baidu.com/',
-        redirect: '/',
-        meta: {
-          title: '去百度',
-          icon: 'link',
-        },
-      },
-    ],
+    path: '',
+    meta: {
+      title: '去百度',
+      icon: 'link',
+      linkUrl: 'https://www.baidu.com/',
+    },
   },
 ];
 const constantRoutes = [
@@ -28,6 +20,9 @@ const constantRoutes = [
     name: 'home',
     redirect: '/home',
     component: () => import('@/Layout/index.vue'),
+    meta: {
+      hidden: true, // 不需要再左边显示的
+    },
     children: [
       {
         path: '/home',
@@ -70,10 +65,12 @@ router.beforeEach(async (to, from, next) => {
     } else {
       // TODO 处理菜单
       // 模拟后端返回的菜单权限菜单
+      // console.log(to.name, appStore.authMenusList);
       if (appStore.authMenusList.includes(to.name) || whiteList.includes(to.name)) {
         NProgress.done();
         next();
       } else {
+        console.log('222');
         NProgress.done();
         next('/home');
       }

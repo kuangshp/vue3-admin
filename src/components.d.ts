@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     ElSubmenu: typeof import('element-plus/es')['ElSubmenu']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Hamburger: typeof import('./layout/components/AppHeader/components/Hamburger/index.vue')['default']
+    MenuItem: typeof import('./layout/components/Sidebar/MenuItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Screenfull: typeof import('./layout/components/AppHeader/components/Screenfull/index.vue')['default']

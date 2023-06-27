@@ -8,7 +8,7 @@ export const useAppStore = defineStore('app', {
       size: 'default',
       language: 'zh-CN',
       // TODO 实际开发替换模拟后端返回的菜单列表
-      authMenusList: ['account', 'resources', 'accountDetail', 'baidu'],
+      authMenusList: ['account', 'resources', 'accountDetail', 'baidu', 'role'],
     };
   },
   getters: {},
