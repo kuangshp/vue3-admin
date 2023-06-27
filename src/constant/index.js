@@ -11,4 +11,4 @@ export const TIME_STAMP = 'timeStamp';
 export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 1000;
 
 // TODO 实际开发替换模拟后端返回的菜单列表
-export const mockMenusList = ['account', 'resources'];
+export const mockMenusList = ['account', 'resources', 'accountDetail', 'baidu'];

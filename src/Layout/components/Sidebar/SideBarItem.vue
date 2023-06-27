@@ -12,14 +12,16 @@
           background: ' #304156',
         }"
       >
-        <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
-          <el-icon v-if="icon">
-            <SvgIcon :icon="icon"></SvgIcon>
-          </el-icon>
-          <template #title>
-            <span>{{ theOnlyOneChildRoute.meta?.title }}</span>
-          </template>
-        </el-menu-item>
+        <template v-if="menusList.includes(item.name)">
+          <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
+            <el-icon v-if="icon">
+              <SvgIcon :icon="icon"></SvgIcon>
+            </el-icon>
+            <template #title>
+              <span>{{ theOnlyOneChildRoute.meta?.title }}</span>
+            </template>
+          </el-menu-item>
+        </template>
       </SideBarItemLink>
     </template>
     <!-- 多个子路由时 TODO 需要处理-->
@@ -51,7 +53,9 @@
 <script setup>
   import path from 'path-browserify';
   import SideBarItemLink from './SideBarItemLink.vue';
+  import { mockMenusList } from '@/constant';
   import { isExternal } from '@/utils';
+  import { computed } from 'vue';
   const props = defineProps({
     item: {
       type: Object,
@@ -68,7 +72,7 @@
       default: false,
     },
   });
-
+  const menusList = computed(() => mockMenusList);
   // 渲染菜单主要先看子路由
   // 比如我们的路由 一级路由一般都是layout组件 二级路由才是我们考虑要渲染成菜单的
   const showingChildNumber = computed(() => {

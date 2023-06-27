@@ -10,6 +10,7 @@ export const asyncRoutes = [
     // 外链路由
     path: '/external-link',
     component: () => import('@/Layout/index.vue'),
+    name: 'baidu',
     children: [
       {
         path: 'https://www.baidu.com/',
