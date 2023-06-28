@@ -17,7 +17,7 @@
   <template v-else>
     <template v-if="!route.meta?.hidden">
       <el-menu-item
-        :index="route.path"
+        :index="route.path ? route.path : ''"
         :style="{
           width: !props.sidebarOpened ? '210px' : '64px',
           display: 'block',

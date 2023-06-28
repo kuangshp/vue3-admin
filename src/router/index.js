@@ -1,10 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 import SystemRouter from './modules/system';
+import ComponentsRouter from './modules/components';
 import NProgress from 'nprogress';
 // 假设异步路由
 export const asyncRoutes = [
   SystemRouter,
+  ComponentsRouter,
   {
     path: '',
     meta: {
