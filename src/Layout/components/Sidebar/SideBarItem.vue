@@ -2,6 +2,7 @@
   <!-- 有子路由的时候 -->
   <el-sub-menu
     v-if="route.children?.length && !route.meta?.hidden"
+    :index="route.path ? route.path : ''"
     :style="{ width: !props.sidebarOpened ? '210px' : '64px' }"
   >
     <template #title>
