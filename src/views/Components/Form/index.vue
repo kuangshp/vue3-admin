@@ -11,7 +11,7 @@
       isShowBtn
     ></CustomForm>
     {{ treeData }}
-    <TreeSelect :options="treeDataList" isMultiple v-model="treeData" />
+    <TreeSelect :options="treeDataList" v-model="treeData" />
   </div>
 </template>
 

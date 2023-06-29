@@ -91,12 +91,13 @@
   });
   const emit = defineEmits('update:modelValue');
   const selectTreeRef = ref(null);
+  const selectTree = ref(null);
   // 点击文本节点
   const handleNodeClick = (node) => {
     if (node.children || props.isMultiple) return;
     console.log(node, '选择文本', selectTreeRef.value);
     newValue.value = node.id;
-    // selectTreeRef.value.blur();
+    selectTree.value.blur();
     emit('update:modelValue', newValue.value);
   };
   // 复选框的时候
