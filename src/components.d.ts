@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip'];
     FormWrapper: typeof import('./components/CustomForm/components/FormWrapper/index.vue')['default'];
     Hamburger: typeof import('./layout/components/AppHeader/components/Hamburger/index.vue')['default'];
+    InputNumber: typeof import('./components/InputNumber/index.vue')['default'];
     MenuItem: typeof import('./layout/components/Sidebar/MenuItem.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];

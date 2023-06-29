@@ -193,7 +193,7 @@
               style="width: 100%"
               :ref="column.prop"
               :maxlength="column.maxlength || 32"
-              v-model="formData[column.prop]"
+              v-model[column.modifier||string]="formData[column.prop]"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               clearable
               :disabled="column.disabled || isDisabledForm"
@@ -321,6 +321,22 @@
               :max="column.max"
             ></el-input-number>
           </FormWrapper>
+          <!-- 普通数值组件开始 -->
+          <FormWrapper
+            v-if="column.type == 'inputNumber'"
+            v-bind="$attrs"
+            v-on="$listeners"
+            :formData="formData"
+            :column="column"
+            :ref="column.prop"
+          >
+            <InputNumber
+              v-model="formData[column.prop]"
+              :disabled="column.disabled || isDisabledForm"
+              :placeholder="column.placeholder || getPlaceHolder(column)"
+              :append="column.append"
+            />
+          </FormWrapper>
         </el-col>
       </el-row>
       <!-- 按钮 -->
@@ -347,6 +363,7 @@
 <script setup>
   import { computed, onMounted, reactive } from 'vue';
   import FormWrapper from './components/FormWrapper/index.vue';
+  import InputNumber from './../InputNumber/index.vue';
   const props = defineProps({
     // 表单字段
     formFieldList: {

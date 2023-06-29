@@ -132,6 +132,7 @@
       label: '段值名称',
       prop: 'segmentDescription',
       type: 'input',
+      modifier: 'number',
     },
     {
       label: '备注',
@@ -181,6 +182,12 @@
       label: '段值代码',
       prop: 'segmentlabel',
       type: 'number',
+    },
+    {
+      prop: 'amount',
+      type: 'inputNumber',
+      label: '金额',
+      append: '元',
     },
     // {
     //   prop: 'date4',
