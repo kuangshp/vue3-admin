@@ -41,7 +41,7 @@
           </FormWrapper>
           <!--开始时间-->
           <FormWrapper
-            v-if="['startDateRangePicker', 'startDaterangePicker'].includes(column.type)"
+            v-if="['startDateRangePicker'].includes(column.type)"
             v-bind="$attrs"
             v-on="$listeners"
             :formData="formData"
@@ -56,14 +56,14 @@
               type="date"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               value-format="YYYY-MM-DD"
-              :disabled-date="(event) => disabledDate(event, column)"
+              :disabled-date="disabledDateRangePick"
               @focus="() => handleFocusDate('start', column)"
               @change="(val) => handleChange(val, column)"
             ></el-date-picker>
           </FormWrapper>
           <!--结束时间-->
           <FormWrapper
-            v-if="['endDateRangePicker', 'endDaterangePicker'].includes(column.type)"
+            v-if="['endDateRangePicker'].includes(column.type)"
             v-bind="$attrs"
             v-on="$listeners"
             :formData="formData"
@@ -78,7 +78,6 @@
               :placeholder="column.placeholder || getPlaceHolder(column)"
               value-format="YYYY-MM-DD"
               :disabled="column.disabled || isDisabledForm"
-              :disabled-date="(event) => disabledDate(event, column)"
               @focus="() => handleFocusDate('end', column)"
               @change="(val) => handleChange(val, column)"
             ></el-date-picker>
@@ -100,7 +99,6 @@
               type="datetime"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               value-format="YYYY-MM-DD HH:mm:ss"
-              :picker-options="pickerStartOptions"
               @focus="() => handleFocusDate('start', column)"
               @change="(val) => handleChange(val, column)"
             ></el-date-picker>
@@ -130,7 +128,7 @@
 
           <!-- 时间范围 -->
           <FormWrapper
-            v-if="column.type == 'daterange'"
+            v-if="column.type == 'dateRange'"
             v-bind="$attrs"
             v-on="$listeners"
             :formData="formData"
@@ -151,7 +149,7 @@
           </FormWrapper>
           <!-- 时间面板带快捷方式 -->
           <FormWrapper
-            v-if="column.type == 'daterangePanel'"
+            v-if="column.type == 'dateRangePanel'"
             v-bind="$attrs"
             v-on="$listeners"
             :formData="formData"
@@ -237,8 +235,8 @@
               :ref="column.prop"
               v-model="formData[column.prop]"
               :placeholder="column.placeholder || getPlaceHolder(column)"
-              @change="(val) => changeMethod(val, column)"
-              @clear="(val) => clearMethod(val, column.clearMethod)"
+              @change="(val) => handleChange(val, column)"
+              @clear="(val) => clearMethod(val, column)"
               filterable
               :disabled="column.disabled || isDisabledForm"
               :multiple="column.multiple || false"
@@ -252,34 +250,6 @@
               ></el-option>
             </el-select>
           </FormWrapper>
-          <!-- 字典选择器 -->
-          <FormWrapper
-            v-if="column.type == 'dict'"
-            v-bind="$attrs"
-            v-on="$listeners"
-            :formData="formData"
-            :column="column"
-          >
-            <el-select
-              style="width: 100%"
-              :ref="column.prop"
-              v-model="formData[column.prop]"
-              :placeholder="column.placeholder || getPlaceHolder(column)"
-              @change="(val) => changeMethod(val, column)"
-              @clear="(val) => clearMethod(val, column.clearMethod)"
-              filterable
-              :multiple="column.multiple || false"
-              :clearable="column.clearable || true"
-              :disabled="column.disabled || isDisabledForm"
-            >
-              <el-option
-                v-for="item in dictListMap[column.dictType]"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </FormWrapper>
           <!-- 复选框带文案的 -->
           <template v-else-if="column.type == 'checkbox'">
             <template v-if="column.labelPosition == 'right'">
@@ -290,52 +260,22 @@
                   :false-label="column.falseLabel"
                   :disabled="column.disabled || isDisabledForm"
                   @change="(val) => handleChange(val, column)"
-                  >{{ column.name }}
+                  >{{ column.label }}
                 </el-checkbox>
               </el-form-item>
             </template>
-            <el-form-item v-else :prop="column.prop" :label="column.name">
+            <el-form-item v-else :prop="column.prop" :label="column.label">
               <el-checkbox
                 :checked="column.isChecked ? column.isChecked : false"
                 v-model="formData[column.prop]"
                 :true-label="column.trueLabel"
-                :false-label="column.trueLabel"
-                @change="(val) => changeChecked(column.prop, val)"
+                :false-label="column.falseLabel"
+                @change="(val) => handleChange(val, column)"
                 :disabled="column.disabled || isDisabledForm"
-                >{{ column.label }}</el-checkbox
-              >
+              ></el-checkbox>
             </el-form-item>
           </template>
 
-          <!-- 币种开始 -->
-          <FormWrapper
-            v-if="column.type == 'currency'"
-            v-bind="$attrs"
-            v-on="$listeners"
-            :formData="formData"
-            :column="column"
-          >
-            <el-select
-              style="width: 100%"
-              :ref="column.prop"
-              v-model="formData[column.prop]"
-              :placeholder="column.placeholder || getPlaceHolder(column)"
-              @change="(val) => changeMethod(val, column)"
-              @clear="(val) => clearMethod(val, column.clearMethod)"
-              filterable
-              :multiple="column.multiple || false"
-              :clearable="column.clearable || true"
-              :disabled="column.disabled || isDisabledForm"
-            >
-              <el-option
-                v-for="item in currencyList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </FormWrapper>
-          <!-- 币种结束 -->
           <!-- 单选按钮开始 -->
           <FormWrapper
             v-else-if="column.type === 'radio'"
@@ -438,7 +378,7 @@
     // label宽度
     labelWidth: {
       type: String,
-      default: '',
+      default: '120px',
     },
     // label对齐方式
     labelPosition: {
@@ -529,7 +469,7 @@
     const inputArr = ['input', 'textarea', 'inputNumber'];
     return (
       (inputArr.indexOf(option.type) > -1 ? '请输入' : '请选择') +
-      (option.name === '至' ? '日期' : option.name || '')
+      (option.label === '至' ? '日期' : option.label || '')
     );
   };
   // 资金预报表根据选择的年月限制选择的日期范围
@@ -627,35 +567,12 @@
       pickerEndOptions = pickerOptions;
     }
   };
-  // 开始结束日期禁用日期
-  // const disabledDate = (time, prop, type, flag) => {
-  //   if (type === 'end') {
-  //     let startDate = this.formData[prop];
-  //     if (flag == '1') {
-  //       if (startDate) {
-  //         return (
-  //           time.getTime() < new Date(startDate).getTime() - 24 * 60 * 60 * 1000 ||
-  //           time.getTime() > Date.now()
-  //         );
-  //       } else {
-  //         return time.getTime() > Date.now();
-  //       }
-  //     }
-  //     if (startDate) {
-  //       return time.getTime() < new Date(startDate).getTime() - 24 * 60 * 60 * 1000;
-  //     }
-  //   } else {
-  //     let endDate = this.query[prop];
-  //     if (endDate) {
-  //       return time.getTime() > new Date(endDate).getTime();
-  //     }
-  //   }
-  // };
+
   onMounted(() => {
     initFormDataHandler();
   });
   const customFormRef = ref(null);
-  const emit = defineEmits(['query', 'resetForm', 'filedChange']);
+  const emit = defineEmits(['query', 'resetForm', 'filedChange', 'clearMethod']);
   const onSubmit = async () => {
     await customFormRef.value.validate((valid, fields) => {
       if (valid) {
@@ -671,8 +588,14 @@
     emit('resetForm');
   };
   // 字段改变的事件
-  const handleChange = (val, prop) => {
-    emit('filedChange', { val: val, prop: prop });
+  const handleChange = (val, column) => {
+    emit('filedChange', { val: val, prop: column });
+  };
+  const clearMethod = (val, column) => {
+    if (!column.clearMethod) {
+      return;
+    }
+    emit('clearMethod', { val: val });
   };
 </script>
 

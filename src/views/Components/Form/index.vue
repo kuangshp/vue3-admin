@@ -32,13 +32,7 @@
     //   append: '元',
     //   iconMethod: 'iconMethod',
     // },
-    // {
-    //   prop: 'text1',
-    //   type: 'text',
-    //   label: '文本',
-    //   icon: 'el-icon-user',
-    //   iconMethod: 'iconMethod',
-    // },
+
     // {
     //   prop: 'sobCode',
     //   label: '账套代码',
@@ -96,27 +90,98 @@
       // disabledAfter: true,
     },
     {
-      prop: 'date6',
+      prop: 'date2',
       label: '开始时间1',
       type: 'startDateRangePicker',
       required: true,
     },
 
     {
-      prop: 'date2',
+      prop: 'date3',
       label: '结束时间1',
       type: 'endDateRangePicker',
     },
-    // {
-    //   prop: 'date3',
-    //   label: '开始时间',
-    //   type: 'startDateRangePickerTime',
-    // },
-    // {
-    //   prop: 'date7',
-    //   label: '带快捷时间',
-    //   type: 'daterangePanel',
-    // },
+    {
+      prop: 'date4',
+      label: '开始时间-十分',
+      type: 'startDateRangePickerTime',
+    },
+    {
+      prop: 'date5',
+      label: '结束时间-十分',
+      type: 'endDateRangePickerTime',
+    },
+    {
+      prop: 'date6',
+      label: '时间范围',
+      type: 'dateRange',
+    },
+    {
+      prop: 'date7',
+      label: '带快捷时间',
+      type: 'dateRangePanel',
+    },
+    {
+      prop: 'text1',
+      type: 'text',
+      label: '文本',
+      icon: 'el-icon-user',
+      iconMethod: 'iconMethod',
+    },
+    {
+      label: '段值名称',
+      prop: 'segmentDescription',
+      type: 'input',
+    },
+    {
+      label: '备注',
+      prop: 'sobId',
+      type: 'textarea',
+      span: 24,
+    },
+    {
+      prop: 'select',
+      label: '地区选择',
+      type: 'select',
+      options: [
+        {
+          value: '0',
+          label: '深圳市',
+        },
+        {
+          value: '1',
+          label: '广州市',
+        },
+      ],
+    },
+    {
+      prop: 'isChecked',
+      type: 'checkbox',
+      label: '是否勾选',
+      labelPosition: 'right',
+      // trueLabel: 1,
+      // falseLabel: 0,
+    },
+    {
+      label: '性别',
+      prop: 'gender',
+      type: 'radio',
+      options: [
+        {
+          label: '男',
+          value: 1,
+        },
+        {
+          label: '女',
+          value: 2,
+        },
+      ],
+    },
+    {
+      label: '段值代码',
+      prop: 'segmentlabel',
+      type: 'number',
+    },
     // {
     //   prop: 'date4',
     //   label: '结束时间',
