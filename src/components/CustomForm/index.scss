@@ -1,0 +1,88 @@
+.form-warp {
+  padding: 15px 20px 0 20px;
+  // border-radius: $border-radius;
+  border-radius: 10px;
+  &.is-query {
+    background-color: #fcfcfc;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  // .el-form-item {
+  //   margin-bottom: 1.5rem;
+
+  //   ::v-deep .el-form-item__label {
+  //     text-align: left;
+  //   }
+  // }
+
+  ::v-deep .el-input-number,
+  .el-form-item,
+  .el-select,
+  .el-date-editor {
+    width: 100%;
+  }
+}
+
+.label-width- {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 100px);
+  }
+}
+.label-width-0 {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 0px);
+  }
+}
+
+.label-width-70px {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 70px);
+  }
+}
+
+.label-width-80px {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 80px);
+  }
+}
+
+.label-width-100px {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 100px);
+  }
+}
+
+.label-width-120px {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 120px);
+  }
+}
+
+.label-width-160px {
+  ::v-deep .el-form-item__content {
+    width: calc(100% - 160px);
+  }
+}
+
+.action-btn {
+  ::v-deep .el-form-item__content {
+    width: 100%;
+  }
+
+  .button-80 {
+    width: 80px;
+    border-radius: 18px !important;
+    height: 30px;
+  }
+}
+
+.queryForm ::v-deep input,
+.el-textarea__inner {
+  border-radius: 6px !important;
+}
+
+.up-down-icon {
+  margin-left: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}

@@ -11,9 +11,13 @@ import installElementPlus from './plugins/element';
 // store 数据持久化
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 // 自定义图标
-import installIcons from "./icons"
-
+import installIcons from './icons';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 const app = createApp(App);
+// 全部的字体图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

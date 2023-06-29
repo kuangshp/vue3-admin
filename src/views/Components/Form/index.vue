@@ -1,7 +1,245 @@
 <template>
-  <div>表单组件</div>
+  <div>
+    <CustomForm
+      :formFieldList="formFields"
+      :initFormData="formData"
+      @query="onSubmitHandler"
+      @resetForm="resetFormHandler"
+      @iconMethod="iconMethod"
+      @filedChange="filedChange"
+      isQueryPanel
+      isShowBtn
+    ></CustomForm>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+  import { reactive } from 'vue';
+  // 定义表单数据
+  const formData = reactive({
+    soblabel: 'hello',
+    sobCode: null,
+    sobId: null,
+    segmentDescription: null,
+    segmentlabel: null,
+    gender: null,
+    text1: '你好',
+  });
+  const formFields = reactive([
+    // {
+    //   prop: 'soblabel',
+    //   label: '账套名称',
+    //   append: '元',
+    //   iconMethod: 'iconMethod',
+    // },
+    // {
+    //   prop: 'text1',
+    //   type: 'text',
+    //   label: '文本',
+    //   icon: 'el-icon-user',
+    //   iconMethod: 'iconMethod',
+    // },
+    // {
+    //   prop: 'sobCode',
+    //   label: '账套代码',
+    //   // hidden: true,
+    // },
+    // {
+    //   label: '账套名称',
+    //   prop: 'sobId',
+    //   type: 'textarea',
+    //   span: 24,
+    // },
+    // {
+    //   label: '段值名称',
+    //   prop: 'segmentDescription',
+    //   type: 'input',
+    // },
+    // // {
+    // //   label: '段值代码',
+    // //   prop: 'segmentlabel',
+    // //   type: 'number',
+    // // },
+    // {
+    //   label: '性别',
+    //   prop: 'gender',
+    //   type: 'radio',
+    //   options: [
+    //     {
+    //       label: '男',
+    //       value: 1,
+    //     },
+    //     {
+    //       label: '女',
+    //       value: 2,
+    //     },
+    //   ],
+    // },
+
+    // {
+    //   prop: 'date1',
+    //   label: '普通时间',
+    //   type: 'date',
+    //   required: true,
+    // },
+    // {
+    //   type: 'amount',
+    //   prop: 'totalRebateAmount',
+    //   max: 99999999999999.99,
+    //   label: '总退税金额',
+    // },
+    {
+      prop: 'date1',
+      label: '普通时间',
+      type: 'date',
+      required: true,
+      // disabledAfter: true,
+    },
+    {
+      prop: 'date6',
+      label: '开始时间1',
+      type: 'startDateRangePicker',
+      required: true,
+    },
+
+    {
+      prop: 'date2',
+      label: '结束时间1',
+      type: 'endDateRangePicker',
+    },
+    // {
+    //   prop: 'date3',
+    //   label: '开始时间',
+    //   type: 'startDateRangePickerTime',
+    // },
+    // {
+    //   prop: 'date7',
+    //   label: '带快捷时间',
+    //   type: 'daterangePanel',
+    // },
+    // {
+    //   prop: 'date4',
+    //   label: '结束时间',
+    //   type: 'endDateRangePickerTime',
+    //   icon: 'el-icon-phone',
+    //   iconMethod: 'iconMethod',
+    // },
+    // {
+    //   prop: 'date5',
+    //   label: '时间范围',
+    //   type: 'daterange',
+    // },
+    // {
+    //   prop: 'text1',
+    //   type: 'text',
+    //   label: '文本',
+    //   icon: 'el-icon-user',
+    //   iconMethod: 'iconMethod',
+    // },
+    // {
+    //   prop: 'contractNo',
+    //   label: '输入框',
+    //   type: 'input',
+    // },
+    // {
+    //   prop: 'text2',
+    //   label: '文本域',
+    //   type: 'textarea',
+    //   span: 24,
+    // },
+    // {
+    //   prop: ['test1', 'test2'],
+    //   label: '金额范围',
+    //   type: 'inputRange',
+    //   unit: '元',
+    //   disabled1: true,
+    //   // disabled: true,
+    // },
+    // {
+    //   prop: ['test3', 'test4'],
+    //   label: '金额范围1',
+    //   type: 'selectRange',
+    //   options: [
+    //     {
+    //       value: '0',
+    //       label: '斤',
+    //     },
+    //     {
+    //       value: '1',
+    //       label: '吨',
+    //     },
+    //   ],
+    //   unit: '元',
+    // },
+    // {
+    //   prop: 'test5',
+    //   label: '范围选择',
+    //   type: 'select',
+    //   options: [
+    //     {
+    //       value: '0',
+    //       label: '斤',
+    //     },
+    //     {
+    //       value: '1',
+    //       label: '吨',
+    //     },
+    //   ],
+    // },
+
+    // {
+    //   prop: 'amount',
+    //   type: 'inputNumber',
+    //   label: '金额',
+    //   append: '元',
+    // },
+    // {
+    //   prop: 'tree',
+    //   type: 'treeSelect',
+    //   label: '树组件',
+    //   // options: treeData,
+    //   isMultiple: true,
+    //   // isHidden: true,
+    //   options: [
+    //     { id: 1, label: '云南', parentId: -1 },
+    //     { id: 2, label: '昆明', parentId: 1 },
+    //     { id: 3, label: '五华区', parentId: 2 },
+    //     { id: 4, label: '盘龙区', parentId: 2 },
+    //     { id: 5, label: '湖南', parentId: -1 },
+    //     { id: 6, label: '长沙', parentId: 5 },
+    //     { id: 7, label: '永州', parentId: 5 },
+    //     { id: 8, label: '北辰小区', parentId: 3 },
+    //   ],
+    // },
+    // {
+    //   prop: 'amount',
+    //   type: 'inputNumber',
+    //   label: '金额',
+    //   append: '元',
+    // },
+    // {
+    //   prop: 'amount',
+    //   type: 'inputNumber',
+    //   label: '金额',
+    //   append: '元',
+    // },
+    // {
+    //   prop: 'isChecked',
+    //   type: 'checkbox',
+    //   label: '是否勾选',
+    //   labelPosition: 'right',
+    // },
+  ]);
+  const iconMethod = (val, key) => {
+    console.log(val, key, '点击了');
+  };
+  const onSubmitHandler = (formData) => {
+    console.log(formData, '数据');
+  };
+  const resetFormHandler = () => {};
+  const filedChange = (val) => {
+    console.log(val, '字段改变');
+  };
+</script>
 
 <style lang="scss" scoped></style>
