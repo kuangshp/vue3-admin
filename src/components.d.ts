@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     AppMain: typeof import('./layout/components/AppMain/index.vue')['default'];
     Breadcrumb: typeof import('./layout/components/AppHeader/components/Breadcrumb/index.vue')['default'];
     CustomForm: typeof import('./components/CustomForm/index.vue')['default'];
+    CustomTreeSelect: typeof import('./components/CustomTreeSelect/index.vue')['default'];
     ElAvatar: typeof import('element-plus/es')['ElAvatar'];
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb'];
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem'];
@@ -41,6 +42,7 @@ declare module '@vue/runtime-core' {
     ElSubmenu: typeof import('element-plus/es')['ElSubmenu'];
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
     ElTooltip: typeof import('element-plus/es')['ElTooltip'];
+    ElTree: typeof import('element-plus/es')['ElTree'];
     FormWrapper: typeof import('./components/CustomForm/components/FormWrapper/index.vue')['default'];
     Hamburger: typeof import('./layout/components/AppHeader/components/Hamburger/index.vue')['default'];
     InputNumber: typeof import('./components/InputNumber/index.vue')['default'];
@@ -54,5 +56,6 @@ declare module '@vue/runtime-core' {
     SideBarItemLink: typeof import('./layout/components/Sidebar/SideBarItemLink.vue')['default'];
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default'];
     TagsView: typeof import('./layout/components/TagsView/index.vue')['default'];
+    TreeSelect: typeof import('./components/TreeSelect/index.vue')['default'];
   }
 }

@@ -10,11 +10,14 @@
       isQueryPanel
       isShowBtn
     ></CustomForm>
+    {{ treeData }}
+    <TreeSelect :options="treeDataList" isMultiple v-model="treeData" />
   </div>
 </template>
 
 <script setup>
   import { reactive } from 'vue';
+  const treeData = ref([]);
   // 定义表单数据
   const formData = reactive({
     soblabel: 'hello',
@@ -25,6 +28,16 @@
     gender: null,
     text1: '你好',
   });
+  const treeDataList = reactive([
+    { id: 1, label: '云南', parentId: -1 },
+    { id: 2, label: '昆明', parentId: 1 },
+    { id: 3, label: '五华区', parentId: 2 },
+    { id: 4, label: '盘龙区', parentId: 2 },
+    { id: 5, label: '湖南', parentId: -1 },
+    { id: 6, label: '长沙', parentId: 5 },
+    { id: 7, label: '永州', parentId: 5 },
+    { id: 8, label: '北辰小区', parentId: 3 },
+  ]);
   const formFields = reactive([
     // {
     //   prop: 'soblabel',

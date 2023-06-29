@@ -17,7 +17,7 @@
 </template>
 <script setup>
   const props = defineProps({
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -63,7 +63,7 @@
     },
   });
   const isBlur = ref(false);
-  const emit = defineEmits('input', 'change', 'blur', 'focus');
+  const emit = defineEmits('update:modelValue', 'change', 'blur', 'focus');
   //number限制长度和位数
   const inputHandler = (value) => {
     // 去除非数字输入
@@ -127,7 +127,7 @@
         value = props.min;
       }
     }
-    emit('input', value);
+    emit('update:modelValue', value);
   };
   // 新增负值判断
   const lowerZero = (value) => {
@@ -160,14 +160,14 @@
         value = props.min;
       }
     }
-    emit('input', value);
+    emit('update:modelValue', value);
   };
   // 输入框值改变值失去焦点函数
   const inputChangeHandler = (value) => {
     if (props.min != 0 && (value || value == '') && Number(value) < Number(props.min)) {
       //如果input时判断 例如min=9 max=10时 输入1就自动转成9  所以放到change时判断
       value = props.min;
-      emit('input', value);
+      emit('update:modelValue', value);
     }
     emit('change', value);
   };
