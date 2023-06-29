@@ -105,7 +105,7 @@
     console.log(selectTreeRef.value.getCheckedKeys(), '????11');
     newValue.value = selectTreeRef.value.getCheckedKeys();
     console.log(newValue.value, '???');
-    emit('update:modelValue', shallowRef(newValue.value));
+    emit('update:modelValue', newValue.value);
   };
   // 多选的时候删除tag
   const removeTagHandler = (val) => {
