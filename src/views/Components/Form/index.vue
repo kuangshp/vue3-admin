@@ -202,118 +202,23 @@
       label: '金额',
       append: '元',
     },
-    // {
-    //   prop: 'date4',
-    //   label: '结束时间',
-    //   type: 'endDateRangePickerTime',
-    //   icon: 'el-icon-phone',
-    //   iconMethod: 'iconMethod',
-    // },
-    // {
-    //   prop: 'date5',
-    //   label: '时间范围',
-    //   type: 'daterange',
-    // },
-    // {
-    //   prop: 'text1',
-    //   type: 'text',
-    //   label: '文本',
-    //   icon: 'el-icon-user',
-    //   iconMethod: 'iconMethod',
-    // },
-    // {
-    //   prop: 'contractNo',
-    //   label: '输入框',
-    //   type: 'input',
-    // },
-    // {
-    //   prop: 'text2',
-    //   label: '文本域',
-    //   type: 'textarea',
-    //   span: 24,
-    // },
-    // {
-    //   prop: ['test1', 'test2'],
-    //   label: '金额范围',
-    //   type: 'inputRange',
-    //   unit: '元',
-    //   disabled1: true,
-    //   // disabled: true,
-    // },
-    // {
-    //   prop: ['test3', 'test4'],
-    //   label: '金额范围1',
-    //   type: 'selectRange',
-    //   options: [
-    //     {
-    //       value: '0',
-    //       label: '斤',
-    //     },
-    //     {
-    //       value: '1',
-    //       label: '吨',
-    //     },
-    //   ],
-    //   unit: '元',
-    // },
-    // {
-    //   prop: 'test5',
-    //   label: '范围选择',
-    //   type: 'select',
-    //   options: [
-    //     {
-    //       value: '0',
-    //       label: '斤',
-    //     },
-    //     {
-    //       value: '1',
-    //       label: '吨',
-    //     },
-    //   ],
-    // },
-
-    // {
-    //   prop: 'amount',
-    //   type: 'inputNumber',
-    //   label: '金额',
-    //   append: '元',
-    // },
-    // {
-    //   prop: 'tree',
-    //   type: 'treeSelect',
-    //   label: '树组件',
-    //   // options: treeData,
-    //   isMultiple: true,
-    //   // isHidden: true,
-    //   options: [
-    //     { id: 1, label: '云南', parentId: -1 },
-    //     { id: 2, label: '昆明', parentId: 1 },
-    //     { id: 3, label: '五华区', parentId: 2 },
-    //     { id: 4, label: '盘龙区', parentId: 2 },
-    //     { id: 5, label: '湖南', parentId: -1 },
-    //     { id: 6, label: '长沙', parentId: 5 },
-    //     { id: 7, label: '永州', parentId: 5 },
-    //     { id: 8, label: '北辰小区', parentId: 3 },
-    //   ],
-    // },
-    // {
-    //   prop: 'amount',
-    //   type: 'inputNumber',
-    //   label: '金额',
-    //   append: '元',
-    // },
-    // {
-    //   prop: 'amount',
-    //   type: 'inputNumber',
-    //   label: '金额',
-    //   append: '元',
-    // },
-    // {
-    //   prop: 'isChecked',
-    //   type: 'checkbox',
-    //   label: '是否勾选',
-    //   labelPosition: 'right',
-    // },
+    {
+      prop: 'tree',
+      type: 'treeSelect',
+      label: '树组件',
+      // isMultiple: true,
+      // isHidden: true,
+      options: [
+        { id: 1, label: '云南', parentId: -1 },
+        { id: 2, label: '昆明', parentId: 1 },
+        { id: 3, label: '五华区', parentId: 2 },
+        { id: 4, label: '盘龙区', parentId: 2 },
+        { id: 5, label: '湖南', parentId: -1 },
+        { id: 6, label: '长沙', parentId: 5 },
+        { id: 7, label: '永州', parentId: 5 },
+        { id: 8, label: '北辰小区', parentId: 3 },
+      ],
+    },
   ]);
   const iconMethod = (val, key) => {
     console.log(val, key, '点击了');

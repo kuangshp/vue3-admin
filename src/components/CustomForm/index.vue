@@ -337,6 +337,24 @@
               :append="column.append"
             />
           </FormWrapper>
+          <!-- 树组件开始 -->
+          <FormWrapper
+            v-if="column.type == 'treeSelect'"
+            v-bind="$attrs"
+            v-on="$listeners"
+            :formData="formData"
+            :column="column"
+          >
+            <TreeSelect
+              v-model="formData[column.prop]"
+              :options="column.options"
+              :ref="column.prop"
+              :isMultiple="column.isMultiple"
+              :disabled="column.disabled || isDisabledForm"
+              :placeholder="column.placeholder"
+              :clearable="column.clearable"
+            ></TreeSelect>
+          </FormWrapper>
         </el-col>
       </el-row>
       <!-- 按钮 -->
@@ -364,6 +382,7 @@
   import { computed, onMounted, reactive } from 'vue';
   import FormWrapper from './components/FormWrapper/index.vue';
   import InputNumber from './../InputNumber/index.vue';
+  import TreeSelect from './../TreeSelect/index.vue';
   const props = defineProps({
     // 表单字段
     formFieldList: {
