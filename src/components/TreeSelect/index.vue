@@ -89,7 +89,7 @@
   onMounted(() => {
     treeDataList.value = getTreeList(props.options, 'id', 'parentId');
   });
-  const emit = defineEmits('update:modelValue');
+  const emit = defineEmits(['update:modelValue']);
   const selectTreeRef = ref(null);
   const selectTree = ref(null);
   // 点击文本节点

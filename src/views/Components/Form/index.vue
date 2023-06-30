@@ -10,14 +10,19 @@
       isQueryPanel
       isShowBtn
     ></CustomForm>
+    <div>树组件</div>
     {{ treeData }}
     <TreeSelect :options="treeDataList" v-model="treeData" />
+    <div>数字组件</div>
+    {{ number }}
+    <InputNumber v-model="number" />
   </div>
 </template>
 
 <script setup>
   import { reactive } from 'vue';
   const treeData = ref([]);
+  const number = ref(null);
   // 定义表单数据
   const formData = reactive({
     soblabel: 'hello',

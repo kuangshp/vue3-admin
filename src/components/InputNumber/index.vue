@@ -1,7 +1,7 @@
 <template>
   <el-input
     style="width: 100%; height: 32.5px"
-    :value="value"
+    v-model="inputNewValue"
     :placeholder="placeholder"
     :disabled="disabled"
     :readonly="readonly"
@@ -62,123 +62,128 @@
       default: true,
     },
   });
+  const inputNewValue = ref(props.modelValue);
   const isBlur = ref(false);
-  const emit = defineEmits('update:modelValue', 'change', 'blur', 'focus');
+  const emit = defineEmits(['update:modelValue', 'change', 'blur', 'focus']);
   //number限制长度和位数
   const inputHandler = (value) => {
+    let newValue = value;
     // 去除非数字输入
     if (!/^-?\d+([\.]\d+)?$/gi.test(value)) {
       if (!value.endsWith('.')) {
         const val1 = value.split('');
         val1.pop();
-        value = val1.join('');
+        newValue = val1.join('');
+        inputNewValue.value = newValue;
       }
     }
     if (props.min < 0) {
-      lowerZero(value);
+      lowerZero(newValue);
     } else {
-      value = value.toString();
-      if (value[0] == '0' && value[1] == '0') {
-        value = '0';
+      newValue = newValue.toString();
+      if (value[0] == '0' && newValue[1] == '0') {
+        newValue = '0';
       }
-      if (value[0] == '0' && value[1] != '.' && value.length > 1) {
-        value = value.replace(/\b(0+)/gi, '');
+      if (newValue[0] == '0' && newValue[1] != '.' && newValue.length > 1) {
+        newValue = newValue.replace(/\b(0+)/gi, '');
       }
-      overZero(value);
+      overZero(newValue);
     }
   };
   // 原有正数判断逻辑
-  const overZero = (value) => {
+  const overZero = (newValue) => {
     if (props.precision == 0) {
-      value = value.toString().replace(/[^\d]+/g, '');
+      newValue = newValue.toString().replace(/[^\d]+/g, '');
     } else {
-      value = value.toString().replace(/[^\d.]/g, ''); //清除"数字"和"."以外的字符
-      value = value.toString().replace(/^\./g, ''); //验证第一个字符是数字
-      value = value.toString().replace(/\.{2,}/g, '.'); //只保留第一个, 清除多余的
-      value = value.toString().replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
+      newValue = newValue.toString().replace(/[^\d.]/g, ''); //清除"数字"和"."以外的字符
+      newValue = newValue.toString().replace(/^\./g, ''); //验证第一个字符是数字
+      newValue = newValue.toString().replace(/\.{2,}/g, '.'); //只保留第一个, 清除多余的
+      newValue = newValue.toString().replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
       if (props.precision == 1) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d).*$/, '$1$2.$3'); //只能输入一位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d).*$/, '$1$2.$3'); //只能输入一位小数
       }
       if (props.precision == 2) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两位小数
       }
       if (props.precision == 3) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
       }
       if (props.precision == 4) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
       }
       if (props.precision == 5) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入五位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入五位小数
       }
       if (props.precision == 6) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入六位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入六位小数
       }
       if (this.precision == 10) {
-        value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入十位小数
+        newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入十位小数
       }
     }
-    if (Number(value) > Number(props.max)) {
-      value = value.substring(0, value.length - 1); //输入超过最大值后，后面输入无效
+    if (Number(newValue) > Number(props.max)) {
+      newValue = newValue.substring(0, newValue.length - 1); //输入超过最大值后，后面输入无效
     }
     if (props.min == 0) {
       //如果input时判断 例如min=9 max=10时 输入1就自动转成9  所以放到change时判断
-      if (value && Number(value) < Number(props.min)) {
-        value = props.min;
+      if (newValue && Number(newValue) < Number(props.min)) {
+        newValue = props.min;
       }
     }
-    emit('update:modelValue', value);
+    inputNewValue.value = newValue;
+    emit('update:modelValue', newValue);
   };
   // 新增负值判断
-  const lowerZero = (value) => {
-    value = value.toString().replace(/\.{2,}/g, '.'); //只保留第一个, 清除多余的
-    value = value.toString().replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
+  const lowerZero = (newValue) => {
+    newValue = newValue.toString().replace(/\.{2,}/g, '.'); //只保留第一个, 清除多余的
+    newValue = newValue.toString().replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');
     if (props.precision == 1) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d).*$/, '$1$2.$3'); //只能输入一位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d).*$/, '$1$2.$3'); //只能输入一位小数
     }
     if (props.precision == 2) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两位小数
     }
     if (props.precision == 3) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
     }
     if (props.precision == 4) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3'); //只能输入四位小数
     }
     if (props.precision == 5) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入五位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入五位小数
     }
     if (props.precision == 6) {
-      value = value.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入六位小数
+      newValue = newValue.toString().replace(/^(\-)*(\d+)\.(\d\d\d\d\d\d).*$/, '$1$2.$3'); //只能输入六位小数
     }
-    if (Number(value) > Number(props.max)) {
-      value = value.substring(0, value.length - 1); //输入超过最大值后，后面输入无效
+    if (Number(newValue) > Number(props.max)) {
+      newValue = newValue.substring(0, newValue.length - 1); //输入超过最大值后，后面输入无效
     }
     if (props.min == 0) {
       //如果input时判断 例如min=9 max=10时 输入1就自动转成9  所以放到change时判断
-      if (value && Number(value) < Number(props.min)) {
-        value = props.min;
+      if (newValue && Number(newValue) < Number(props.min)) {
+        newValue = props.min;
       }
     }
-    emit('update:modelValue', value);
+    inputNewValue.value = newValue;
+    emit('update:modelValue', newValue);
   };
   // 输入框值改变值失去焦点函数
-  const inputChangeHandler = (value) => {
-    if (props.min != 0 && (value || value == '') && Number(value) < Number(props.min)) {
+  const inputChangeHandler = (newValue) => {
+    if (props.min != 0 && (newValue || newValue == '') && Number(newValue) < Number(props.min)) {
       //如果input时判断 例如min=9 max=10时 输入1就自动转成9  所以放到change时判断
-      value = props.min;
-      emit('update:modelValue', value);
+      newValue = props.min;
+      emit('update:modelValue', newValue);
     }
-    emit('change', value);
+    emit('change', newValue);
   };
   // 输入框值改变值失去焦点函数
-  const inputBlurHandler = (value) => {
+  const inputBlurHandler = (newValue) => {
     isBlur.value = true;
-    emit('blur', value);
+    emit('blur', newValue);
   };
   // 输入框获取焦点
-  const inputFocusHandler = (value) => {
+  const inputFocusHandler = (newValue) => {
     isBlur.value = false;
-    emit('focus', value);
+    emit('focus', newValue);
   };
 </script>
