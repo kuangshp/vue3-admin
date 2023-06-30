@@ -508,6 +508,25 @@
       (option.label === '至' ? '日期' : option.label || '')
     );
   };
+  // 表格规则
+  const computedRules = computed(() => {
+    // 循环当前column中是否有必填字段
+    let resultObj = {};
+    for (const item of props.formFieldList) {
+      resultObj[item.prop] = [
+        {
+          required: item.required ? true : false,
+          message: `${item.label}必填`,
+          trigger: ['change', 'blur'],
+        },
+      ];
+    }
+    // 将传递进来的替换字段
+    for (const key in props.rules) {
+      resultObj[key] = props.rules[key];
+    }
+    return resultObj;
+  });
   // 资金预报表根据选择的年月限制选择的日期范围
   let pickerTimeOptions = reactive({});
   let pickerStartOptions = reactive({});
@@ -609,15 +628,21 @@
   });
   const customFormRef = ref(null);
   const emit = defineEmits(['query', 'resetForm', 'filedChange', 'clearMethod']);
-  const onSubmit = async () => {
-    await customFormRef.value.validate((valid, fields) => {
-      if (valid) {
-        emit('query', formData.value);
-      } else {
-        console.log('error submit!', fields);
-      }
-    });
+  // 提交获取数据
+  const onSubmit = async (isValid = true) => {
+    if (isValid) {
+      await customFormRef.value.validate((valid, fields) => {
+        if (valid) {
+          emit('query', formData.value);
+        } else {
+          console.log('error submit!', fields);
+        }
+      });
+    } else {
+      emit('query', formData.value);
+    }
   };
+  // 重置字段
   const resetForm = (formEl) => {
     formEl.resetFields();
     initFormDataHandler();
