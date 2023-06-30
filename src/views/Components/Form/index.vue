@@ -213,6 +213,7 @@
       label: '树组件',
       // isMultiple: true,
       // isHidden: true,
+      required: true,
       options: [
         { id: 1, label: '云南', parentId: -1 },
         { id: 2, label: '昆明', parentId: 1 },
