@@ -145,6 +145,7 @@
               :range-separator="column.separator ?? '-'"
               :start-placeholder="column.startPlaceholder ?? '开始时间'"
               :end-placeholder="column.endPlaceholder ?? '结束时间'"
+              @change="(val) => handleChange(val, column)"
             ></el-date-picker>
           </FormWrapper>
           <!-- 时间面板带快捷方式 -->
@@ -167,6 +168,7 @@
               :start-placeholder="column.startPlaceholder ?? '开始时间'"
               :end-placeholder="column.endPlaceholder ?? '结束时间'"
               :shortcuts="column.pickerOptions ? column.pickerOptions : pickerOptionsPanel"
+              @change="(val) => handleChange(val, column)"
             >
             </el-date-picker>
           </FormWrapper>
@@ -197,6 +199,8 @@
               :placeholder="column.placeholder || getPlaceHolder(column)"
               clearable
               :disabled="column.disabled || isDisabledForm"
+              @change="(val) => handleChange(val, column)"
+              @input="(val) => handleChange(val, column)"
             >
               <template #prepend v-if="column.prepend">{{ column.prepend }}</template>
               <template #append v-if="column.append">{{ column.append }}</template>
@@ -219,6 +223,8 @@
               v-model="formData[column.prop]"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               clearable
+              @change="(val) => handleChange(val, column)"
+              @input="(val) => handleChange(val, column)"
               :disabled="column.disabled || isDisabledForm"
             />
           </FormWrapper>
@@ -289,6 +295,7 @@
               v-model="formData[column.prop]"
               :readonly="column.readonly"
               :disabled="column.disabled"
+              @change="(val) => handleChange(val, column)"
             >
               <el-radio
                 v-for="item in column.options || []"
@@ -316,7 +323,7 @@
               :clearable="column?.clearable ?? true"
               :readonly="column?.readonly"
               :disabled="column?.disabled"
-              @change="column.change || function () {}"
+              @change="(val) => handleChange(val, column)"
               :min="column.min"
               :max="column.max"
             ></el-input-number>
@@ -335,6 +342,7 @@
               :disabled="column.disabled || isDisabledForm"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               :append="column.append"
+              @change="(val) => handleChange(val, column)"
             />
           </FormWrapper>
           <!-- 树组件开始 -->
@@ -353,6 +361,7 @@
               :disabled="column.disabled || isDisabledForm"
               :placeholder="column.placeholder"
               :clearable="column.clearable"
+              @change="(val) => handleChange(val, column)"
             ></TreeSelect>
           </FormWrapper>
         </el-col>
@@ -396,10 +405,9 @@
       default: true,
     },
     // 表单数据
-    initFormData: {
+    modelValue: {
       type: Object,
       default: () => {},
-      required: true,
     },
     // 是否为行内元素
     inline: {
@@ -470,7 +478,7 @@
   // 计算表单字段
   let formData = reactive({});
   const initFormDataHandler = () => {
-    // 循环表单的字段,然后和initFormData混入
+    // 循环表单的字段,然后和modelValue混入
     const resultObj = {};
     for (const item of props.formFieldList) {
       if (item.isHidden) {
@@ -479,8 +487,8 @@
         resultObj[item.prop] = null;
       }
     }
-    console.log('计算属性', props.initFormData);
-    formData = toRef({ ...resultObj, ...props.initFormData });
+    console.log('计算属性', props.modelValue);
+    formData = toRef({ ...resultObj, ...props.modelValue });
   };
   // 当前是否折叠在一起
   const isCollapse = ref(props.collapse);
@@ -627,7 +635,13 @@
     initFormDataHandler();
   });
   const customFormRef = ref(null);
-  const emit = defineEmits(['query', 'resetForm', 'filedChange', 'clearMethod']);
+  const emit = defineEmits([
+    'update:modelValue',
+    'query',
+    'resetForm',
+    'filedChange',
+    'clearMethod',
+  ]);
   // 提交获取数据
   const onSubmit = async (isValid = true) => {
     if (isValid) {
@@ -650,7 +664,9 @@
   };
   // 字段改变的事件
   const handleChange = (val, column) => {
-    emit('filedChange', { val: val, prop: column });
+    console.log(formData.value, '表单数据');
+    emit('update:modelValue', formData.value);
+    // emit('filedChange', { val: val, prop: column });
   };
   const clearMethod = (val, column) => {
     if (!column.clearMethod) {

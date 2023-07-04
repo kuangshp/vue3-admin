@@ -89,7 +89,7 @@
   onMounted(() => {
     treeDataList.value = getTreeList(props.options, 'id', 'parentId');
   });
-  const emit = defineEmits(['update:modelValue']);
+  const emit = defineEmits(['update:modelValue', 'change']);
   const selectTreeRef = ref(null);
   const selectTree = ref(null);
   // 点击文本节点
@@ -99,6 +99,7 @@
     newValue.value = node.id;
     selectTree.value.blur();
     emit('update:modelValue', newValue.value);
+    emit('change', newValue.value);
   };
   // 复选框的时候
   const handleCheckChange = (node, checked, indeterminate) => {
@@ -107,6 +108,7 @@
     newValue.value = selectTreeRef.value.getCheckedKeys();
     console.log(newValue.value, '???');
     emit('update:modelValue', newValue.value);
+    emit('change', newValue.value);
   };
   // 多选的时候删除tag
   const removeTagHandler = (val) => {
@@ -139,6 +141,7 @@
             selectTreeRef.value.setCheckedKeys(currentNodeKey.value);
             console.log('执行了----');
             emit('update:modelValue', currentNodeKey.value);
+            emit('change', currentNodeKey.value);
           } else {
             // 且没有匹配成功
             isExit = true;

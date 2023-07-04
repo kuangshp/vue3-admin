@@ -1,8 +1,9 @@
 <template>
   <div>
+    {{ formData }}
     <CustomForm
       :formFieldList="formFields"
-      :initFormData="formData"
+      v-model="formData"
       @query="onSubmitHandler"
       @resetForm="resetFormHandler"
       @iconMethod="iconMethod"
@@ -24,11 +25,11 @@
   const treeData = ref([]);
   const number = ref(null);
   // 定义表单数据
-  const formData = reactive({
+  const formData = ref({
     soblabel: 'hello',
     sobCode: null,
     sobId: null,
-    segmentDescription: null,
+    segmentDescription: '你好吗',
     segmentlabel: null,
     gender: null,
     text1: '你好',
