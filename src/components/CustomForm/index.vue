@@ -36,6 +36,7 @@
               :value-format="column.format ? column.format : 'YYYY-MM-DD'"
               :picker-options="pickerStartOptions"
               :disabled-date="(event) => disabledDate(event, column)"
+              @focus="() => handleFocusDate('start', column)"
               @change="(val) => handleChange(val, column)"
             ></el-date-picker>
           </FormWrapper>
@@ -666,7 +667,7 @@
   const handleChange = (val, column) => {
     console.log(formData.value, '表单数据');
     emit('update:modelValue', formData.value);
-    // emit('filedChange', { val: val, prop: column });
+    emit('filedChange', { val: val, prop: column });
   };
   const clearMethod = (val, column) => {
     if (!column.clearMethod) {
