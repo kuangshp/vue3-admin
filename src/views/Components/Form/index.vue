@@ -45,62 +45,6 @@
     { id: 8, label: '北辰小区', parentId: 3 },
   ]);
   const formFields = reactive([
-    // {
-    //   prop: 'soblabel',
-    //   label: '账套名称',
-    //   append: '元',
-    //   iconMethod: 'iconMethod',
-    // },
-
-    // {
-    //   prop: 'sobCode',
-    //   label: '账套代码',
-    //   // hidden: true,
-    // },
-    // {
-    //   label: '账套名称',
-    //   prop: 'sobId',
-    //   type: 'textarea',
-    //   span: 24,
-    // },
-    // {
-    //   label: '段值名称',
-    //   prop: 'segmentDescription',
-    //   type: 'input',
-    // },
-    // // {
-    // //   label: '段值代码',
-    // //   prop: 'segmentlabel',
-    // //   type: 'number',
-    // // },
-    // {
-    //   label: '性别',
-    //   prop: 'gender',
-    //   type: 'radio',
-    //   options: [
-    //     {
-    //       label: '男',
-    //       value: 1,
-    //     },
-    //     {
-    //       label: '女',
-    //       value: 2,
-    //     },
-    //   ],
-    // },
-
-    // {
-    //   prop: 'date1',
-    //   label: '普通时间',
-    //   type: 'date',
-    //   required: true,
-    // },
-    // {
-    //   type: 'amount',
-    //   prop: 'totalRebateAmount',
-    //   max: 99999999999999.99,
-    //   label: '总退税金额',
-    // },
     {
       prop: 'date1',
       label: '普通时间',
