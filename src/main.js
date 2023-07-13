@@ -18,7 +18,7 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
-
+console.log(import.meta.env.VITE_BASE_API, '当前环境');
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
