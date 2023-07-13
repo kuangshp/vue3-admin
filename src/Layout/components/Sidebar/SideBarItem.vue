@@ -12,7 +12,12 @@
       <span class="submenu-title">{{ route.meta?.title }}</span>
     </template>
     <!-- 递归循环 -->
-    <SideBarItem v-for="item in route.children" :key="item.path" :route="item"></SideBarItem>
+    <SideBarItem
+      v-for="item in route.children"
+      :key="item.path"
+      :route="item"
+      :basePath="item.path"
+    ></SideBarItem>
   </el-sub-menu>
   <!-- 没有子路由的时候 -->
   <template v-else>

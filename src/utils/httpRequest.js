@@ -9,16 +9,11 @@ const prefix = import.meta.env.VITE_BASE_API;
 console.log('当前环境地址', prefix);
 
 let theFullLoading = null;
-let loadingIndex = 0;
-
 const showLoading = () => {
   theFullLoading = fullLoading('数据加载中...');
 };
 const clearLoading = () => {
-  loadingIndex > 0 && loadingIndex--;
-  if (loadingIndex <= 0) {
-    theFullLoading && theFullLoading.close();
-  }
+  theFullLoading && theFullLoading.close();
 };
 
 class HttpRequest {
@@ -87,10 +82,7 @@ class HttpRequest {
     // 处理缓存
     config = this.delBrowserCache(config);
     // 判断加载中
-    if (!loadingIndex) {
-      showLoading();
-    }
-    loadingIndex++;
+    showLoading();
     return config;
   }
 
