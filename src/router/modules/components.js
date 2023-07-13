@@ -1,14 +1,14 @@
 export default {
-  path: '/components',
+  path: '/comp',
   component: () => import('@/Layout/index.vue'),
   meta: {
     title: '自定义组件',
     icon: 'personnel',
   },
-  redirect: '/components/from',
+  redirect: '/comp/from',
   children: [
     {
-      path: '/components/from',
+      path: '/comp/from',
       name: 'from',
       component: () => import('@/views/Components/Form/index.vue'),
       meta: {
@@ -18,7 +18,7 @@ export default {
       },
     },
     {
-      path: '/components/table',
+      path: '/comp/table',
       name: 'table',
       component: () => import('@/views/Components/Table/index.vue'),
       meta: {

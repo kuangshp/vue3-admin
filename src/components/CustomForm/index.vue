@@ -21,7 +21,6 @@
           <FormWrapper
             v-if="column.type == 'date'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -44,7 +43,6 @@
           <FormWrapper
             v-if="['startDateRangePicker'].includes(column.type)"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -57,7 +55,6 @@
               type="date"
               :placeholder="column.placeholder || getPlaceHolder(column)"
               value-format="YYYY-MM-DD"
-              :disabled-date="disabledDateRangePick"
               @focus="() => handleFocusDate('start', column)"
               @change="(val) => handleChange(val, column)"
             ></el-date-picker>
@@ -66,7 +63,6 @@
           <FormWrapper
             v-if="['endDateRangePicker'].includes(column.type)"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -87,7 +83,6 @@
           <FormWrapper
             v-if="column.type == 'startDateRangePickerTime'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -109,7 +104,6 @@
           <FormWrapper
             v-if="column.type == 'endDateRangePickerTime'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -131,7 +125,6 @@
           <FormWrapper
             v-if="column.type == 'dateRange'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -153,7 +146,6 @@
           <FormWrapper
             v-if="column.type == 'dateRangePanel'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -177,7 +169,6 @@
           <FormWrapper
             v-if="column.type == 'text'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
             style="height: 32.5px"
@@ -188,7 +179,6 @@
           <FormWrapper
             v-if="column.type == 'input' || !column.type"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -212,7 +202,6 @@
           <FormWrapper
             v-if="column.type == 'textarea'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -233,7 +222,6 @@
           <FormWrapper
             v-if="column.type == 'select'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -287,7 +275,6 @@
           <FormWrapper
             v-else-if="column.type === 'radio'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
             :ref="column.prop"
@@ -314,7 +301,6 @@
           <FormWrapper
             v-if="column.type == 'number'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
             :ref="column.prop"
@@ -333,7 +319,6 @@
           <FormWrapper
             v-if="column.type == 'inputNumber'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
             :ref="column.prop"
@@ -350,7 +335,6 @@
           <FormWrapper
             v-if="column.type == 'treeSelect'"
             v-bind="$attrs"
-            v-on="$listeners"
             :formData="formData"
             :column="column"
           >
@@ -369,7 +353,7 @@
       </el-row>
       <!-- 按钮 -->
       <el-row v-show="isShowBtn" type="flex" justify="end">
-        <el-col :span="span" style="text-align: end; padding-bottom: 30px">
+        <el-col :span="5" style="text-align: end; padding-bottom: 30px">
           <div class="action-btn">
             <el-button type="primary" class="button-80" size="small" @click="onSubmit"
               >查询</el-button
