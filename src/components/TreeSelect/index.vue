@@ -41,7 +41,7 @@
   import { onMounted, reactive } from 'vue';
   const props = defineProps({
     modelValue: {
-      type: [String, Array],
+      type: [String, Array, Number],
     },
     // 是否多选
     isMultiple: {
