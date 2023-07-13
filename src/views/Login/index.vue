@@ -48,7 +48,7 @@
   import { useAppStore } from '@/stores/app';
   import { AUTH_Token_NAME } from '@/constant';
   import { validatePassword } from './rule';
-  import { LoginService } from '@/services';
+  // import { LoginService } from '@/services';
   const appStore = useAppStore();
   const loginForm = ref({
     username: 'admin',
@@ -90,13 +90,14 @@
     // 1.进行表单验证
     loginFromRef.value.validate(async (valid) => {
       if (!valid) return;
-      const result = await LoginService.loginApi(loginForm.value);
-      console.log(result, '登录返回数据');
+      // const result = await LoginService.loginApi(loginForm.value);
+      // console.log(result, '登录返回数据');
       // 2.触发登陆操作
       loading.value = true;
       window.localStorage.setItem(AUTH_Token_NAME, 'test');
       appStore.setGlobalToken('test1');
       appStore.setGlobalUserInfo({ username: 'admin' });
+      appStore.getMenusApi();
       router.push('/');
       // store
       //   .dispatch('user/login', loginForm.value)

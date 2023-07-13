@@ -26,7 +26,7 @@
           v-for="route in menuRoutes"
           :key="route.path"
           :route="route"
-          :base-path="route.path"
+          :basePath="route.path"
         ></SideBarItem>
       </el-menu>
     </el-scrollbar>

@@ -9,7 +9,7 @@ export const useAppStore = defineStore('app', {
       size: 'default',
       language: 'zh-CN',
       // TODO 实际开发替换模拟后端返回的菜单列表
-      authMenusList: ['account', 'resources', 'accountDetail', 'baidu', 'role', 'from', 'table'],
+      authMenusList: [],
     };
   },
   getters: {},
@@ -21,8 +21,21 @@ export const useAppStore = defineStore('app', {
     setGlobalToken(token) {
       this.globalToken = token;
     },
+    // 模拟获取菜单接口
+    getMenusApi() {
+      this.authMenusList = [
+        'account',
+        'resources',
+        'accountDetail',
+        'baidu',
+        'role',
+        'from',
+        'table',
+      ];
+    },
     clearGlobalToken() {
       this.globalToken = null;
+      this.authMenusList = [];
     },
     setGlobalUserInfo(userInfo) {
       this.globalUserInfo = userInfo;
