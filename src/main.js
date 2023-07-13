@@ -6,6 +6,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import './utils/httpRequest';
 // 注册element-plus
 import installElementPlus from './plugins/element';
 // store 数据持久化

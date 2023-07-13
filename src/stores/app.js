@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import router from '@/router';
 export const useAppStore = defineStore('app', {
   state: () => {
     return {
@@ -25,6 +26,12 @@ export const useAppStore = defineStore('app', {
     },
     setGlobalUserInfo(userInfo) {
       this.globalUserInfo = userInfo;
+    },
+    logout() {
+      // 登出操作
+      this.clearGlobalToken();
+      window.localStorage.clear();
+      router.push('/login');
     },
   },
   // 数据持久化

@@ -33,14 +33,10 @@
   import Hamburger from './components/Hamburger/index.vue';
   import Breadcrumb from './components/Breadcrumb/index.vue';
   import Screenfull from './components/Screenfull/index.vue';
-  import { useRouter } from 'vue-router';
   import { useAppStore } from '@/stores/app';
   const appStore = useAppStore();
-  const router = useRouter();
   const logout = () => {
-    appStore.clearGlobalToken();
-    window.localStorage.clear();
-    router.push('/login');
+    appStore.logout();
   };
 </script>
 
