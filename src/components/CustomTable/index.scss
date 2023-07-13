@@ -1,0 +1,95 @@
+.custom-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.03);
+  .tools {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0px;
+    position: relative;
+    .user-action {
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      display: flex;
+      flex-direction: row;
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin: 0 5px;
+      }
+    }
+  }
+  .el-table {
+    width: 100%;
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: none;
+  }
+
+  .pagination {
+    text-align: end;
+    margin: 1.5rem 2rem;
+    margin-left: 0;
+    justify-content: flex-end;
+    ::v-deep .btn-next,
+    ::v-deep .btn-prev,
+    ::v-deep .el-pager li {
+      border: 1px solid #dcdfe6;
+      border-radius: 6px !important;
+    }
+
+    ::v-deep .el-pager {
+      li:first-child {
+        margin-left: 10px;
+      }
+
+      li {
+        margin-right: 10px;
+        min-width: 32px;
+      }
+
+      .active {
+        color: #fff;
+        background-color: #e5e5e5;
+      }
+    }
+
+    .pagination-btn {
+      display: inline-block;
+      margin: 0 10px;
+      width: 34px;
+      height: 32px;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px !important;
+      background-size: auto 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-right: -5px;
+      cursor: pointer;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      &:nth-of-type(2),
+      &:nth-of-type(5) {
+        display: none !important;
+      }
+
+      &:nth-of-type(1) {
+        background-image: url(@/assets/images/goHomePage.png);
+      }
+
+      &:nth-of-type(6) {
+        background-image: url(@/assets/images/goLastPage.png);
+      }
+    }
+
+    ::v-deep .el-input__inner {
+      border-radius: 6px !important;
+    }
+  }
+}

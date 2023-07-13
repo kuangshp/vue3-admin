@@ -13,11 +13,13 @@ declare module '@vue/runtime-core' {
     AppMain: typeof import('./layout/components/AppMain/index.vue')['default'];
     Breadcrumb: typeof import('./layout/components/AppHeader/components/Breadcrumb/index.vue')['default'];
     CustomForm: typeof import('./components/CustomForm/index.vue')['default'];
+    CustomTable: typeof import('./components/CustomTable/index.vue')['default'];
     ElAvatar: typeof import('element-plus/es')['ElAvatar'];
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb'];
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem'];
     ElButton: typeof import('element-plus/es')['ElButton'];
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox'];
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup'];
     ElCol: typeof import('element-plus/es')['ElCol'];
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker'];
     ElDropdown: typeof import('element-plus/es')['ElDropdown'];
@@ -31,12 +33,15 @@ declare module '@vue/runtime-core' {
     ElMenu: typeof import('element-plus/es')['ElMenu'];
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem'];
     ElOption: typeof import('element-plus/es')['ElOption'];
+    ElPagination: typeof import('element-plus/es')['ElPagination'];
     ElRadio: typeof import('element-plus/es')['ElRadio'];
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup'];
     ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSelect: typeof import('element-plus/es')['ElSelect'];
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
+    ElTable: typeof import('element-plus/es')['ElTable'];
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
     ElTree: typeof import('element-plus/es')['ElTree'];
     FormWrapper: typeof import('./components/CustomForm/components/FormWrapper/index.vue')['default'];
     Hamburger: typeof import('./layout/components/AppHeader/components/Hamburger/index.vue')['default'];
@@ -49,5 +54,8 @@ declare module '@vue/runtime-core' {
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default'];
     TagsView: typeof import('./layout/components/TagsView/index.vue')['default'];
     TreeSelect: typeof import('./components/TreeSelect/index.vue')['default'];
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective'];
   }
 }
