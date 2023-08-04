@@ -74,4 +74,7 @@
       white-space: nowrap;
     }
   }
+  ::v-deep .el-menu {
+    border-right: none !important;
+  }
 </style>
