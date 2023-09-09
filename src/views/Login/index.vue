@@ -49,6 +49,8 @@
   import { AUTH_Token_NAME } from '@/constant';
   import { validatePassword } from './rule';
   // import { LoginService } from '@/services';
+  import { useTagsViewStore } from '@/stores/tagsView';
+  const tagsViewStore = useTagsViewStore();
   const appStore = useAppStore();
   const loginForm = ref({
     username: 'admin',
@@ -98,6 +100,8 @@
       appStore.setGlobalToken('test1');
       appStore.setGlobalUserInfo({ username: 'admin' });
       appStore.getMenusApi();
+      // 全部关闭
+      tagsViewStore.delAllView();
       router.push('/');
       // store
       //   .dispatch('user/login', loginForm.value)

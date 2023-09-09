@@ -1,6 +1,6 @@
 export default {
   path: '/comp',
-  component: () => import('@/Layout/index.vue'),
+  // component: () => import('@/Layout/index.vue'),
   meta: {
     title: '自定义组件',
     icon: 'personnel',

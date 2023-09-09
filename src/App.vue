@@ -1,12 +1,10 @@
 <template>
-  <el-config-provider :locale="zhCn">
-    <RouterView />
-  </el-config-provider>
+  <Layout></Layout>
 </template>
 
 <script setup>
-  import { ElConfigProvider } from 'element-plus';
-  import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+  import Layout from './Layout/index.vue';
+
   import { aesDecrypt } from '@/utils';
   console.log(
     aesDecrypt('ytCfMOa5qUknEuEBS5qrUIYtVmM5xz6MwdIMYyFoyv4=', 'lmd87x8qz4gbw51a'),

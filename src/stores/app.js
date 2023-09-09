@@ -31,6 +31,7 @@ export const useAppStore = defineStore('app', {
         'role',
         'from',
         'table',
+        'coupon',
       ];
     },
     clearGlobalToken() {

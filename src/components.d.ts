@@ -51,6 +51,7 @@ declare module 'vue' {
     SideBarItem: typeof import('./layout/components/Sidebar/SideBarItem.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
     TagsView: typeof import('./layout/components/TagsView/index.vue')['default']
+    TagViewItem: typeof import('./layout/components/TagsView/TagViewItem.vue')['default']
     TreeSelect: typeof import('./components/TreeSelect/index.vue')['default']
   }
   export interface ComponentCustomProperties {

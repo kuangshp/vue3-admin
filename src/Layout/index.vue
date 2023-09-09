@@ -1,18 +1,25 @@
 <template>
-  <div class="app-wrapper" :class="[appStore.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
-    <!-- 左边导航 -->
-    <Sidebar class="sidebar-container" :sidebarOpened="appStore.sidebarOpened"></Sidebar>
-    <!-- 右边内容区域 -->
-    <div class="main-container">
-      <!-- 头部导航 -->
-      <div class="fixed-header">
-        <AppHeader />
-        <TagsView />
+  <el-config-provider :locale="zhCn">
+    <template v-if="$route.meta.isNotLayout">
+      <RouterView />
+    </template>
+    <template v-else>
+      <div class="app-wrapper" :class="[appStore.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
+        <!-- 左边导航 -->
+        <Sidebar class="sidebar-container" :sidebarOpened="appStore.sidebarOpened"></Sidebar>
+        <!-- 右边内容区域 -->
+        <div class="main-container">
+          <!-- 头部导航 -->
+          <div class="fixed-header">
+            <AppHeader />
+            <TagsView />
+          </div>
+          <!-- 内容区域 -->
+          <AppMain />
+        </div>
       </div>
-      <!-- 内容区域 -->
-      <AppMain />
-    </div>
-  </div>
+    </template>
+  </el-config-provider>
 </template>
 
 <script setup>
@@ -20,6 +27,8 @@
   import Sidebar from './components/Sidebar/index.vue';
   import AppMain from './components/AppMain/index.vue';
   import TagsView from './components/TagsView/index.vue';
+  import { ElConfigProvider } from 'element-plus';
+  import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
   import { useAppStore } from '@/stores/app';
   const route = useRoute();
   const appStore = useAppStore();

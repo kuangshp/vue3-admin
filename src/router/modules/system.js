@@ -1,6 +1,6 @@
 export default {
   path: '/system',
-  component: () => import('@/Layout/index.vue'),
+  // component: () => import('@/Layout/index.vue'),
   meta: {
     title: '系统管理',
     icon: 'personnel',
