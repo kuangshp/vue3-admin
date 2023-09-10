@@ -15,7 +15,9 @@
             <TagsView />
           </div>
           <!-- 内容区域 -->
-          <AppMain />
+          <el-scrollbar>
+            <AppMain />
+          </el-scrollbar>
         </div>
       </div>
     </template>
@@ -47,12 +49,14 @@
   }
   .app-main {
     /* 浏览器可视区域的高度 100vh */
-    min-height: calc(100vh - 50px - 43px);
+    // min-height: calc(100vh - 50px - 43px);
+    min-height: 100vh;
     width: 100%;
     position: relative;
     overflow: hidden;
     padding: 104px 20px 20px 20px;
     box-sizing: border-box;
+    background: #f2f3f5;
   }
   .fixed-header {
     position: fixed;
@@ -198,7 +202,7 @@
   }
 
   .main-container {
-    min-height: 100%;
+    height: 100%;
     transition: margin-left 0.28s;
     margin-left: 210px;
     position: relative;

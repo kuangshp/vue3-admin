@@ -55,7 +55,6 @@
   import { routes } from '@/router';
   // 渲染路由
   const menuRoutes = computed(() => routes);
-  console.log(menuRoutes, '路由');
 </script>
 
 <style lang="scss" scoped>

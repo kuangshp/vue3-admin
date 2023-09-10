@@ -64,7 +64,6 @@
   // 点击跳转外部链接(可能是单点登录进入到另外一个系统)
   const clickLinkHandler = (route) => {
     if (!route.path) {
-      console.log(route.meta.linkUrl, '点击');
       if (isExternal(route.meta.linkUrl)) {
         window.open(route.meta.linkUrl, '_blank');
       } else {

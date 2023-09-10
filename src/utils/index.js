@@ -6,3 +6,4 @@ export * from './httpRequest';
 export * from './object';
 export * from './storage';
 export * from './decrypt';
+export * from './date';

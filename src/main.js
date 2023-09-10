@@ -1,18 +1,17 @@
 import 'virtual:svg-icons-register';
 import './assets/css/main.scss';
-// import 'element-plus/dist/index.css';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
 import './utils/httpRequest';
-// 注册element-plus
-import installElementPlus from './plugins/element';
+
 // store 数据持久化
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-// 自定义图标
-import installIcons from './icons';
+import mUi from './components';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 const app = createApp(App);
 // 全部的字体图标
@@ -24,8 +23,6 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 
-app.use(router);
-app.use(installElementPlus);
-app.use(installIcons);
+app.use(router).use(ElementPlus).use(mUi);
 
 app.mount('#app');
