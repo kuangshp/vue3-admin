@@ -46,6 +46,12 @@
               <!-- 上传提示文案 -->
               <slot name="uploadTip"></slot>
             </el-upload>
+            <!-- 数字输入框 -->
+            <InputNumber
+              v-if="item.type === 'number'"
+              v-model.number="model[item.prop]"
+              v-bind="item.attrs"
+            ></InputNumber>
             <!-- 富文本编辑器 -->
             <div id="editor" v-if="item.type === 'editor'"></div>
           </el-form-item>

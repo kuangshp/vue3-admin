@@ -28,14 +28,22 @@ export const tableOptions = [
     align: 'center',
     width: 180,
   },
-]
-
+];
 
 export const formOption = [
   {
     type: 'input',
     label: '用户名',
     prop: 'username',
+    required: true,
+    attrs: {
+      clearable: true,
+    },
+  },
+  {
+    type: 'number',
+    label: '排序',
+    prop: 'sort',
     required: true,
     attrs: {
       clearable: true,

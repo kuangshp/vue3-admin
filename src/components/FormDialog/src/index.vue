@@ -43,7 +43,7 @@
     // 最大高度
     maxHeight: {
       type: Number,
-      default: 200,
+      default: 300,
     },
     // 显示和隐藏
     visible: {

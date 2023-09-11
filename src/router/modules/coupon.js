@@ -3,7 +3,7 @@ export default {
   name: 'coupon',
   component: () => import('@/views/Coupon/index.vue'),
   meta: {
-    title: '优惠劵',
+    title: '自定义组件库',
     icon: 'personnel-manage',
     keepAlive: true,
     // isNotLayout: true,
