@@ -23,7 +23,7 @@
     },
     placeholder: {
       type: String,
-      default: '请输入',
+      default: '请输入数字',
     },
     disabled: {
       type: Boolean,
