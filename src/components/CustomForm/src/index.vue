@@ -185,14 +185,19 @@
   const formOptions = ref([]);
   // 富文本
   const edit = ref();
-  const initForm = () => {
+  const initForm = (isReset) => {
     if (props.options && props.options.length) {
       let m = {};
       let r = {};
       let o = [];
+      if (isReset) {
+        m = cloneDeep(model.value);
+      }
       for (const option of props.options) {
         // 隐藏字段
         if (option.isHidden && option.isHidden.value) {
+          // 隐藏的字段值要清空
+          m[option.prop] = null;
           continue;
         }
         // 处理富文本编辑器
@@ -211,11 +216,13 @@
             }
           });
         }
-        // 处理表单反填数据
-        if (props?.formData && Object.keys(props?.formData).length) {
-          m[option.prop] = props.formData[option.prop] || null;
-        } else {
-          m[option.prop] = null;
+        // 处理表单反填数据(避免重置的时候清空数据)
+        if (!isReset) {
+          if (props?.formData && Object.keys(props?.formData).length) {
+            m[option.prop] = props.formData[option.prop] || null;
+          } else {
+            m[option.prop] = null;
+          }
         }
         // 判断如果写了required的时候直接手动添加一个规则
         if (option.required) {
@@ -244,8 +251,7 @@
   watch(
     () => props.options,
     () => {
-      initForm();
-      console.log('触发');
+      initForm(isReset);
     },
     { deep: true }
   );
