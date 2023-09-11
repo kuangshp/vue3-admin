@@ -37,6 +37,8 @@
 <script setup>
   import { defineProps, ref } from 'vue';
   import { CloseBold } from '@element-plus/icons-vue';
+  import { useTagsViewStore } from '@/stores/tagsView';
+  const tagsViewStore = useTagsViewStore();
   const route = useRoute();
   const router = useRouter();
   const props = defineProps({
