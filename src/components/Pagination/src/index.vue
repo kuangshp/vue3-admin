@@ -1,8 +1,8 @@
 <template>
   <el-pagination
     v-bind="$attrs"
-    v-model:pageNumber="pageNumber"
-    v-model:pageSize="pageSize"
+    v-model:current-page="pageNumber"
+    v-model:page-size="pageSize"
     :page-sizes="pageSizes"
     :layout="layout"
     :total="total"
