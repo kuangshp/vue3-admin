@@ -23,6 +23,7 @@
     "element-plus": "^2.3.8",
     "husky": "^8.0.3",
     "install": "^0.13.0",
+    "js-md5": "^0.8.3",
     "moment": "^2.29.4",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",

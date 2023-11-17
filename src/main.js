@@ -7,7 +7,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
-import './utils/httpRequest';
+// import './utils/httpRequest';
 
 // store 数据持久化
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
