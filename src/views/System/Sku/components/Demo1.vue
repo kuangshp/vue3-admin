@@ -179,10 +179,12 @@
     const attrValue = [];
 
     // 获取选中的属性
+    const checkList = [];
     for (const item of skuAttribute) {
       attrValue.push(item.propertyList.filter((it) => item.checkList.includes(it.id)));
-      checkPropertyList.value.push(item.id);
+      checkList.push(item.id);
     }
+    checkPropertyList.value = checkList;
     console.log(attrValue, '???');
     let skuList = [];
     if (attrValue.length == 0) {
