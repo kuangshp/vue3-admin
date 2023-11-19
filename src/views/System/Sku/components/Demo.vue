@@ -110,13 +110,13 @@
     for (const item of skuAttribute) {
       attrValue.push(item.values);
     }
-    console.log(attrValue, '111');
 
     let skuList = [];
     if (attrValue.length == 0) {
       tableData.value = [];
       return;
     }
+    console.log(attrValue, '???');
     // 循环组成sku数据
     skuList = attrValue
       .reduce((pre, cur) => {

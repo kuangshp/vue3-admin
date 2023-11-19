@@ -1,6 +1,6 @@
 <template>
   <div style="background: #fff; padding: 20px">
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+    <el-tabs v-model="activeName" class="demo-tabs">
       <el-tab-pane label="Demo演示" name="first">
         <Demo></Demo>
       </el-tab-pane>
