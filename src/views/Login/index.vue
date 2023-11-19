@@ -63,9 +63,9 @@
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { useAppStore } from '@/stores/app';
-  import { AUTH_Token_NAME } from '@/constant';
+  import { AUTH_TOKEN_NAME } from '@/constant';
   import { validatePassword } from './rule';
-  // import { LoginService } from '@/services';
+  import { LoginService } from '@/services';
   import { useTagsViewStore } from '@/stores/tagsView';
   const tagsViewStore = useTagsViewStore();
   const appStore = useAppStore();
@@ -109,11 +109,11 @@
     // 1.进行表单验证
     loginFromRef.value.validate(async (valid) => {
       if (!valid) return;
-      // const result = await LoginService.loginApi(loginForm.value);
-      // console.log(result, '登录返回数据');
+      const result = await LoginService.loginApi(loginForm.value);
+      console.log(result, '登录返回数据');
       // 2.触发登陆操作
       loading.value = true;
-      window.localStorage.setItem(AUTH_Token_NAME, 'test');
+      window.localStorage.setItem(AUTH_TOKEN_NAME, 'test');
       appStore.setGlobalToken('test1');
       appStore.setGlobalUserInfo({ username: 'admin' });
       appStore.getMenusApi();

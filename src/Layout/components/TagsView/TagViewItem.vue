@@ -48,7 +48,7 @@
   const currentRouterRef = ref(null);
   // 是否是当前应该激活的tag
   const isActive = (tag) => {
-    return tag.path === route.path;
+    return tag && tag.path === route.path;
   };
 
   const isAffix = (tag) => {
@@ -114,10 +114,14 @@
   };
   // 关闭其他
   const handleCloseOtherTag = (view) => {
+    console.log(view, '??');
+    if (!view) return;
     tagsViewStore.delOthersViews(view);
     if (!isActive(view)) {
       // 删除其他tag后 让该view路由激活
-      router.push(view.path);
+      if (view && view.path) {
+        router.push(view.path);
+      }
     }
   };
 </script>

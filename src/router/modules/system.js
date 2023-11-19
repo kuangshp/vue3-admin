@@ -57,5 +57,14 @@ export default {
         icon: 'permission',
       },
     },
+    {
+      path: '/system/sku',
+      name: 'sku',
+      component: () => import('@/views/System/Sku/index.vue'),
+      meta: {
+        title: '商品sku管理',
+        icon: 'permission',
+      },
+    },
   ],
 };

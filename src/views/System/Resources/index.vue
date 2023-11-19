@@ -22,7 +22,6 @@
 <script setup>
   console.log('资源管理');
   import { ref } from 'vue';
-  import { genFileId } from 'element-plus';
   import axios from 'axios';
   import md5 from 'js-md5';
 
