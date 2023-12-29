@@ -24,6 +24,7 @@
     "husky": "^8.0.3",
     "install": "^0.13.0",
     "js-md5": "^0.8.3",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
