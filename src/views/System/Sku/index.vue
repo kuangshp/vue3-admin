@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #fff; padding: 20px">
+  <div class="app-content">
     <el-tabs v-model="activeName" class="demo-tabs">
       <el-tab-pane label="Demo演示" name="first">
         <Demo></Demo>

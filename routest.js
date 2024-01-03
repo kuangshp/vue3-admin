@@ -9,6 +9,16 @@ export const routeList = [
     alwaysShow: true,
     children: [
       {
+        path: 'tenant',
+        name: 'tenant',
+        component: 'System/Tenant/index',
+        meta: {
+          title: '租户管理',
+          icon: 'personnel-manage',
+          keepAlive: false,
+        },
+      },
+      {
         path: 'account',
         name: 'account',
         component: 'System/Account/index',

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div class="app-content"
     >资源中心
     <el-upload
       ref="uploadRef"

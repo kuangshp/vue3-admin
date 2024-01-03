@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-content">
     <div>角色中心</div>
     <input placeholder="请输入" />
   </div>
