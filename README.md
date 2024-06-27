@@ -1,7 +1,7 @@
-# gameclound-admin
+# admin-web
 
 #### 介绍
-圈外社-后台管理
+后台管理
 
 #### 软件架构
 软件架构说明
