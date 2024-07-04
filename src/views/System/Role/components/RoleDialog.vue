@@ -123,7 +123,7 @@ const confirmHandler = async () => {
       console.log(formData.value);
       const postData = {
         ...formData.value,
-        resourceList: allCheckedNodes.value,
+        resourceList: [...treeRef.value.getCheckedKeys(),...treeRef.value.getHalfCheckedKeys()],
       };
       if (formData.value.id) {
         await RoleService.modifyByIdApi(formData.value.id, postData);
