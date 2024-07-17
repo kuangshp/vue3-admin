@@ -138,7 +138,7 @@
       display: flex;
       flex-direction: row;
       .login-logo {
-        background-image: url('@/assets/images/ad.png');
+        background-image: url('@/assets/images/login1.svg');
         background-repeat: no-repeat;
         background-size: cover;
         flex-basis: 60%;
