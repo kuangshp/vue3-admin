@@ -346,12 +346,10 @@
     background: #fff;
     padding: 20px;
     box-sizing: border-box;
-    ::v-deep {
-      .el-upload {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    :deep(.el-upload) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
   .button-80 {

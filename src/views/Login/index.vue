@@ -193,20 +193,17 @@
           width: 105px;
           height: 35px;
         }
-
-        ::v-deep {
-          .el-input {
-            width: 95%;
-            border: none;
-          }
-          .el-form-item {
-            width: 100%;
-            margin-bottom: 0 !important;
-          }
-          .el-input__wrapper {
-            border: none;
-            box-shadow: none;
-          }
+        :deep(.el-input) {
+          width: 95%;
+          border: none;
+        }
+        :deep(.el-form-item) {
+          width: 100%;
+          margin-bottom: 0 !important;
+        }
+        :deep(.el-input__wrapper) {
+          border: none;
+          box-shadow: none;
         }
       }
     }

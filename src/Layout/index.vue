@@ -181,24 +181,22 @@
       }
     }
 
-    ::v-deep {
-      .el-menu--collapse {
-        .el-sub-menu {
-          & > .el-sub-menu__title {
-            & > span {
-              height: 0;
-              width: 0;
-              overflow: hidden;
-              visibility: hidden;
-              display: inline-block;
-            }
-            & > .el-sub-menu__icon-arrow {
-              height: 0;
-              width: 0;
-              overflow: hidden;
-              visibility: hidden;
-              display: inline-block;
-            }
+    :deep(.el-menu--collapse) {
+      .el-sub-menu {
+        & > .el-sub-menu__title {
+          & > span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+          & > .el-sub-menu__icon-arrow {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
           }
         }
       }

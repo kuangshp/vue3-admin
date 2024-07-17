@@ -58,10 +58,8 @@
 </script>
 
 <style lang="scss" scoped>
-  ::v-deep {
-    .scrollbar-wrapper.el-scrollbar {
-      height: calc(100vh - 70px);
-    }
+  :v-deep(.scrollbar-wrapper.el-scrollbar) {
+    height: calc(100vh - 70px);
   }
   .logo-container {
     height: v-bind(logoHeight) + 'px';
@@ -78,7 +76,7 @@
       white-space: nowrap;
     }
   }
-  ::v-deep .el-menu {
+  :deep(.el-menu) {
     border-right: none !important;
   }
 </style>

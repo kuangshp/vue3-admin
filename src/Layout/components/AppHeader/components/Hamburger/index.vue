@@ -17,7 +17,7 @@
 <style lang="scss" scoped>
   .hamburger-container {
     padding: 0 16px;
-    ::v-deep .svg-icon {
+    :deep(.svg-icon) {
       font-size: 25px;
       margin-top: 13px;
     }
