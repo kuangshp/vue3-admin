@@ -7,6 +7,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import formCreate from '@form-create/element-ui'
 import './utils/httpRequest';
 
 // store 数据持久化
@@ -25,7 +26,7 @@ console.log(import.meta.env.VITE_BASE_API, '当前环境');
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
-
+app.use(formCreate);
 app.use(router).use(ElementPlus).use(mUi).use(VXETable);
 
 app.mount('#app');

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "@form-create/element-ui": "^3.2.1",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "next",
     "axios": "^1.4.0",
