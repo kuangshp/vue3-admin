@@ -144,7 +144,7 @@
         flex-basis: 60%;
       }
       .login-form {
-        padding: 30px 20px;
+        padding: 100px 20px;
         flex-basis: 40%;
         box-sizing: border-box;
         .title {
