@@ -13,9 +13,9 @@
         class="sidebar-container-menu"
         mode="vertical"
         :default-active="activeMenu"
-        background-color="#304156"
-        text-color="#bfcbd9"
-        active-text-color="#fff"
+        background-color="#fff"
+        text-color="#4e5969"
+        active-text-color="#409eff"
         :collapse="!props.sidebarOpened"
         :collapse-transition="false"
         :unique-opened="true"
@@ -69,7 +69,7 @@
     justify-content: center;
     .logo-title {
       margin-left: 10px;
-      color: #fff;
+      color: #4e5969;
       font-weight: 600;
       line-height: 50px;
       font-size: 16px;

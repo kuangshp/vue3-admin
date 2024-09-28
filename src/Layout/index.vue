@@ -70,7 +70,7 @@
     width: 210px !important;
     height: 100%;
     position: fixed;
-    background: #304156;
+    background: #fff;
     top: 0;
     bottom: 0;
     left: 0;
