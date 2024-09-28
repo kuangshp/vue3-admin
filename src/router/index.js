@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory,createWebHistory } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 import { isHttp } from '@/utils';
 import NProgress from 'nprogress';
@@ -42,7 +42,7 @@ export const constantRoutes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: constantRoutes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
