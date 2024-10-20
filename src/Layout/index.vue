@@ -76,7 +76,8 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
-    border-right: 1px solid #f2f3f5;
+    border-right: 1px solid #ddd;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.08);
     // 重置 element-plus 的css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;

@@ -79,4 +79,9 @@
   :deep(.el-menu) {
     border-right: none !important;
   }
+  /* 自定义 el-menu 项的鼠标悬停样式 */
+  :deep(.el-menu-item:hover) {
+    background-color: #f2f3f5; /* 更改悬停时的背景颜色 */
+  }
 </style>
+
