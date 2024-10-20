@@ -43,7 +43,7 @@
       default: false,
     },
   });
-  const title = ref('管理系统');
+  const title = ref('OCR图像识别');
 
   const route = useRoute();
   // 根据路由路径 对应 当前激活的菜单 页面刷新后 激活当前路由匹配的菜单
