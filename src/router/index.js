@@ -86,7 +86,11 @@ router.beforeEach((to, form, next) => {
           appStore.logout();
         })
       } else {
-        next()
+        if (to.path == '/') {
+          next({ path: '/home' ,replace:true});
+        } else {
+          next()
+        }
       }
     }
   } else {
