@@ -37,16 +37,21 @@
 </template>
 
 <script setup>
+  import { useRouter } from 'vue-router';
   import Hamburger from './components/Hamburger/index.vue';
   import Breadcrumb from './components/Breadcrumb/index.vue';
   import Screenfull from './components/Screenfull/index.vue';
   import { useAppStore } from '@/stores/app';
   import { AccountService } from '@/services';
   import { ElMessage } from 'element-plus';
+  
   const appStore = useAppStore();
+  const router = useRouter();
   const logout = async () => {
-    await AccountService.logoutApi();
-    appStore.logout();
+    // await AccountService.logoutApi();
+    appStore.clearGlobalToken();
+    window.localStorage.clear();
+    router.push('/login');
   };
   const isVisibleDialog = ref(false);
   const formData = ref({});
@@ -116,7 +121,7 @@
       align-items: center;
       float: right;
       padding-right: 16px;
-      
+
       :deep(.avatar-container) {
         cursor: pointer;
         .avatar-wrapper {
@@ -141,3 +146,4 @@
     }
   }
 </style>
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    111
+    详情
   </div>
 </template>
 

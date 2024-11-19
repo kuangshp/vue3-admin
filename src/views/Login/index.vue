@@ -101,10 +101,13 @@
       try {
         const { result } = await LoginService.loginApi(loginForm.value);
         loading.value = false;
-        window.localStorage.setItem(AUTH_TOKEN_NAME, result.token);
+        // window.localStorage.setItem(AUTH_TOKEN_NAME, result.token);
+        appStore.setGlobalToken(result.token);
+        appStore.setGlobalUserInfo(result);
+        // 获取菜单
         // 全部关闭
         tagsViewStore.delAllView();
-        router.push('/home');
+        router.push({path:'/home'});
       } catch (e) {
         loading.value = false;
         console.log(e);
