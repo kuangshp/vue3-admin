@@ -12,84 +12,53 @@
         <div class="avatar-wrapper">
           <!-- <el-avatar shape="square" :size="40"></el-avatar> -->
           <!-- <i class="el-icon-s-tools"></i> -->
-          <div>{{ appStore.globalUserInfo.username ?? '管理员账号' }}</div>
+          <div>{{ appStore.globalUserInfo.userName ?? '管理员账号' }}</div>
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
-            <el-dropdown-item @click="modifyPasswordHandler">修改密码</el-dropdown-item>
-            <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="modifyUserInfoHandler">个人信息</el-dropdown-item>
+            <el-dropdown-item divided @click="modifyPasswordHandler">修改密码</el-dropdown-item>
+            <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
 
       <!-- 修改密码弹框 -->
-      <FormDialog
-        title="修改密码"
-        width="40%"
-        :maxHeight="400"
-        v-model:visible="isVisibleDialog"
-        :options="formOptionList"
-        :formData="formData"
-        @getFormData="getFormData"
-      ></FormDialog>
+      <ModifyDialog ref="modifyDialogRef"></ModifyDialog>
+      <!-- 个人信息 -->
+      <ModifyUserInfoDialog ref="modifyUserInfoDialogRef"></ModifyUserInfoDialog>
     </div>
   </div>
 </template>
 
 <script setup>
+  import { useRouter } from 'vue-router';
   import Hamburger from './components/Hamburger/index.vue';
   import Breadcrumb from './components/Breadcrumb/index.vue';
   import Screenfull from './components/Screenfull/index.vue';
+  import ModifyDialog from './components/ModifyDialog.vue';
+  import ModifyUserInfoDialog from './components/ModifyUserInfoDialog.vue';
   import { useAppStore } from '@/stores/app';
-  import { AccountService } from '@/services';
-  import { ElMessage } from 'element-plus';
+
   const appStore = useAppStore();
+  const router = useRouter();
   const logout = async () => {
-    await AccountService.logoutApi();
-    appStore.logout();
+    // await AccountService.logoutApi();
+    appStore.clearGlobalToken();
+    window.localStorage.clear();
+    router.push('/login');
   };
-  const isVisibleDialog = ref(false);
-  const formData = ref({});
-  const formOptionList = ref([
-    {
-      type: 'input',
-      label: '旧密码',
-      prop: 'password',
-      required: true,
-      attrs: {
-        type: 'password',
-      },
-    },
-    {
-      type: 'input',
-      label: '新密码',
-      prop: 'newPassword',
-      required: true,
-      attrs: {
-        type: 'password',
-      },
-    },
-    {
-      type: 'input',
-      label: '确认密码',
-      prop: 'confirmPassword',
-      required: true,
-      attrs: {
-        type: 'password',
-      },
-    },
-  ]);
+
+  // 修改密码
+  const modifyDialogRef = ref(null);
   const modifyPasswordHandler = () => {
-    isVisibleDialog.value = true;
+    modifyDialogRef.value.openDialog();
   };
-  // 提交数据
-  const getFormData = async (postData) => {
-    await AccountService.modifyPasswordApi(postData);
-    isVisibleDialog.value = false;
-    ElMessage.success('修改密码成功');
-    setTimeout(() => {
-      appStore.logout();
-    }, 2000);
+
+  // 修改个人信息
+  const modifyUserInfoDialogRef = ref();
+  const modifyUserInfoHandler = () => {
+    modifyUserInfoDialogRef.value.openDialog();
   };
 </script>
 
@@ -116,7 +85,7 @@
       align-items: center;
       float: right;
       padding-right: 16px;
-      
+
       :deep(.avatar-container) {
         cursor: pointer;
         .avatar-wrapper {
@@ -141,3 +110,4 @@
     }
   }
 </style>
+

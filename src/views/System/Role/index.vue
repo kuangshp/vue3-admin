@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <!-- 上面表单搜索 -->
-    <CustomForm :options="queryFormOption" @queryHandler="queryHandler"></CustomForm>
+  <div class="customer">
+    <!-- 搜索 -->
+    <QueryForm style="margin-bottom: 20px" @searchHandler="searchHandler"></QueryForm>
     <!-- 表格区域 -->
     <CustomTable
       :options="tableOptions"
@@ -9,99 +9,114 @@
       :pageNumber="pageNumberRef"
       :pageSize="pageSizeRef"
       :data="tableData"
-      border
-      style="margin-top: 20px"
+      isCustomHeader
+      v-loading="loading"
+      element-loading-text="拼命加载中"
       @changePageHandler="changePageHandler"
+      row-key="accountId"
     >
       <template #tableHeader>
-        <el-button type="primary" @click="addNewHandler">新增</el-button>
+        <el-button type="primary" icon="Plus" @click="addNewHandler">新增</el-button>
       </template>
-      <template #status="{ scope }">
-        <el-switch
-          v-model="scope.row.status"
-          @change="changeStatusHandler($event, scope.row)"
-          :active-value="0"
-          :inactive-value="1"
-          size="small"
+      <template #avatar="{ scope }">
+        <el-image
+          v-if="scope.row.avatar"
+          class="word-img"
+          :src="scope.row.avatar"
+          :zoom-rate="1.2"
+          :max-scale="7"
+          :min-scale="0.2"
+          :preview-src-list="[scope.row.avatar]"
+          style="width: 50px; height: 50px"
+          :preview-teleported="true"
+          fit="cover"
         />
       </template>
-      <template #action="scope">
-        <el-button link type="primary" icon="Edit" @click="editRowHandler(scope.scope.row)"
-          >修改</el-button
-        >
-        <el-button
-          link
-          size="small"
-          type="danger"
-          icon="Delete"
-          @click="deleteRowHandler(scope.scope.row)"
-          >删除</el-button
-        >
+      <template #lastLogin="{ scope }">
+        <span v-if="scope.row.lastLogin > 0">{{ formatDate(scope.row.lastLogin, true) }}</span>
+      </template>
+      <template #status="{ scope }">
+        <el-tag type="success" v-if="scope.row.status == 0">正常</el-tag>
+        <el-tag type="danger" v-else>禁用</el-tag>
+      </template>
+      <template #action="{ scope }">
+        <el-button link type="primary" icon="Edit" @click="editRowHandler(scope.row)">编辑</el-button>
+        <el-popconfirm title="确定要删除?" @confirm="deleteRowHandler(scope.row)">
+          <template #reference>
+            <el-button link icon="Delete" type="danger">删除</el-button>
+          </template>
+        </el-popconfirm>
       </template>
     </CustomTable>
-    <!-- 角色 -->
-    <RoleDialog ref="roleDialogRef" @uploadTable="initTableData"></RoleDialog>
+    <RoleDialog ref="roleDialogRef" @uploadTable="fetchTableData"></RoleDialog>
   </div>
 </template>
 
 <script setup>
-  import { RoleService } from '@/services';
-  import { queryFormOption, tableOptions } from './data';
-  import { onMounted } from 'vue';
-  import RoleDialog from './components/RoleDialog';
+  import { ref, onMounted } from 'vue';
+  import { RoleService } from '@/api';
+  import QueryForm from './components/QueryForm.vue';
+  import { tableOptions } from './tableData';
+  import { formatDate } from '@/utils';
+  import { ElMessage } from 'element-plus';
+  import RoleDialog from './components/RoleDialog.vue';
+
+  const loading = ref(false);
   const tableData = ref([]);
-  const tableTotal = ref(0);
-  const pageSizeRef = ref(10);
+  const tableTotal = ref(10);
   const pageNumberRef = ref(1);
-  // 搜索
-  const queryHandler = (queryData) => {
-    initTableData(queryData);
+  const pageSizeRef = ref(10);
+
+  // 定义数据类型
+  const fetchTableData = async (params = {}) => {
+    try {
+      loading.value = true;
+      const { result } = await RoleService.getPageApi({
+        ...params,
+        pageSize: pageSizeRef.value,
+        pageNumber: pageNumberRef.value,
+      });
+      tableData.value = result.list;
+      tableTotal.value = result.total;
+    } finally {
+      loading.value = false;
+    }
   };
-  // 初始化表格数据
-  const initTableData = async (queryData = {}) => {
-    const { result } = await RoleService.getPageApi({
-      ...queryData,
-      pageSize: pageSizeRef.value,
-      pageNumber: pageNumberRef.value,
-    });
-    tableData.value = result.data ?? [];
-    tableTotal.value = result?.total ?? 0;
-  };
+
+  // 翻页操作
   const changePageHandler = ({ page, limit }) => {
     pageSizeRef.value = limit;
     pageNumberRef.value = page;
-    initTableData();
+    fetchTableData();
   };
+
+  // 搜索
+  const searchHandler = (queryParams) => {
+    pageNumberRef.value = 1;
+    fetchTableData(queryParams);
+  };
+
   // 新增
-  const roleDialogRef = ref(null);
-  const addNewHandler = async () => {
-    roleDialogRef.value.openDialog();
+  const roleDialogRef = ref();
+  const addNewHandler = () => {
+    roleDialogRef.value.openDialog('create');
   };
-  // 修改状态
-  const changeStatusHandler = async (value, rowData) => {
+
+  const editRowHandler = (rowData) => {
+    roleDialogRef.value.openDialog('edit', rowData);
+  };
+
+  // 删除行
+  const deleteRowHandler = async (rowData) => {
     if (rowData.id) {
-      await RoleService.modifyStatusByIdApi(rowData.id);
-      initTableData();
+      await RoleService.deleteByIdApi(rowData.id);
+      ElMessage.success('操作成功');
+      fetchTableData();
     }
   };
-  // 编辑操作
-  const editRowHandler = async (rowData) => {
-    roleDialogRef.value.openDialog(rowData);
-  };
-  // 删除操作
-  const deleteRowHandler = (rowData) => {
-    ElMessageBox.confirm('确定要删除', '删除提示', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning',
-    }).then(async () => {
-      await RoleService.deleteByIdApi(rowData.id);
-      ElMessage.success('删除成功');
-      initTableData();
-    });
-  };
+
   onMounted(() => {
-    initTableData();
+    fetchTableData();
   });
 </script>
 

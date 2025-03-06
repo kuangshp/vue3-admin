@@ -1,7 +1,7 @@
 import BaseService from '../base.service';
 
 export class MenusService extends BaseService {
-  static async getMenusApi() {
-    return BaseService.get('/menus');
+  static async getMenuApi() {
+    return BaseService.get('/menu');
   }
 }

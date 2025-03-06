@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./layout/components/AppHeader/index.vue')['default']
-    AppLink: typeof import('./layout/components/Sidebar/AppLink.vue')['default']
     AppMain: typeof import('./layout/components/AppMain/index.vue')['default']
     Breadcrumb: typeof import('./layout/components/AppHeader/components/Breadcrumb/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -26,11 +25,13 @@ declare module 'vue' {
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
@@ -40,7 +41,6 @@ declare module 'vue' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
@@ -48,6 +48,8 @@ declare module 'vue' {
     ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Hamburger: typeof import('./layout/components/AppHeader/components/Hamburger/index.vue')['default']
+    ModifyDialog: typeof import('./layout/components/AppHeader/components/ModifyDialog.vue')['default']
+    ModifyUserInfoDialog: typeof import('./layout/components/AppHeader/components/ModifyUserInfoDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Screenfull: typeof import('./layout/components/AppHeader/components/Screenfull/index.vue')['default']
@@ -56,5 +58,8 @@ declare module 'vue' {
     Src: typeof import('./components/ChooseIcon/src/index.vue')['default']
     TagsView: typeof import('./layout/components/TagsView/index.vue')['default']
     TagViewItem: typeof import('./layout/components/TagsView/TagViewItem.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

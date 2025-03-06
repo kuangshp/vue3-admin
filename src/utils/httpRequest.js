@@ -92,6 +92,7 @@ axiosInstance.interceptors.response.use(
           return Promise.resolve(response.data);
         }
         const { code, message, result } = response.data;
+        console.info("本次请求数据", result)
         if (Object.is(code, 0)) {
           return Promise.resolve({ code, message, result });
         } else {
@@ -106,15 +107,14 @@ axiosInstance.interceptors.response.use(
               });
             }
             ElMessage.warning('登录过期，请重新登录');
-            const appStore = useAppStore();
             // 退出登录
             appStore.logout();
-          } else if (code == 10023) {
+          } else if (code == 10024) {
             appStore.logout();
           } else {
             ElMessage.error(message);
             // 将失败的接口打印到控制台上
-            printPanel('后端返回失败', { method, url, data });
+            printPanel('后端返回失败', { method, url, result });
             return Promise.reject(message);
           }
         }

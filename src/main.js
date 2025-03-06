@@ -17,7 +17,10 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 // vxe-table第三方组件
 import VXETable from 'vxe-table';
 import 'vxe-table/lib/style.css';
+// 自定义指令
+import { setupGlobDirectives } from '@/directives';
 const app = createApp(App);
+setupGlobDirectives(app);
 // 全部的字体图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);

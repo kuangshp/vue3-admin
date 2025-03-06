@@ -9,3 +9,4 @@ export * from './decrypt';
 export * from './date';
 export * from './filterRoute';
 export * from './scroll-to';
+export * from './menus';

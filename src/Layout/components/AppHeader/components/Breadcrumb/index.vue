@@ -1,7 +1,7 @@
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="index">
         <!-- 不可点击项 -->
         <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
           item.meta.title

@@ -1,5 +1,6 @@
 <template>
-  <div v-if="!route?.hidden">
+  <div v-if="!route.meta?.hideInMenu">
+    <!-- 没有子路由的时候,或者只有一个的时候 -->
     <template
       v-if="
         hasOneShowingChild(route.children, route) &&
@@ -7,96 +8,70 @@
         !route.alwaysShow
       "
     >
-      <AppLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path, onlyOneChild.query)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)">
-          <el-icon v-if="onlyOneChild.meta?.icon">
-            <SvgIcon :icon="onlyOneChild.meta?.icon || (route.meta && route.meta.icon)"></SvgIcon>
-          </el-icon>
-          <template #title>
-            <span class="menu-title" :title="hasTitle(onlyOneChild.meta.title)">
-              {{ onlyOneChild.meta.title }}
-            </span>
-          </template>
-        </el-menu-item>
-      </AppLink>
+      <el-menu-item :index="`${onlyOneChild.path}`" @click="meanItemClickHandler(route)">
+        <el-icon v-if="onlyOneChild.meta?.icon">
+          <SvgIcon :icon="onlyOneChild.meta?.icon"></SvgIcon>
+        </el-icon>
+        <template #title>
+          <span>{{ onlyOneChild.meta?.title }}</span>
+        </template>
+      </el-menu-item>
     </template>
     <!-- 有子路由的时候 -->
-    <el-sub-menu v-else ref="subMenu" :index="resolvePath(route.path)">
-      <template v-if="route.meta" #title>
+    <el-sub-menu
+      v-else
+      :index="route.path ? route.path : ''"
+      :style="{ width: !props.sidebarOpened ? '200px' : '64px' }"
+    >
+      <template #title>
         <el-icon v-if="route.meta?.icon">
           <SvgIcon :icon="route.meta.icon"> </SvgIcon>
         </el-icon>
-        <span class="submenu-title" :title="hasTitle(route.meta.title)">
-          {{ route.meta?.title }}
-        </span>
+        <span class="submenu-title">{{ route.meta?.title }}</span>
       </template>
       <!-- 递归循环 -->
-      <SideBarItem
-        v-for="item in route.children"
-        :key="item.path"
-        :route="item"
-        :basePath="resolvePath(item.path)"
-      ></SideBarItem>
+      <SideBarItem v-for="item in route.children" :key="item.path" :route="item"></SideBarItem>
     </el-sub-menu>
   </div>
 </template>
 
 <script setup>
   import { isExternal } from '@/utils';
-  // import { ElMessage } from 'element-plus';
-  import AppLink from './AppLink.vue';
+  import { ElMessage } from 'element-plus';
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
   const props = defineProps({
     route: {
       type: Object,
       default: () => {},
       required: true,
     },
-    basePath: {
-      type: String,
-      required: true,
+    // 修改宽度传递当前是否展开或者折叠
+    sidebarOpened: {
+      type: Boolean,
+      default: false,
     },
   });
-  // // 点击跳转外部链接(可能是单点登录进入到另外一个系统)
-  // const clickLinkHandler = (route) => {
-  //   if (!route.path) {
-  //     if (isExternal(route.meta.linkUrl)) {
-  //       window.open(route.meta.linkUrl, '_blank');
-  //     } else {
-  //       ElMessage.warning(`${route.meta.linkUrl}不是合法的url地址`);
-  //     }
-  //   }
-  // };
-  const resolvePath = (routePath, routeQuery) => {
-    if (isExternal(routePath)) {
-      return routePath;
+  // 点击跳转外部链接(可能是单点登录进入到另外一个系统)
+  const meanItemClickHandler = (routeItem) => {
+    if (routeItem.name) {
+      if (isExternal(routeItem.name)) {
+        window.open(routeItem.name, '_blank');
+      } else {
+        // 路由跳转
+        router.push({
+          name: routeItem.name,
+        });
+      }
+    } else {
+      ElMessage.error('路由name不能为空');
     }
-    if (isExternal(props.basePath)) {
-      return props.basePath;
-    }
-    if (routeQuery) {
-      let query = JSON.parse(routeQuery);
-      return { path: getNormalPath(props.basePath + '/' + routePath), query: query };
-    }
-    return getNormalPath(props.basePath + '/' + routePath);
-  };
-  // 返回项目路径
-  const getNormalPath = (p) => {
-    if (p.length === 0 || !p || p == 'undefined') {
-      return p;
-    }
-    let res = p.replace('//', '/');
-    if (res[res.length - 1] === '/') {
-      return res.slice(0, res.length - 1);
-    }
-    return res;
   };
 
-  const onlyOneChild = ref({});
-
-  function hasOneShowingChild(children = [], parent) {
-    if (!children) {
-      children = [];
-    }
+  const onlyOneChild = ref(null);
+  // 判断是否只有一个字节点
+  const hasOneShowingChild = (children = [], parent) => {
     const showingChildren = children.filter((item) => {
       if (item.hidden) {
         return false;
@@ -114,19 +89,12 @@
 
     // Show parent if there are no child router to display
     if (showingChildren.length === 0) {
-      onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
+      onlyOneChild.value = { ...parent, noShowingChildren: true };
       return true;
     }
-
     return false;
-  }
-  function hasTitle(title) {
-    if (title.length > 5) {
-      return title;
-    } else {
-      return '';
-    }
-  }
+  };
 </script>
 
 <style lang="scss" scoped></style>
+

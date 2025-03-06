@@ -3,28 +3,29 @@
     <router-link to="/home">
       <div class="logo-container">
         <el-avatar shape="square" :size="logoHeight"></el-avatar>
+        <!-- <img src="@/assets/images/logo.png" alt="" style="width: 40px; height: 40px" /> -->
         <h1 class="logo-title" v-if="props.sidebarOpened">{{ title }}</h1>
       </div>
     </router-link>
     <!-- 加上有滚动条 -->
-    <el-scrollbar class="scrollbar-wrapper">
+    <el-scrollbar class="scrollbar">
       <!-- 菜单开始 -->
       <el-menu
         class="sidebar-container-menu"
         mode="vertical"
         :default-active="activeMenu"
         background-color="#fff"
-        text-color="#4e5969"
+        text-color="#304156"
         active-text-color="#409eff"
         :collapse="!props.sidebarOpened"
-        :collapse-transition="false"
+        :collapse-transition="true"
         :unique-opened="true"
       >
         <SideBarItem
-          v-for="(route, index) in menuRoutes"
-          :key="route.path + index"
+          :sidebarOpened="!props.sidebarOpened"
+          v-for="route in menuRoutes"
+          :key="route.path"
           :route="route"
-          :basePath="route.path"
         ></SideBarItem>
       </el-menu>
     </el-scrollbar>
@@ -33,9 +34,11 @@
 
 <script setup>
   import SideBarItem from './SideBarItem.vue';
+  import { routes } from '@/router';
   import { useAppStore } from '@/stores/app';
+
   const appStore = useAppStore();
-  const menuRoutes = computed(() => appStore.authMenusList);
+
   const logoHeight = 44;
   const props = defineProps({
     sidebarOpened: {
@@ -43,24 +46,26 @@
       default: false,
     },
   });
-  const title = ref('OCR图像识别');
+  const title = ref('admin-web');
 
   const route = useRoute();
   // 根据路由路径 对应 当前激活的菜单 页面刷新后 激活当前路由匹配的菜单
   const activeMenu = computed(() => {
-    return route.path;
+    return route.name;
   });
 
-  // 导入路由表
-  // import { routes } from '@/router';
-  // 渲染路由
-  // const menuRoutes = computed(() => routes);
+  console.log(appStore.serverMenu, '菜单');
+  // 根据条件选择渲染路由
+  const menuRoutes = computed(() => {
+    if (appStore.menuFromServer) {
+      return appStore.serverMenu;
+    } else {
+      return routes;
+    }
+  });
 </script>
 
 <style lang="scss" scoped>
-  :v-deep(.scrollbar-wrapper.el-scrollbar) {
-    height: calc(100vh - 70px);
-  }
   .logo-container {
     height: v-bind(logoHeight) + 'px';
     padding: 10px 0 10px 0;
@@ -69,19 +74,18 @@
     justify-content: center;
     .logo-title {
       margin-left: 10px;
-      color: #4e5969;
+      color: #304156;
       font-weight: 600;
       line-height: 50px;
       font-size: 16px;
       white-space: nowrap;
     }
   }
-  :deep(.el-menu) {
+  .sidebar-container-menu {
     border-right: none !important;
   }
-  /* 自定义 el-menu 项的鼠标悬停样式 */
-  :deep(.el-menu-item:hover) {
-    background-color: #f2f3f5; /* 更改悬停时的背景颜色 */
+  .scrollbar {
+    height: calc(100vh - 80px);
   }
 </style>
 

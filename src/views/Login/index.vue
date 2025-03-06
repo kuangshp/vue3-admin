@@ -11,7 +11,7 @@
             <i class="icon icon-user"></i>
             <el-form-item prop="username">
               <el-input
-                placeholder="请输入用户名"
+                placeholder="请输入手机号码"
                 name="username"
                 type="text"
                 v-model.trim="loginForm.username"
@@ -28,10 +28,8 @@
                 v-model.trim="loginForm.password"
                 :type="passwordType"
                 @keyup.enter="handleLogin"
+                show-password
               ></el-input>
-              <span class="show-pwd" @click="onChangePwdType">
-                <SvgIcon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></SvgIcon>
-              </span>
             </el-form-item>
           </div>
           <el-button
@@ -48,18 +46,19 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { useAppStore } from '@/stores/app';
   import { AUTH_TOKEN_NAME } from '@/constant';
-  import { LoginService } from '@/services';
+  import { AuthService, MenusService } from '@/api';
   import { useTagsViewStore } from '@/stores/tagsView';
   import { ElMessage } from 'element-plus';
+
   const tagsViewStore = useTagsViewStore();
   const appStore = useAppStore();
   const loginForm = ref({
     username: 'admin',
-    password: '123456',
+    passWord: '123456',
   });
 
   const loading = ref(false);
@@ -99,18 +98,23 @@
       if (!valid) return;
       loading.value = true;
       try {
-        const { result } = await LoginService.loginApi(loginForm.value);
+        const { result } = await AuthService.loginApi(loginForm.value);
+        ElMessage.success('登录成功');
         loading.value = false;
         window.localStorage.setItem(AUTH_TOKEN_NAME, result.token);
+        appStore.setGlobalToken(result.token);
+        appStore.setGlobalUserInfo(result);
+        if (appStore.menuFromServer) {
+          const menusData = await MenusService.getMenuApi();
+          // // 获取菜单
+          appStore.setServerMenu(menusData.result);
+        }
         // 全部关闭
         tagsViewStore.delAllView();
-        router.push('/home');
+        router.push({ path: '/home' });
       } catch (e) {
         loading.value = false;
         console.log(e);
-        if (e == '验证码错误') {
-          initCaptcha();
-        }
       }
     });
   };
@@ -156,7 +160,7 @@
         }
         .input-row {
           width: 100%;
-          border-bottom: 1px solid #cccccc;
+          border-bottom: 1px solid #ddd;
           background: #fff;
           margin-bottom: 8px;
           margin-top: 20px;
@@ -194,14 +198,15 @@
           height: 35px;
         }
         :deep(.el-input) {
-          width: 95%;
+          width: 100%;
           border: none;
         }
         :deep(.el-form-item) {
           width: 100%;
           margin-bottom: 0 !important;
         }
-        :deep(.el-input__wrapper) {
+        :deep(.el-input__wrapper),
+        :deep(.el-select__wrapper) {
           border: none;
           box-shadow: none;
         }
@@ -209,3 +214,4 @@
     }
   }
 </style>
+

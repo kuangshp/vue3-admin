@@ -1,29 +1,48 @@
-import { createRouter, createWebHashHistory,createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import { useAppStore } from '@/stores/app';
-import { isHttp } from '@/utils';
 import NProgress from 'nprogress';
-import { AUTH_TOKEN_NAME } from '@/constant';
 
-// 假设异步路由
+const modules = import.meta.glob('./modules/*/*.js', { eager: true });
+
+function formatModules(_modules, result) {
+  Object.keys(_modules).forEach((key) => {
+    const defaultModule = _modules[key].default;
+    if (!defaultModule) return;
+    const moduleList = Array.isArray(defaultModule)
+      ? [...defaultModule]
+      : [defaultModule];
+    result.push(...moduleList);
+  });
+  return result;
+}
+const customRoutes = formatModules(modules, []);
+// 常量路由
 export const constantRoutes = [
+  // {
+  //   name: 'https://www.baidu.com',
+  //   meta: {
+  //     title: '去百度',
+  //     icon: 'link',
+  //     linkUrl: 'https://www.baidu.com/',
+  //   },
+  // },
   {
-    path: '',
     name: 'home',
     redirect: '/home',
     component: () => import('@/Layout/index.vue'),
     meta: {
-      hidden: true, // 不需要再左边显示的
+      title: '首页',
+      hideInMenu: true,
     },
-    hidden: true,
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: () => import('@/views/Home/index.vue'),
         meta: {
           title: '首页',
-          hidden: true, // 不需要再左边显示的
           affix: true,
+          hideInMenu: true,
         },
       },
     ],
@@ -31,74 +50,69 @@ export const constantRoutes = [
   {
     path: '/login',
     name: 'login',
+    hideInMenu: true,
     component: () => import('../views/Login/index.vue'),
     meta: {
       title: '登录',
-      isNotLayout: true,
-      hidden: true,
+      hideInMenu: true,
     },
-    hidden: true,
   },
 ];
 
+// 全部的路由
+export const routes = [...constantRoutes, ...customRoutes];
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: constantRoutes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0 };
-    }
+  history: createWebHashHistory(import.meta.env.BASE_URL),
+  routes,
+  scrollBehavior() {
+    return { top: 0 };
   },
 });
 // 白名单
 const whiteList = ['/login', 'home'];
-router.beforeEach((to, form, next) => {
+router.beforeEach(async (to, from, next) => {
   const appStore = useAppStore();
   NProgress.start();
-  if (window.localStorage.getItem(AUTH_TOKEN_NAME)) {
-    if (to.path === '/login') {
+  if (appStore.globalToken) {
+    if (to.name === '/login') {
       NProgress.done();
-      next('/');
-    } else if (whiteList.indexOf(to.path) !== -1) {
-      next();
+      next('/home');
     } else {
-      if (appStore.roles.length === 0) {
-        // 判断当前用户是否已拉取完user_info信息
-        appStore.getInfo().then(() => {
-          appStore
-            .getMenusApi()
-            .then((accessRoutes) => {
-              accessRoutes.forEach((route) => {
-                if (!isHttp(route.path)) {
-                  router.addRoute(route); // 动态添加可访问路由表
-                }
-              });
-              next({ ...to, replace: true }); // hack方法 确保addRoutes已完成
-            })
-            .catch((err) => {
-              next({ path: '/' });
-            });
-          
-        }).catch(err => {
-          console.log(err, "错误信息")
-          appStore.logout();
-        })
-      } else {
-        if (to.path == '/') {
-          next({ path: '/home' ,replace:true});
-        } else {
-          next()
+      // 做路由权限判断
+      if (appStore.menuFromServer) {
+        if (!appStore.appAsyncMenus.length) {
+          await appStore.fetchServerMenuConfig();
         }
+        const serverMenuConfig = [...appStore.appAsyncMenus];
+        let exist = false;
+        while (serverMenuConfig.length && !exist) {
+          const element = serverMenuConfig.shift();
+          if (element?.name === to.name) {
+            exist = true
+          };
+          if (element?.children) {
+            serverMenuConfig.push(
+              ...element.children
+            );
+          }
+        }
+        if (exist) {
+          next();
+        } else {
+          console.log('没有权限');
+          next('/home');
+        }
+      } else { 
+        next();
       }
     }
   } else {
-    if (whiteList.indexOf(to.path) != -1) {
+    if (whiteList.indexOf(to.path) > -1) {
       next();
     } else {
-      next(`/login?redirect=${to.fullPath}`); // 否则全部重定向到登录页
       NProgress.done();
+      next('/login');
     }
   }
 });
