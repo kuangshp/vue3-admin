@@ -2,18 +2,18 @@ import { defineStore } from 'pinia';
 import router, { constantRoutes } from './../router';
 import { axiosInstance } from '@/utils';
 import { getTreeList, formatMenusTree } from '@/utils';
+
+const defaultInitState = {
+  globalUserInfo: {},
+  globalToken: null,
+  sidebarOpened: true,
+  size: 'default',
+  language: 'zh-CN',
+  menuFromServer: true,
+  serverMenu: [],
+}
 export const useAppStore = defineStore('app', {
-  state: () => {
-    return {
-      sidebarOpened: true,
-      globalToken: null,
-      globalUserInfo: null,
-      size: 'default',
-      language: 'zh-CN',
-      menuFromServer: true, // 是否加载后端菜单
-      serverMenu: [], // 服务器菜单
-    };
-  },
+  state: () => ({ ...defaultInitState }),
   getters: {
     appCurrentSetting(state) {
       return { ...state };
@@ -36,7 +36,7 @@ export const useAppStore = defineStore('app', {
       this.sidebarOpened = true;
       this.size = 'default';
       this.language = 'zh-CN';
-      this.menuFromServer = false;
+      this.menuFromServer = true;
       this.serverMenu = [];
     },
     // 设置服务器菜单
