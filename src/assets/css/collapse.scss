@@ -1,0 +1,61 @@
+.collapse-main-content {
+  padding-bottom: 20px;
+}
+.collapse-main-no-content {
+  padding-bottom: 20px;
+}
+.el-collapse-item {
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 17px 0px rgba(0, 86, 151, 0.16);
+  .el-collapse-item__header {
+    height: auto;
+    padding: 15px 0 14px 20px;
+  }
+}
+.collapse-title-pre {
+  display: flex;
+  height: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(40, 55, 79, 1);
+  line-height: 15px;
+  span {
+    margin-right: 10px;
+    width: 4px;
+    height: 15px;
+    background-color: #409eff !important;
+  }
+}
+.el-collapse-item__arrow {
+  margin: 0 20px 0 auto;
+}
+.collapse-content {
+  border-top: 1px solid #e9ebf0;
+  padding: 20px 20px 0px 20px;
+}
+.el-collapse-item__content {
+  padding-bottom: 11px;
+}
+.collapse-content {
+  .el-form-item--mini.el-form-item,
+  .el-form-item--small.el-form-item {
+    margin-bottom: 15px;
+  }
+  .el-form-item--small {
+    .el-form-item__content,
+    .el-form-item__label {
+      vertical-align: middle;
+    }
+  }
+}
+.el-collapse {
+  border-bottom: none !important;
+}
+
+.reset-label {
+  label,
+  div {
+    line-height: 15px !important;
+    text-align: right;
+  }
+}
